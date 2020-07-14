@@ -1,0 +1,475 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>HMP GUI</title>
+        <style type="text/css" media="screen">@import "jqtouch/jqtouch.min.css";</style>
+        <style type="text/css" media="screen">@import "themes/jqt/theme.css";</style>
+        <script src="jqtouch/jquery.1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="jqtouch/jqtouch.min.js" type="application/x-javascript" charset="utf-8"></script>
+
+        <script type="text/javascript" charset="utf-8">
+			var volume   = 50;
+			var mute     = 0;
+			var filepath = "";
+			var curdir   = "";
+			var filesdata= "";
+			var position = "";
+			var	duration = "";
+		
+            var jQT = new $.jQTouch({
+                icon: 'hmpgui.png',
+                addGlossToIcon: false,
+                startupScreen: 'hmpgui_startup.png',
+                statusBar: 'black',
+                preloadImages: [
+                    '../../themes/jqt/img/back_button.png',
+                    '../../themes/jqt/img/back_button_clicked.png',
+                    '../../themes/jqt/img/button_clicked.png',
+                    '../../themes/jqt/img/grayButton.png',
+                    '../../themes/jqt/img/whiteButton.png',
+                    '../../themes/jqt/img/folder.png',
+                    '../../themes/jqt/img/movie.png',
+                    '../../themes/jqt/img/music.png',
+                    '../../themes/jqt/img/mediafile.png'
+                    ]
+            });
+			
+			jQT.addAnimation({
+                    name: 'cubeleft',
+                    selector: '.cubeleft'
+                });
+
+            $(function(){
+				setupState();
+				setInterval ( "setupState()", 5000 );
+				
+				document.buttonHighlight = buttonHighlight;
+            });
+			
+			function sec2min(secs)
+			{
+				secs = Math.floor(secs/1000);
+				var min = Math.floor(secs/60);
+				var sec = secs - min*60;
+				if(sec<10) {sec = "0"+sec;}
+				return min+":"+sec;
+			}
+			
+			function timeshift()
+			{
+				var curtime = "00:"+document.getElementById("timeshift").value;
+				$.ajax({
+				   type: "POST",
+				   url: "command.html",
+				   data: "wm_command=-1&position="+curtime,
+				   success: function(msg){
+						setupState();
+				   }
+				});
+			}
+			
+			function setupState()
+			{
+				that = this;
+				$.ajax({
+				   type: "GET",
+				   url: "controls.html",
+				   success: function(msg){
+						var data = msg.split(";");
+						volume = data[0];
+						mute = data[1];
+						filepath = data[2];
+						state = data[3];
+						position = data[4];
+						duration = data[5];
+						document.getElementById("volumevalue").innerHTML = volume+"%";
+						if(mute == 1)
+						{
+							document.getElementById("muteButton").innerHTML = "Unmute";
+						}
+						else
+						{
+							document.getElementById("muteButton").innerHTML = "Mute";
+						}
+						document.getElementById("title").innerHTML = filepath.substr(filepath.lastIndexOf('\\')+1);
+						//document.getElementById("timeshift").value = sec2min(position);
+						
+						switch(state)
+						{
+							case "0":   document.getElementById("playButtonId").className="grayButton";
+										document.getElementById("stopButtonId").className="whiteButton";
+										document.getElementById("pauseButtonId").className="grayButton";
+									  break;
+							case "1":   document.getElementById("playButtonId").className="grayButton";
+										document.getElementById("stopButtonId").className="grayButton";
+										document.getElementById("pauseButtonId").className="whiteButton";
+									  break;
+							case "2":   document.getElementById("playButtonId").className="whiteButton";
+										document.getElementById("stopButtonId").className="grayButton";
+										document.getElementById("pauseButtonId").className="grayButton";
+									  break;
+						}
+						document.getElementById("timedata").innerHTML = sec2min(position)+" / "+sec2min(duration);
+				   }
+				 });
+			}
+			
+			function decMinutte()
+			{
+				$.ajax({
+				   type: "POST",
+				   url: "command.html",
+				   data: "wm_command=903&null=0",
+				   success: function(msg){
+						setupState();
+				   }
+				 });
+			}
+			
+			function incMinutte()
+			{
+				$.ajax({
+				   type: "POST",
+				   url: "command.html",
+				   data: "wm_command=904&null=0",
+				   success: function(msg){
+						setupState();
+				   }
+				 });
+			}
+			
+			function onClickPlay()
+			{
+				$.ajax({
+				   type: "POST",
+				   url: "command.html",
+				   data: "wm_command=887&null=0",
+				   success: function(msg){
+						setupState();
+				   }
+				 });
+			}
+
+			function onClickPause()
+			{
+				$.ajax({
+				   type: "POST",
+				   url: "command.html",
+				   data: "wm_command=888&null=0",
+				   success: function(msg){
+						setupState();
+				   }
+				 });
+			}
+			
+			function onMute()
+			{
+				$.ajax({
+				   type: "POST",
+				   url: "command.html",
+				   data: "wm_command=909&null=0",
+				   success: function(msg){
+						setupState();
+				   }
+				 });
+			}
+			
+			function onIncreaseVolume()
+			{
+				if(volume==100) {return;}
+				volume = parseInt(volume)+10;
+				document.getElementById("volumevalue").innerHTML = volume+"%";
+				$.ajax({
+				   type: "POST",
+				   url: "command.html",
+				   data: "wm_command=-2&volume="+volume,
+				   success: function(msg){
+				   }
+				 });
+			}
+
+			function onDecreaseVolume()
+			{
+				if(volume==0) {return;}
+				volume = parseInt(volume)-10;
+				document.getElementById("volumevalue").innerHTML = volume+"%";
+				$.ajax({
+				   type: "POST",
+				   url: "command.html",
+				   data: "wm_command=-2&volume="+volume,
+				   success: function(msg){
+				   }
+				 });
+			}
+			
+			function onClickStop()
+			{
+				$.ajax({
+				   type: "POST",
+				   url: "command.html",
+				   data: "wm_command=890&null=0",
+				   success: function(msg){
+						setupState();
+				   }
+				 });
+			}
+			
+			function onFullScreen()
+			{
+				$.ajax({
+				   type: "POST",
+				   url: "command.html",
+				   data: "wm_command=830&null=0",
+				   success: function(msg){
+				   }
+				 });
+			}
+			
+			function onPrevAudio()
+			{
+				$.ajax({
+				   type: "POST",
+				   url: "command.html",
+				   data: "wm_command=952&null=0",
+				   success: function(msg){
+				   }
+				 });
+			}
+			
+			function onNextAudio()
+			{
+				$.ajax({
+				   type: "POST",
+				   url: "command.html",
+				   data: "wm_command=951&null=0",
+				   success: function(msg){
+				   }
+				 });
+			}
+			
+			function stripFront(str)
+			{
+				var pos = str.indexOf(">");
+				return str.substr(pos+1,str.length);
+			}
+			
+			function extractData(str)
+			{
+				str = stripFront(str);
+				var tmp = str.replace(/<.*?>/g, '');
+				return tmp;
+			}
+			
+			function extractPath(str)
+			{
+				var pos = str.indexOf("?path=");pos+=6;
+				var tmp = str.substr(pos,str.length);
+				pos = tmp.indexOf('"');
+				var res = tmp.substr(0,pos);
+				return res;
+			}
+		
+			function filesObjects(filesdata)
+			{
+				var res = new Array();
+				var trarray = filesdata.split("<tr");
+				for(i=0;i<trarray.length;i++)
+				{
+					var tdarray = trarray[i].split("<td");
+					if(tdarray.length<5) {continue;}
+					var file = new Object();
+					file.name = extractData(tdarray[1]);
+					file.type = extractData(tdarray[2]);
+					file.path = extractPath(tdarray[1]);
+					res.push(file);
+				}
+				return res;
+			}
+			
+			function switchFolder(folder)
+			{
+				$.ajax({
+				   type: "GET",
+				   url: "browser.html?path="+unescape(folder),
+				   success: function(msg){
+						var data = msg.split(";");
+						curdir = data[0];
+						filesdata = data[1];
+						document.getElementById("curdir").innerHTML = smallcurdir(curdir);
+						var fileDataArray = filesObjects(filesdata);
+						document.getElementById("filesdata").innerHTML = constructBrowsePage(fileDataArray,curdir);
+				   }
+				 });
+				return true;
+			}
+			
+			function startPlayback(fileNamePath)
+			{
+				$.ajax({
+				   type: "GET",
+				   url: "browser.html?path="+unescape(fileNamePath),
+				   success: function(msg){
+						jQT.goTo($('#main'), 'flip');
+				   }
+				 });
+				 return true;
+			}
+			
+			function constructBrowsePage(fileDataArray,curdir)
+			{
+				var start = '<ul class="edgetoedge">';
+				var end   = '</ul>';
+				var line  = '';
+				for(var i=0;i<fileDataArray.length;i++)
+				{
+					var file = fileDataArray[i];
+					
+					if(file.type != "Directory" && file.type != "MPEG Layer 3 Audio File" && file.type != "mkv_auto_file" && file.type != "MP3 Format Sound" && file.type != "Video Clip") {continue;}
+					
+					var img  = "";
+					var link = "#";
+					var clickFunc = "";
+					if(file.name == ".." && file.path.length>3) {file.path=curdir.substr(0,curdir.substr(0,curdir.length-1).lastIndexOf('\\')+1);}
+					switch(file.type)
+					{
+						case "Directory":img="folder.png";clickFunc='switchFolder(\''+escape(file.path)+'\')';break;
+						case "MP3 Format Sound":
+						case "MPEG Layer 3 Audio File":img="music.png";clickFunc='startPlayback(\''+escape(file.path)+'\')';break;
+						case "mkv_auto_file":
+						case "Video Clip":img="movie.png";clickFunc='startPlayback(\''+escape(file.path)+'\')';break;
+						default: img="mediafile.png";link="#";clickFunc='startPlayback(\''+escape(file.path)+'\')';
+					}
+					var line = line+'<li class="arrow"><a href="'+link+'" onClick="javascript:'+clickFunc +'"><img src="themes/jqt/img/'+img+'" border="0" align="left"/>'+file.name+'</a></li>';
+				}
+				return start+line+end;
+			}
+			
+			function smallcurdir(curdir)
+			{
+				if(curdir.length<4){return curdir;}
+				curdir = curdir.substr(0,curdir.length-1);
+				return  "..\\"+curdir.substr(curdir.lastIndexOf('\\')+1);
+			}
+						
+			function startBrowser()
+			{
+				$.ajax({
+				   type: "GET",
+				   url: "browser.html",
+				   success: function(msg){
+						var data = msg.split(";");
+						curdir = data[0];
+						filesdata = data[1];
+						document.getElementById("curdir").innerHTML = smallcurdir(curdir);
+						var fileDataArray = filesObjects(filesdata);
+						document.getElementById("filesdata").innerHTML = constructBrowsePage(fileDataArray,curdir);
+				   }
+				 });
+		 }
+			
+        </script>
+        <style type="text/css" media="screen">
+.cubeleft {
+    -webkit-animation-duration: .55s;
+}
+
+.cubeleft.in {
+	-webkit-animation-name: cubeinfromleft;
+    -webkit-transform-origin: 50% 0%;
+}
+.cubeleft.out {
+	-webkit-animation-name: cubeouttoright;
+    -webkit-transform-origin: 50% 100%;
+}
+.cubeleft.in.reverse {
+	-webkit-animation-name: cubeinfromright;	
+    -webkit-transform-origin: 50% 100%;
+}
+.cubeleft.out.reverse {
+	-webkit-animation-name: cubeouttoleft;
+    -webkit-transform-origin: 50% 0%;
+
+}
+
+.timeshift {
+    font: bold 18px Helvetica;
+}
+
+        </style>
+    </head>
+    <body>
+        <div id="main">
+			<div class="toolbar">
+				<center>
+					<h3 id="timedata"></h3>
+				</center>
+                <a class="button leftButton cubeleft" id="filesButton" href="#files" onClick="javascript:startBrowser();">Files</a>
+                <a class="button cube" id="optionsButton" href="#options">Options</a>
+            </div>
+			
+			<div class="info" id="title">no file selected</div>
+			
+			<center>
+			<table width="100%">
+			<tr>
+				<td colspan="2"></td>
+			</tr>
+			<tr>
+				<td><a href="#" class="grayButton" id="playButtonId" onClick="javascript:onClickPlay();">Play</a></td>
+				<td><a href="#" class="grayButton" id="pauseButtonId" onClick="javascript:onClickPause();">Pause</a></td>
+				<td><a href="#" class="grayButton" id="stopButtonId" onClick="javascript:onClickStop();">Stop</a></td>
+			</tr>
+			</table>
+			
+			<table>
+			<tr>
+				<td class="timeshift">Volume</td>
+				<td><a href="#" class="grayButton" onClick="javascript:onDecreaseVolume();">-</a></td>
+				<td class="timeshift" id="volumevalue">0%</td>
+				<td><a href="#" class="grayButton" onClick="javascript:onIncreaseVolume();">+</a></td>
+				<td><a href="#" class="grayButton" onClick="javascript:onMute();" id="muteButton">Mute</a></td>
+			</tr>
+			</table>
+
+			<table>
+			<tr>
+				<td class="timeshift">Position</td>
+				<td><a href="#main" class="grayButton" onClick="javascript:decMinutte();"><</a></td>
+				<td align="middle"><input class="timeshift" type="edit" onChange="javascript:timeshift();" value="00:00" size="5" id="timeshift"></td>
+				<td><a href="#main" class="grayButton" onClick="javascript:incMinutte();">></a></td>
+			</tr>
+			</table>
+			</center>
+			
+			
+        </div>
+		
+		<div id="files">
+			<div class="toolbar">
+                <center><h3 id="curdir">Directory</h3></center>
+                <a class="button cube" id="mainButton" href="#main" onClick="javascript:setupState();">Playback</a>
+            </div>
+			<div id="filesdata"></div>
+		</div>
+		
+		<div id="options">
+			<div class="toolbar">
+                <center><h3 id="curdir">Options</h3></center>
+                <a class="button leftButton cubeleft" id="mainButton" href="#main" onClick="javascript:setupState();">Playback</a>
+            </div>
+
+			<h2>Screen control</h2>
+			<ul class="">
+				<li><a href="#main" class="grayButton cube" onClick="javascript:onFullScreen();">Full screen mode</a></li>
+			</ul>
+
+			<h2>Audio track control</h2>
+				<ul class="rounded">
+				<li><a href="#" class="grayButton" onClick="javascript:onPrevAudio();">Previous Audio</a></li>
+				<li><a href="#" class="grayButton" onClick="javascript:onNextAudio();">Next Audio</a></li>
+				</ul>
+		</div>
+		
+    </body>
+</html>
