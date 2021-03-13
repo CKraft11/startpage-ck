@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en"><head><link type="text/css" id="dark-mode" rel="stylesheet" href=""><style type="text/css" id="dark-mode-custom-style"></style>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><style id="react-tooltip">.__react_component_tooltip{border-radius:3px;display:inline-block;font-size:13px;left:-999em;opacity:0;padding:8px 21px;position:fixed;pointer-events:none;transition:opacity 0.3s ease-out;top:-999em;visibility:hidden;z-index:999}.__react_component_tooltip.allow_hover,.__react_component_tooltip.allow_click{pointer-events:auto}.__react_component_tooltip:before,.__react_component_tooltip:after{content:"";width:0;height:0;position:absolute}.__react_component_tooltip.show{opacity:0.9;margin-top:0px;margin-left:0px;visibility:visible}.__react_component_tooltip.type-dark{color:#fff;background-color:#222}.__react_component_tooltip.type-dark.place-top:after{border-top-color:#222;border-top-style:solid;border-top-width:6px}.__react_component_tooltip.type-dark.place-bottom:after{border-bottom-color:#222;border-bottom-style:solid;border-bottom-width:6px}.__react_component_tooltip.type-dark.place-left:after{border-left-color:#222;border-left-style:solid;border-left-width:6px}.__react_component_tooltip.type-dark.place-right:after{border-right-color:#222;border-right-style:solid;border-right-width:6px}.__react_component_tooltip.type-dark.border{border:1px solid #fff}.__react_component_tooltip.type-dark.border.place-top:before{border-top:8px solid #fff}.__react_component_tooltip.type-dark.border.place-bottom:before{border-bottom:8px solid #fff}.__react_component_tooltip.type-dark.border.place-left:before{border-left:8px solid #fff}.__react_component_tooltip.type-dark.border.place-right:before{border-right:8px solid #fff}.__react_component_tooltip.type-success{color:#fff;background-color:#8DC572}.__react_component_tooltip.type-success.place-top:after{border-top-color:#8DC572;border-top-style:solid;border-top-width:6px}.__react_component_tooltip.type-success.place-bottom:after{border-bottom-color:#8DC572;border-bottom-style:solid;border-bottom-width:6px}.__react_component_tooltip.type-success.place-left:after{border-left-color:#8DC572;border-left-style:solid;border-left-width:6px}.__react_component_tooltip.type-success.place-right:after{border-right-color:#8DC572;border-right-style:solid;border-right-width:6px}.__react_component_tooltip.type-success.border{border:1px solid #fff}.__react_component_tooltip.type-success.border.place-top:before{border-top:8px solid #fff}.__react_component_tooltip.type-success.border.place-bottom:before{border-bottom:8px solid #fff}.__react_component_tooltip.type-success.border.place-left:before{border-left:8px solid #fff}.__react_component_tooltip.type-success.border.place-right:before{border-right:8px solid #fff}.__react_component_tooltip.type-warning{color:#fff;background-color:#F0AD4E}.__react_component_tooltip.type-warning.place-top:after{border-top-color:#F0AD4E;border-top-style:solid;border-top-width:6px}.__react_component_tooltip.type-warning.place-bottom:after{border-bottom-color:#F0AD4E;border-bottom-style:solid;border-bottom-width:6px}.__react_component_tooltip.type-warning.place-left:after{border-left-color:#F0AD4E;border-left-style:solid;border-left-width:6px}.__react_component_tooltip.type-warning.place-right:after{border-right-color:#F0AD4E;border-right-style:solid;border-right-width:6px}.__react_component_tooltip.type-warning.border{border:1px solid #fff}.__react_component_tooltip.type-warning.border.place-top:before{border-top:8px solid #fff}.__react_component_tooltip.type-warning.border.place-bottom:before{border-bottom:8px solid #fff}.__react_component_tooltip.type-warning.border.place-left:before{border-left:8px solid #fff}.__react_component_tooltip.type-warning.border.place-right:before{border-right:8px solid #fff}.__react_component_tooltip.type-error{color:#fff;background-color:#BE6464}.__react_component_tooltip.type-error.place-top:after{border-top-color:#BE6464;border-top-style:solid;border-top-width:6px}.__react_component_tooltip.type-error.place-bottom:after{border-bottom-color:#BE6464;border-bottom-style:solid;border-bottom-width:6px}.__react_component_tooltip.type-error.place-left:after{border-left-color:#BE6464;border-left-style:solid;border-left-width:6px}.__react_component_tooltip.type-error.place-right:after{border-right-color:#BE6464;border-right-style:solid;border-right-width:6px}.__react_component_tooltip.type-error.border{border:1px solid #fff}.__react_component_tooltip.type-error.border.place-top:before{border-top:8px solid #fff}.__react_component_tooltip.type-error.border.place-bottom:before{border-bottom:8px solid #fff}.__react_component_tooltip.type-error.border.place-left:before{border-left:8px solid #fff}.__react_component_tooltip.type-error.border.place-right:before{border-right:8px solid #fff}.__react_component_tooltip.type-info{color:#fff;background-color:#337AB7}.__react_component_tooltip.type-info.place-top:after{border-top-color:#337AB7;border-top-style:solid;border-top-width:6px}.__react_component_tooltip.type-info.place-bottom:after{border-bottom-color:#337AB7;border-bottom-style:solid;border-bottom-width:6px}.__react_component_tooltip.type-info.place-left:after{border-left-color:#337AB7;border-left-style:solid;border-left-width:6px}.__react_component_tooltip.type-info.place-right:after{border-right-color:#337AB7;border-right-style:solid;border-right-width:6px}.__react_component_tooltip.type-info.border{border:1px solid #fff}.__react_component_tooltip.type-info.border.place-top:before{border-top:8px solid #fff}.__react_component_tooltip.type-info.border.place-bottom:before{border-bottom:8px solid #fff}.__react_component_tooltip.type-info.border.place-left:before{border-left:8px solid #fff}.__react_component_tooltip.type-info.border.place-right:before{border-right:8px solid #fff}.__react_component_tooltip.type-light{color:#222;background-color:#fff}.__react_component_tooltip.type-light.place-top:after{border-top-color:#fff;border-top-style:solid;border-top-width:6px}.__react_component_tooltip.type-light.place-bottom:after{border-bottom-color:#fff;border-bottom-style:solid;border-bottom-width:6px}.__react_component_tooltip.type-light.place-left:after{border-left-color:#fff;border-left-style:solid;border-left-width:6px}.__react_component_tooltip.type-light.place-right:after{border-right-color:#fff;border-right-style:solid;border-right-width:6px}.__react_component_tooltip.type-light.border{border:1px solid #222}.__react_component_tooltip.type-light.border.place-top:before{border-top:8px solid #222}.__react_component_tooltip.type-light.border.place-bottom:before{border-bottom:8px solid #222}.__react_component_tooltip.type-light.border.place-left:before{border-left:8px solid #222}.__react_component_tooltip.type-light.border.place-right:before{border-right:8px solid #222}.__react_component_tooltip.place-top{margin-top:-10px}.__react_component_tooltip.place-top:before{border-left:10px solid transparent;border-right:10px solid transparent;bottom:-8px;left:50%;margin-left:-10px}.__react_component_tooltip.place-top:after{border-left:8px solid transparent;border-right:8px solid transparent;bottom:-6px;left:50%;margin-left:-8px}.__react_component_tooltip.place-bottom{margin-top:10px}.__react_component_tooltip.place-bottom:before{border-left:10px solid transparent;border-right:10px solid transparent;top:-8px;left:50%;margin-left:-10px}.__react_component_tooltip.place-bottom:after{border-left:8px solid transparent;border-right:8px solid transparent;top:-6px;left:50%;margin-left:-8px}.__react_component_tooltip.place-left{margin-left:-10px}.__react_component_tooltip.place-left:before{border-top:6px solid transparent;border-bottom:6px solid transparent;right:-8px;top:50%;margin-top:-5px}.__react_component_tooltip.place-left:after{border-top:5px solid transparent;border-bottom:5px solid transparent;right:-6px;top:50%;margin-top:-4px}.__react_component_tooltip.place-right{margin-left:10px}.__react_component_tooltip.place-right:before{border-top:6px solid transparent;border-bottom:6px solid transparent;left:-8px;top:50%;margin-top:-5px}.__react_component_tooltip.place-right:after{border-top:5px solid transparent;border-bottom:5px solid transparent;left:-6px;top:50%;margin-top:-4px}.__react_component_tooltip .multi-line{display:block;padding:2px 0px;text-align:center}</style>
+<style type="text/css">
+    @import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+
+:root {
+  --bg: #2E3440;
+  --fg: #d8dee9;
+  --secondaryFg: #5e81ac;
+  --containerBg: #434C5E;
+  --searchBg: var(--containerBg);
+  --scrollbarColor: #4c566a;
+}
+
+body {
+  background-color: var(--bg);
+  margin: 0px;
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#clock {
+  font-family: sans-serif;
+  font-size: 3.5rem;
+  font-weight: 600;
+  font-family: 'Roboto Mono';
+  color: var(--fg);
+  margin-bottom: 0.25em;
+}
+
+#search {
+  width: 100%;
+  height: 100vh;
+  background-color: var(--searchBg);
+  display: none;
+  position: absolute;
+  box-sizing: border-box;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#search-field {
+  width: 90%;
+  padding: 0.75em 1em;
+  box-sizing: border-box;
+  background-color: var(--searchBg);
+  border: solid 0px var(--searchBg);
+  font-family: 'Roboto Mono';
+  font-size: 4rem;
+  color: var(--fg);
+  outline: none;
+  border-radius: 3px;
+  margin-bottom: 1em;
+  text-align: center;
+}
+
+.weather-container {
+  width: 30%;
+  background-color: var(--containerBg);
+  padding: 1em;
+  border-radius: 3px;
+  font-family: 'Roboto Mono';
+  color: var(--fg);
+  text-align: center;
+}
+.inline {
+  display: inline-block;
+}
+
+.bookmark-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 50%;
+  margin: 1em 0em;
+}
+
+@media only screen and (max-width: 960px) {
+  .container {
+    height: auto;
+  }
+  #clock {
+    margin-top: 1em;
+  }
+  .container > .bookmark-container {
+    flex-direction: column;
+    width: 60%;
+  }
+  .bookmark-container > .bookmark-set {
+    width: auto;
+    margin: 1em 0em;
+  }
+}
+
+.bookmark-set {
+  padding: 1em;
+  background-color: var(--containerBg);
+  border-radius: 3px;
+  font-family: 'Roboto Mono';
+  font-size: 0.85rem;
+  width: 25%;
+  height: 12em;
+  margin: 0em 0.5em;
+  box-sizing: border-box;
+}
+
+.bookmark-inner-container {
+  overflow-y: scroll;
+  height: 80%;
+  vertical-align: top;
+  padding-right: 6px;
+  box-sizing: border-box;
+
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbarColor) #ffffff00;
+}
+
+.bookmark-inner-container::-webkit-scrollbar {
+  width: 6px;
+}
+.bookmark-inner-container::-webkit-scrollbar-track {
+  background: #ffffff00;
+}
+.bookmark-inner-container::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbarColor);
+  border-radius: 6px;
+  border: 3px solid #ffffff00;
+}
+
+.bookmark-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--fg);
+  margin: 0em 0em 0.35em 0em;
+}
+.bookmark {
+  text-decoration: none;
+  color: var(--secondaryFg);
+  display: block;
+  margin: 0.5em 0em;
+}
+.bookmark:hover {
+  color: var(--fg);
+}
+
+
+ </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Home</title>
+<link href="https://5f1d42d8e75b9.htmlsave.net/favicon.png" rel="shortcut icon" type="image/x-icon">
+</head>
+<body data-new-gr-c-s-check-loaded="8.868.0" data-gr-ext-installed="">
+<div id="search">
+<input id="search-field" type="text" name="search-field" onkeypress="return search(event)">
+</div>
+<div class="container">
+<div id="clock">20:07:51</div>
+<div class="weather-container">
+<div class="row">
+<div id="weather-description" class="inline">light rain</div>
+<div class="inline">-</div>
+<div id="temp" class="inline">24 C</div>
+</div>
+</div>
+<div class="bookmark-container">
+<div class="bookmark-set">
+<div class="bookmark-title">Daily</div>
+<div class="bookmark-inner-container">
+<a class="bookmark" href="https://inbox.google.com/" target="_blank">Inbox</a>
+<a class="bookmark" href="https://drive.google.com/" target="_blank">Drive</a>
+<a class="bookmark" href="https://trello.com/b/Oj2XOpQf/school" target="_blank">Trello</a>
+<a class="bookmark" href="https://sas.theteamie.com/dash/#/classroom/47090/newsfeed" target="_blank">Teamie</a>
+<a class="bookmark" href="https://sas.schoology.com/" target="_blank">Schoology</a>
+<a class="bookmark" href="https://twitter.com/" target="_blank">Twitter</a>
+</div>
+</div>
+<div class="bookmark-set">
+<div class="bookmark-title">Media</div>
+<div class="bookmark-inner-container">
+<a class="bookmark" href="https://youtube.com/" target="_blank">Youtube</a>
+<a class="bookmark" href="https://1337x.to/" target="_blank">1337x</a>
+<a class="bookmark" href="https://thepiratebay.org/" target="_blank">Pirate Bay</a>
+<a class="bookmark" href="https://arstechnica.com/" target="_blank">Ars Technica</a>
+<a class="bookmark" href="https://apnews.com/" target="_blank">AP News</a>
+</div>
+</div>
+<div class="bookmark-set">
+<a class="bookmark-title" href="https://www.reddit.com/" target="_blank" style="text-decoration: none">Reddit</a>
+<div class="bookmark-inner-container">
+<a class="bookmark" href="https://www.reddit.com/r/piracy" target="_blank">/r/piracy</a>
+<a class="bookmark" href="https://www.reddit.com/r/mechanicalkeyboards" target="_blank">/r/mechanicalkeyboards</a>
+<a class="bookmark" href="https://www.reddit.com/r/customkeyboards" target="_blank">/r/customkeyboards</a>
+<a class="bookmark" href="https://www.reddit.com/r/battlestations" target="_blank">/r/battlestations</a>
+<a class="bookmark" href="https://www.reddit.com/r/unixporn" target="_blank">/r/unixporn</a>
+<a class="bookmark" href="https://www.reddit.com/r/news" target="_blank">/r/news</a>
+</div>
+</div>
+<div class="bookmark-set">
+<div class="bookmark-title">Management</div>
+<div class="bookmark-inner-container">
+<a class="bookmark" href="http://radon.local" target="_blank">OMV RADON</a>
+<a class="bookmark" href="http://xenon.local" target="_blank">OMV XENON</a>
+<a class="bookmark" href="http://xenon.local:8181/admin/" target="_blank">PiHole</a>
+<a class="bookmark" href="http://xenon.local:8080/" target="_blank">QBittorrent</a>
+<a class="bookmark" href="http://radon.local:9000/" target="_blank">Portainer R</a>
+<a class="bookmark" href="http://xenon.local:9000/" target="_blank">Portainer X</a>
+</div>
+</div>
+<div class="bookmark-set">
+<div class="bookmark-title">Shopping</div>
+<div class="bookmark-inner-container">
+<a class="bookmark" href="https://aliexpress.com/" target="_blank">Aliexpress</a>
+<a class="bookmark" href="https://amazon.com/" target="_blank">Amazon</a>
+<a class="bookmark" href="https://amazon.sg/" target="_blank">Amazon SG</a>
+<a class="bookmark" href="https://banggood.com/" target="_blank">Banggood</a>
+</div>
+</div>
+</div>
+</div>
+<script>
+        // Search on enter key event
+        function search(e) {
+            if (e.keyCode == 13) {
+                var val = document.getElementById("search-field").value;
+                window.open("https://google.com/search?q=" + val);
+            }
+        }
+        // Get current time and format
+        function getTime() {
+            let date = new Date(),
+                min = date.getMinutes(),
+                sec = date.getSeconds(),
+                hour = date.getHours();
+
+            return "" + 
+                (hour < 10 ? ("0" + hour) : hour) + ":" + 
+                (min < 10 ? ("0" + min) : min) + ":" + 
+                (sec < 10 ? ("0" + sec) : sec);
+        }
+
+        window.onload = () => {
+            let xhr = new XMLHttpRequest();
+            // Request to open weather map
+            xhr.open('GET', 'https://api.openweathermap.org/data/2.5/weather?id=1880252&units=metric&appid=e5b292ae2f9dae5f29e11499c2d82ece');
+            xhr.onload = () => {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        let json = JSON.parse(xhr.responseText);
+                        console.log(json);
+                        document.getElementById("temp").innerHTML = json.main.temp.toFixed(0) + " C";
+                        document.getElementById("weather-description").innerHTML = json.weather[0].description;
+                    } else {
+                        console.log('error msg: ' + xhr.status);
+                    }
+                }
+            }
+            xhr.send();
+            // Set up the clock
+            document.getElementById("clock").innerHTML = getTime();
+            // Set clock interval to tick clock
+            setInterval( () => {
+                document.getElementById("clock").innerHTML = getTime();
+            },100);
+        }
+
+        document.addEventListener("keydown", event => {
+            if (event.keyCode == 32) {          // Spacebar code to open search
+                document.getElementById('search').style.display = 'flex';
+                document.getElementById('search-field').focus();
+            } else if (event.keyCode == 27) {   // Esc to close search
+                document.getElementById('search-field').value = '';
+                document.getElementById('search-field').blur();
+                document.getElementById('search').style.display = 'none';
+            }
+        });
+    </script>
+<div at-magnifier-wrapper=""><div class="at-theme-dark"><div class="at-base notranslate" translate="no"><div class="Z1-AJ" style="top: 0px; left: 0px;"></div></div></div></div><div at-external-link-wrapper=""><div class="at-theme-dark"><div class="at-base notranslate" translate="no"><div class="__react_component_tooltip place-top type-dark " data-id="tooltip"><div class="at-tooltip-container__content" style="width: 423px; height: auto;"><div></div><div class="_1mJpe"><div class="iYXld"><span class="Afhjo">Alitools</span>&nbsp;<span>Guide <span>βeta</span></span></div><span class="_2PUhS">Link checked<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="_3nz6u"><path fill-rule="evenodd" clip-rule="evenodd" d="M1.696 1.545C3.11.777 4.546.378 6 .378c1.454 0 2.89.399 4.304 1.167a.374.374 0 0 1 .196.33v.137c0 2.365 0 4.054-.538 5.523-.55 1.497-1.664 2.697-3.76 4.031a.374.374 0 0 1-.403 0c-2.097-1.334-3.212-2.534-3.76-4.03-.54-1.47-.54-3.159-.539-5.524v-.137a.375.375 0 0 1 .196-.33zm6.71 2.746a.5.5 0 1 0-.813-.582L5.514 6.62l-.598-.896a.5.5 0 1 0-.832.554l1 1.5a.5.5 0 0 0 .823.014l2.5-3.5z" fill="#C8C8C8"></path></svg></span></div></div></div></div></div></div></body></html>
