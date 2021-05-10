@@ -11,9 +11,11 @@
 <body data-palette="rainbow" data-page="1">
 
 <main>
-
+	<div id="search" style="display: none;">
+		<input class="search" id="search-field" type="text" name="search-field" onkeypress="return search(event)"/>
+	</div>
 	<div class="container">
-
+		
 		<div class="tabs">
 			<div class="tab page1 active" data-color="1">1</div>
 			<div class="tab page1" data-color="2">2</div>
@@ -34,23 +36,40 @@
 			<div class="tab extra back">-</div>
 			<div class="tab extra next">+</div>
 		</div>
-
-		<div class="content page1 active" data-color="1"></div>
-		<div class="content page1" data-color="2"></div>
-		<div class="content page1" data-color="3"></div>
-		<div class="content page1" data-color="4"></div>
-		<div class="content page1" data-color="5"></div>
-		<div class="content page2" data-color="1"></div>
-		<div class="content page2" data-color="2"></div>
-		<div class="content page2" data-color="3"></div>
-		<div class="content page2" data-color="4"></div>
-		<div class="content page2" data-color="5"></div>
-		<div class="content page3" data-color="1"></div>
-		<div class="content page3" data-color="2"></div>
-		<div class="content page3" data-color="3"></div>
-		<div class="content page3" data-color="4"></div>
-		<div class="content page3" data-color="5"></div>
-
+		<div>
+				<div class="content page1 active" data-color="1"></div>
+					
+				<div class="content page1" data-color="2"></div>
+					
+				<div class="content page1" data-color="3"></div>
+					
+				<div class="content page1" data-color="4"></div>
+					
+				<div class="content page1" data-color="5"></div>
+					
+				<div class="content page2" data-color="1"></div>
+				<div class="content page2" data-color="2"></div>
+				<div class="content page2" data-color="3"></div>
+				<div class="content page2" data-color="4"></div>
+				<div class="content page2" data-color="5"></div>
+				<div class="content page3" data-color="1"></div>
+				<div class="content page3" data-color="2"></div>
+				<div class="content page3" data-color="3"></div>
+				<div class="content page3" data-color="4"></div>
+				<div class="content page3" data-color="5"></div>
+				<div id="st1" class="stats redst clock1" style="float: left;" data-color="1"></div>
+				<div id="temp1" class="stats redst" style="width: 70.3%; float: right;" data-color="1"></div>
+				<div id="st2" class="stats oranst clock2" style="float: left;" data-color="2"></div>
+				<div id="temp2" class="stats oranst" style="width: 70.3%; float: right;" data-color="2"></div>
+				<div id="st3" class="stats grest clock3" style="float: left;" data-color="3"></div>
+				<div id="temp3" class="stats grest" style="width: 70.3%; float: right;" data-color="3"></div>
+				<div id="st4" class="stats blust clock4" style="float: left;" data-color="4"></div>
+				<div id="temp4" class="stats blust" style="width: 70.3%; float: right;" data-color="4"></div>
+				<div id="st5" class="stats purst clock5" style="float: left;" data-color="5"></div>
+				<div id="temp5" class="stats purst" style="width: 70.3%; float: right;" data-color="5"></div>
+		</div>
+		<div>
+		</div>
 		<div class="palette">
 			<div class="palette-content">
 				<div data-color="rainbow"><span></span></div>
@@ -77,7 +96,7 @@
 <style>
 
 :root {
-	--bg: #3B4252;
+	--bg: #2E3440;
 	--text: #D8DEE9;
 	--extra: hsl(222deg 14% 17%);
 	--random: hsl(222deg 14% 25%);
@@ -216,10 +235,11 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 }
 
 /*content*/
+
 .content {
 	display: none;
 	flex-direction: column;
-	padding: 50px 10px;
+	padding: 10px 10px;
 	border: 3px solid;
 }
 .content.active {
@@ -233,8 +253,42 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 	cursor: pointer;
 	height: 20px;
 }
-
+.stats {
+	display: none;
+	padding: 5px 5px;
+	justify-content: center;
+	align-items: center;
+	border: 3px solid;
+	height: 20px;
+	margin-top: 10px;
+}
+.stats.active {
+	display: none;
+}
+/* .stats > a {
+	display: ;
+	justify-content: center;
+	align-items: center;
+	padding: 5px 20px;
+	cursor: pointer;
+	height: 20px;
+} */
 /*palette*/
+.content.active[data-color="1"] ~ .redst{
+	display: flex;
+}
+.content.active[data-color="2"] ~ .oranst{
+	display: flex;
+}
+.content.active[data-color="3"] ~ .grest{
+	display: flex;
+}
+.content.active[data-color="4"] ~ .blust{
+	display: flex;
+}
+.content.active[data-color="5"] ~ .purst{
+	display: flex;
+}
 .palette {
 	display: flex;
 	justify-content: center;
@@ -275,8 +329,56 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 .content {
 	border-color: var(--extra);
 }
+/* .stats {
+	border-color: var(--extra);
+} */
 .content > a {
 	color: var(--text);
+}
+/* .search {
+	color: var(--text);
+	background-color: var(--bg);
+	border-color: var(--color-bg);
+	outline: none;
+	justify-content: center;
+	align-items: center;
+	padding: 5px 20px;
+	cursor: pointer;
+	width: 336px;
+	height: 20px;
+	-webkit-appearance: none; 
+    -moz-appearance: none; 
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	
+} */
+#search {
+  width: 100%;
+  height: 100vh;
+  background-color: var(--Bg);
+  display: none;
+  position: absolute;
+  box-sizing: border-box;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#search-field {
+  width: 90%;
+  padding: 0.75em 1em;
+  box-sizing: border-box;
+  background-color: var(--Bg);
+  border: solid 0px var(--Bg);
+  font-family: 'Roboto Mono';
+  font-size: 4rem;
+  color: var(--fg);
+  outline: none;
+  border-radius: 3px;
+  margin-bottom: 1em;
+  text-align: center;
 }
 
 .tab.active[data-color="1"],
@@ -306,6 +408,13 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 .content[data-color="4"] {	border-color: var(--color-4);}
 .content[data-color="5"] {	border-color: var(--color-5);}
 
+
+
+.stats[data-color="1"] {	border-color: var(--color-1);}
+.stats[data-color="2"] {	border-color: var(--color-2);}
+.stats[data-color="3"] {	border-color: var(--color-3);}
+.stats[data-color="4"] {	border-color: var(--color-4);}
+.stats[data-color="5"] {	border-color: var(--color-5);}
 
 .palette div[data-color="rainbow"] span {
     border: 6px solid var(--grey);
@@ -344,7 +453,68 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 <script>
 
 	//links
+	function search(e) {
+            if (e.keyCode == 13) {
+                var val = document.getElementById("search-field").value;
+                window.open("https://google.com/search?q=" + val);
+            }
+        }
+	document.addEventListener("keydown", event => {
+            if (event.keyCode == 32) {          // Spacebar code to open search
+                document.getElementById('search').style.display = 'flex';
+				var divsToHide = document.getElementsByClassName("container"); //divsToHide is an array
+    				for(var i = 0; i < divsToHide.length; i++){
+        				divsToHide[i].style.visibility = "hidden"; // or
+    			}
+				
+                document.getElementById('search-field').focus();
+            } else if (event.keyCode == 27) {   // Esc to close search
+                document.getElementById('search-field').value = '';
+                document.getElementById('search-field').blur();
+                document.getElementById('search').style.display = 'none';
+				var divsToHide = document.getElementsByClassName("container"); //divsToHide is an array
+    				for(var i = 0; i < divsToHide.length; i++){
+        				divsToHide[i].style.visibility = "visible"; // or
+    			}
+            }
+    });
+	function getTime() {
+            let date = new Date(),
+                min = date.getMinutes(),
+                sec = date.getSeconds(),
+                hour = date.getHours();
 
+            return "" + 
+                (hour < 10 ? ("0" + hour) : hour) + ":" + 
+                (min < 10 ? ("0" + min) : min) + ":" + 
+                (sec < 10 ? ("0" + sec) : sec);
+        }
+	// Set up the clock
+	document.getElementById("st1").innerHTML = getTime();
+            // Set clock interval to tick clock
+            setInterval( () => {
+                document.getElementById("st1").innerHTML = getTime();
+    },100);
+	document.getElementById("st2").innerHTML = getTime();
+            // Set clock interval to tick clock
+            setInterval( () => {
+                document.getElementById("st2").innerHTML = getTime();
+    },100);
+	document.getElementById("st3").innerHTML = getTime();
+            // Set clock interval to tick clock
+            setInterval( () => {
+                document.getElementById("st3").innerHTML = getTime();
+    },100);
+	document.getElementById("st4").innerHTML = getTime();
+            // Set clock interval to tick clock
+            setInterval( () => {
+                document.getElementById("st4").innerHTML = getTime();
+    },100);
+	document.getElementById("st5").innerHTML = getTime();
+            // Set clock interval to tick clock
+            setInterval( () => {
+                document.getElementById("st5").innerHTML = getTime();
+    },100);
 	var links_var = [
 
 	[
@@ -498,6 +668,33 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 			localStorage.setItem('palette', palette_spans[i].parentElement.dataset.color);
 		})
 	}
+	window.onload = () => {
+            let xhr = new XMLHttpRequest();
+            // Request to open weather map
+            xhr.open('GET', 'http://api.openweathermap.org/data/2.5/weather?id=1880252&units=metric&appid=e5b292ae2f9dae5f29e11499c2d82ece');
+            xhr.onload = () => {
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        let json = JSON.parse(xhr.responseText);
+                        console.log(json);
+                        
+                        document.getElementById("temp1").innerHTML = json.weather[0].description + ", ";
+						document.getElementById("temp1").innerHTML += json.main.temp.toFixed(0) + " celsius";
+						document.getElementById("temp2").innerHTML = json.weather[0].description + ", ";
+						document.getElementById("temp2").innerHTML += json.main.temp.toFixed(0) + " celsius";
+						document.getElementById("temp3").innerHTML = json.weather[0].description + ", ";
+						document.getElementById("temp3").innerHTML += json.main.temp.toFixed(0) + " celsius";
+						document.getElementById("temp4").innerHTML = json.weather[0].description + ", ";
+						document.getElementById("temp4").innerHTML += json.main.temp.toFixed(0) + " celsius";
+						document.getElementById("temp5").innerHTML = json.weather[0].description + ", ";
+						document.getElementById("temp5").innerHTML += json.main.temp.toFixed(0) + " celsius";
+                    } else {
+                        console.log('error msg: ' + xhr.status);
+                    }
+                }
+            }
+            xhr.send();
+        }
 
 
 	//links
@@ -507,6 +704,7 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 
 			var a_element = document.createElement('a');
 			a_element.setAttribute('data-id', 'i' + i + '_j' + j);
+			a_element.setAttribute('class', 'linksel');
 			a_element.innerHTML = links_var[i][j][0];
 
 			if (typeof links_var[i][j][1] == 'string'){
@@ -541,9 +739,11 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 
 
 	//tabs
+	var stats = document.querySelectorAll('.stats');
 	var tabs = document.querySelectorAll('.tab:not(.space):not(.extra)');
 	var contents = document.querySelectorAll('.content');
 	console.log('tabs', tabs);
+	console.log('stats', stats);
 	console.log('contents', contents);
 	for (let i=0; i<tabs.length; i++){
 		tabs[i].addEventListener('mouseenter', function(){
