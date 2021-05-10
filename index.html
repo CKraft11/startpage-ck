@@ -1,288 +1,593 @@
 <!DOCTYPE html>
-<html lang="en"><head><link href="favicon.ico" rel="shortcut icon" type="image/x-icon" /><link type="text/css" id="dark-mode" rel="stylesheet" href=""><style type="text/css" id="dark-mode-custom-style"></style>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8"><style id="react-tooltip">.__react_component_tooltip{border-radius:3px;display:inline-block;font-size:13px;left:-999em;opacity:0;padding:8px 21px;position:fixed;pointer-events:none;transition:opacity 0.3s ease-out;top:-999em;visibility:hidden;z-index:999}.__react_component_tooltip.allow_hover,.__react_component_tooltip.allow_click{pointer-events:auto}.__react_component_tooltip:before,.__react_component_tooltip:after{content:"";width:0;height:0;position:absolute}.__react_component_tooltip.show{opacity:0.9;margin-top:0px;margin-left:0px;visibility:visible}.__react_component_tooltip.type-dark{color:#fff;background-color:#222}.__react_component_tooltip.type-dark.place-top:after{border-top-color:#222;border-top-style:solid;border-top-width:6px}.__react_component_tooltip.type-dark.place-bottom:after{border-bottom-color:#222;border-bottom-style:solid;border-bottom-width:6px}.__react_component_tooltip.type-dark.place-left:after{border-left-color:#222;border-left-style:solid;border-left-width:6px}.__react_component_tooltip.type-dark.place-right:after{border-right-color:#222;border-right-style:solid;border-right-width:6px}.__react_component_tooltip.type-dark.border{border:1px solid #fff}.__react_component_tooltip.type-dark.border.place-top:before{border-top:8px solid #fff}.__react_component_tooltip.type-dark.border.place-bottom:before{border-bottom:8px solid #fff}.__react_component_tooltip.type-dark.border.place-left:before{border-left:8px solid #fff}.__react_component_tooltip.type-dark.border.place-right:before{border-right:8px solid #fff}.__react_component_tooltip.type-success{color:#fff;background-color:#8DC572}.__react_component_tooltip.type-success.place-top:after{border-top-color:#8DC572;border-top-style:solid;border-top-width:6px}.__react_component_tooltip.type-success.place-bottom:after{border-bottom-color:#8DC572;border-bottom-style:solid;border-bottom-width:6px}.__react_component_tooltip.type-success.place-left:after{border-left-color:#8DC572;border-left-style:solid;border-left-width:6px}.__react_component_tooltip.type-success.place-right:after{border-right-color:#8DC572;border-right-style:solid;border-right-width:6px}.__react_component_tooltip.type-success.border{border:1px solid #fff}.__react_component_tooltip.type-success.border.place-top:before{border-top:8px solid #fff}.__react_component_tooltip.type-success.border.place-bottom:before{border-bottom:8px solid #fff}.__react_component_tooltip.type-success.border.place-left:before{border-left:8px solid #fff}.__react_component_tooltip.type-success.border.place-right:before{border-right:8px solid #fff}.__react_component_tooltip.type-warning{color:#fff;background-color:#F0AD4E}.__react_component_tooltip.type-warning.place-top:after{border-top-color:#F0AD4E;border-top-style:solid;border-top-width:6px}.__react_component_tooltip.type-warning.place-bottom:after{border-bottom-color:#F0AD4E;border-bottom-style:solid;border-bottom-width:6px}.__react_component_tooltip.type-warning.place-left:after{border-left-color:#F0AD4E;border-left-style:solid;border-left-width:6px}.__react_component_tooltip.type-warning.place-right:after{border-right-color:#F0AD4E;border-right-style:solid;border-right-width:6px}.__react_component_tooltip.type-warning.border{border:1px solid #fff}.__react_component_tooltip.type-warning.border.place-top:before{border-top:8px solid #fff}.__react_component_tooltip.type-warning.border.place-bottom:before{border-bottom:8px solid #fff}.__react_component_tooltip.type-warning.border.place-left:before{border-left:8px solid #fff}.__react_component_tooltip.type-warning.border.place-right:before{border-right:8px solid #fff}.__react_component_tooltip.type-error{color:#fff;background-color:#BE6464}.__react_component_tooltip.type-error.place-top:after{border-top-color:#BE6464;border-top-style:solid;border-top-width:6px}.__react_component_tooltip.type-error.place-bottom:after{border-bottom-color:#BE6464;border-bottom-style:solid;border-bottom-width:6px}.__react_component_tooltip.type-error.place-left:after{border-left-color:#BE6464;border-left-style:solid;border-left-width:6px}.__react_component_tooltip.type-error.place-right:after{border-right-color:#BE6464;border-right-style:solid;border-right-width:6px}.__react_component_tooltip.type-error.border{border:1px solid #fff}.__react_component_tooltip.type-error.border.place-top:before{border-top:8px solid #fff}.__react_component_tooltip.type-error.border.place-bottom:before{border-bottom:8px solid #fff}.__react_component_tooltip.type-error.border.place-left:before{border-left:8px solid #fff}.__react_component_tooltip.type-error.border.place-right:before{border-right:8px solid #fff}.__react_component_tooltip.type-info{color:#fff;background-color:#337AB7}.__react_component_tooltip.type-info.place-top:after{border-top-color:#337AB7;border-top-style:solid;border-top-width:6px}.__react_component_tooltip.type-info.place-bottom:after{border-bottom-color:#337AB7;border-bottom-style:solid;border-bottom-width:6px}.__react_component_tooltip.type-info.place-left:after{border-left-color:#337AB7;border-left-style:solid;border-left-width:6px}.__react_component_tooltip.type-info.place-right:after{border-right-color:#337AB7;border-right-style:solid;border-right-width:6px}.__react_component_tooltip.type-info.border{border:1px solid #fff}.__react_component_tooltip.type-info.border.place-top:before{border-top:8px solid #fff}.__react_component_tooltip.type-info.border.place-bottom:before{border-bottom:8px solid #fff}.__react_component_tooltip.type-info.border.place-left:before{border-left:8px solid #fff}.__react_component_tooltip.type-info.border.place-right:before{border-right:8px solid #fff}.__react_component_tooltip.type-light{color:#222;background-color:#fff}.__react_component_tooltip.type-light.place-top:after{border-top-color:#fff;border-top-style:solid;border-top-width:6px}.__react_component_tooltip.type-light.place-bottom:after{border-bottom-color:#fff;border-bottom-style:solid;border-bottom-width:6px}.__react_component_tooltip.type-light.place-left:after{border-left-color:#fff;border-left-style:solid;border-left-width:6px}.__react_component_tooltip.type-light.place-right:after{border-right-color:#fff;border-right-style:solid;border-right-width:6px}.__react_component_tooltip.type-light.border{border:1px solid #222}.__react_component_tooltip.type-light.border.place-top:before{border-top:8px solid #222}.__react_component_tooltip.type-light.border.place-bottom:before{border-bottom:8px solid #222}.__react_component_tooltip.type-light.border.place-left:before{border-left:8px solid #222}.__react_component_tooltip.type-light.border.place-right:before{border-right:8px solid #222}.__react_component_tooltip.place-top{margin-top:-10px}.__react_component_tooltip.place-top:before{border-left:10px solid transparent;border-right:10px solid transparent;bottom:-8px;left:50%;margin-left:-10px}.__react_component_tooltip.place-top:after{border-left:8px solid transparent;border-right:8px solid transparent;bottom:-6px;left:50%;margin-left:-8px}.__react_component_tooltip.place-bottom{margin-top:10px}.__react_component_tooltip.place-bottom:before{border-left:10px solid transparent;border-right:10px solid transparent;top:-8px;left:50%;margin-left:-10px}.__react_component_tooltip.place-bottom:after{border-left:8px solid transparent;border-right:8px solid transparent;top:-6px;left:50%;margin-left:-8px}.__react_component_tooltip.place-left{margin-left:-10px}.__react_component_tooltip.place-left:before{border-top:6px solid transparent;border-bottom:6px solid transparent;right:-8px;top:50%;margin-top:-5px}.__react_component_tooltip.place-left:after{border-top:5px solid transparent;border-bottom:5px solid transparent;right:-6px;top:50%;margin-top:-4px}.__react_component_tooltip.place-right{margin-left:10px}.__react_component_tooltip.place-right:before{border-top:6px solid transparent;border-bottom:6px solid transparent;left:-8px;top:50%;margin-top:-5px}.__react_component_tooltip.place-right:after{border-top:5px solid transparent;border-bottom:5px solid transparent;left:-6px;top:50%;margin-top:-4px}.__react_component_tooltip .multi-line{display:block;padding:2px 0px;text-align:center}</style>
-<style type="text/css">
-@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<base target="_blank">
+	<title>Home</title>
+</head>
+<link href='https://fonts.googleapis.com/css?family=Roboto Mono' rel='stylesheet'>
+
+<body data-palette="rainbow" data-page="1">
+
+<main>
+
+	<div class="container">
+
+		<div class="tabs">
+			<div class="tab page1 active" data-color="1">1</div>
+			<div class="tab page1" data-color="2">2</div>
+			<div class="tab page1" data-color="3">3</div>
+			<div class="tab page1" data-color="4">4</div>
+			<div class="tab page1" data-color="5">5</div>
+			<div class="tab page2 notVisible" data-color="1">6</div>
+			<div class="tab page2 notVisible" data-color="2">7</div>
+			<div class="tab page2 notVisible" data-color="3">8</div>
+			<div class="tab page2 notVisible" data-color="4">9</div>
+			<div class="tab page2 notVisible" data-color="5">10</div>
+			<div class="tab page3 notVisible" data-color="1">11</div>
+			<div class="tab page3 notVisible" data-color="2">12</div>
+			<div class="tab page3 notVisible" data-color="3">13</div>
+			<div class="tab page3 notVisible" data-color="4">14</div>
+			<div class="tab page3 notVisible" data-color="5">15</div>
+			<div class="tab space"></div>
+			<div class="tab extra back">-</div>
+			<div class="tab extra next">+</div>
+		</div>
+
+		<div class="content page1 active" data-color="1"></div>
+		<div class="content page1" data-color="2"></div>
+		<div class="content page1" data-color="3"></div>
+		<div class="content page1" data-color="4"></div>
+		<div class="content page1" data-color="5"></div>
+		<div class="content page2" data-color="1"></div>
+		<div class="content page2" data-color="2"></div>
+		<div class="content page2" data-color="3"></div>
+		<div class="content page2" data-color="4"></div>
+		<div class="content page2" data-color="5"></div>
+		<div class="content page3" data-color="1"></div>
+		<div class="content page3" data-color="2"></div>
+		<div class="content page3" data-color="3"></div>
+		<div class="content page3" data-color="4"></div>
+		<div class="content page3" data-color="5"></div>
+
+		<div class="palette">
+			<div class="palette-content">
+				<div data-color="rainbow"><span></span></div>
+				<div data-color="random"><span>?</span></div>
+				<div data-color="ice"><span></span></div>
+				<div data-color="red"><span></span></div>
+				<div data-color="orange"><span></span></div>
+				<div data-color="green"><span></span></div>
+				<div data-color="blue"><span></span></div>
+				<div data-color="purple"><span></span></div>
+			</div>
+		</div>
+
+	</div>
+
+</main>
+
+</body>
+
+</html>
+
+
+
+<style>
 
 :root {
-  --bg: #000000;
-  --fg: #ffffff;
-  --secondaryFg: #b3b3b3;
-  --containerBg: #272727;
-  --searchBg: var(--containerBg);
-  --scrollbarColor: #3f3f3f;
+	--bg: #2E3440;
+	--text: #D8DEE9;
+	--extra: hsl(222deg 14% 17%);
+	--random: hsl(222deg 14% 25%);
+
+	--random-color: #fff;
+
+	--grey: #D8DEE9;
+	--ice: #4C566A;
+	--red: #BF616A;
+	--orange: #D08770;
+	--green: #A3BE8C;
+	--blue: #5E81AC;
+	--purple: #B48EAD;
 }
 
-body {
-  background-color: var(--bg);
-  margin: 0px;
+
+:root [data-palette="rainbow"] {
+	--color-1: var(--red);
+	--color-2: var(--orange);
+	--color-3: var(--green);
+	--color-4: var(--blue);
+	--color-5: var(--purple);
+}
+:root [data-palette="random"] {
+	--color-1: var(--random-color);
+	--color-2: var(--random-color);
+	--color-3: var(--random-color);
+	--color-4: var(--random-color);
+	--color-5: var(--random-color);
+}
+:root [data-palette="ice"] {
+	--color-1: var(--ice);
+	--color-2: var(--ice);
+	--color-3: var(--ice);
+	--color-4: var(--ice);
+	--color-5: var(--ice);
+}
+:root [data-palette="red"] {
+	--color-1: var(--red);
+	--color-2: var(--red);
+	--color-3: var(--red);
+	--color-4: var(--red);
+	--color-5: var(--red);
+}
+:root [data-palette="orange"] {
+	--color-1: var(--orange);
+	--color-2: var(--orange);
+	--color-3: var(--orange);
+	--color-4: var(--orange);
+	--color-5: var(--orange);
+}
+:root [data-palette="green"] {
+	--color-1: var(--green);
+	--color-2: var(--green);
+	--color-3: var(--green);
+	--color-4: var(--green);
+	--color-5: var(--green);
+}
+:root [data-palette="blue"] {
+	--color-1: var(--blue);
+	--color-2: var(--blue);
+	--color-3: var(--blue);
+	--color-4: var(--blue);
+	--color-5: var(--blue);
+}
+:root [data-palette="purple"] {
+	--color-1: var(--purple)
+	--color-2: var(--purple);
+	--color-3: var(--purple);
+	--color-4: var(--purple);
+	--color-5: var(--purple);
 }
 
+
+
+* {
+	font-family: 'Roboto Mono';
+	text-decoration: none;
+	transition: .1s;
+}
+
+html, body {
+	width: 100%;
+	height: 100vh;
+	margin: 0;
+	padding: 0;
+	outline: none;
+	display: flex;
+	justify-content: center;
+}
+main {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+
+/*container*/
 .container {
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: stretch;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
-#clock {
-  font-family: sans-serif;
-  font-size: 3.5rem;
-  font-weight: 600;
-  font-family: 'Roboto Mono';
-  color: var(--fg);
-  margin-bottom: 0.25em;
+/*tabs*/
+.tabs {
+	display: flex;
+}
+.tab {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 50px;
+	height: 30px;
+	cursor: default;
+}
+.tab.notVisible {
+	display: none;
+}
+.tab.space {
+	flex-grow: 1;
+}
+body[data-page="1"] .tab.extra.back,
+body[data-page="3"] .tab.extra.next {
+	visibility: hidden;
+}
+body:not([data-page="1"]) .tab.extra.back:hover,
+body:not([data-page="3"]) .tab.extra.next:hover {
+	cursor: pointer;
 }
 
-#search {
-  width: 100%;
-  height: 100vh;
-  background-color: var(--searchBg);
-  display: none;
-  position: absolute;
-  box-sizing: border-box;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+/*content*/
+.content {
+	display: none;
+	flex-direction: column;
+	padding: 50px 10px;
+	border: 3px solid;
+}
+.content.active {
+	display: flex;
+}
+.content > a {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 5px 20px;
+	cursor: pointer;
+	height: 20px;
 }
 
-#search-field {
-  width: 90%;
-  padding: 0.75em 1em;
-  box-sizing: border-box;
-  background-color: var(--searchBg);
-  border: solid 0px var(--searchBg);
-  font-family: 'Roboto Mono';
-  font-size: 4rem;
-  color: var(--fg);
-  outline: none;
-  border-radius: 3px;
-  margin-bottom: 1em;
-  text-align: center;
+/*palette*/
+.palette {
+	display: flex;
+	justify-content: center;
+	margin: 20px;
 }
-
-.weather-container {
-  width: 30%;
-  background-color: var(--containerBg);
-  padding: 1em;
-  border-radius: 3px;
-  font-family: 'Roboto Mono';
-  color: var(--fg);
-  text-align: center;
+.palette-content {
+	display: flex;
+	justify-content: center;
+	cursor: pointer;
+	opacity: 0;
+	transition: .3s;
 }
-.inline {
-  display: inline-block;
+.palette div[data-color] {
+	padding-bottom: 2px;
+	border-bottom: 3px solid transparent;
 }
-
-.bookmark-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  width: 50%;
-  margin: 1em 0em;
-}
-
-@media only screen and (max-width: 960px) {
-  .container {
-    height: auto;
-  }
-  #clock {
-    margin-top: 1em;
-  }
-  .container > .bookmark-container {
-    flex-direction: column;
-    width: 60%;
-  }
-  .bookmark-container > .bookmark-set {
-    width: auto;
-    margin: 1em 0em;
-  }
-}
-
-.bookmark-set {
-  padding: 1em;
-  background-color: var(--containerBg);
-  border-radius: 3px;
-  font-family: 'Roboto Mono';
-  font-size: 0.85rem;
-  width: 25%;
-  height: 12em;
-  margin: 0em 0.5em;
-  box-sizing: border-box;
-}
-
-.bookmark-inner-container {
-  overflow-y: scroll;
-  height: 80%;
-  vertical-align: top;
-  padding-right: 6px;
-  box-sizing: border-box;
-
-  scrollbar-width: thin;
-  scrollbar-color: var(--scrollbarColor) #ffffff00;
-}
-
-.bookmark-inner-container::-webkit-scrollbar {
-  width: 6px;
-}
-.bookmark-inner-container::-webkit-scrollbar-track {
-  background: #ffffff00;
-}
-.bookmark-inner-container::-webkit-scrollbar-thumb {
-  background-color: var(--scrollbarColor);
-  border-radius: 6px;
-  border: 3px solid #ffffff00;
-}
-
-.bookmark-title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--fg);
-  margin: 0em 0em 0.35em 0em;
-}
-.bookmark {
-  text-decoration: none;
-  color: var(--secondaryFg);
-  display: block;
-  margin: 0.5em 0em;
-}
-.bookmark:hover {
-  color: var(--fg);
+.palette div span {
+	display: flex;
+	justify-content: center;
+	width: 20px;
+	height: 20px;
+	border-radius: 100%;
+	margin: 2px;
 }
 
 
- </style>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Home</title>
-<link href="https://5f1d42d8e75b9.htmlsave.net/favicon.png" rel="shortcut icon" type="image/x-icon">
-</head>
-<body data-new-gr-c-s-check-loaded="8.868.0" data-gr-ext-installed="">
-<div id="search">
-<input id="search-field" type="text" name="search-field" onkeypress="return search(event)">
-</div>
-<div class="container">
-<div id="clock">20:07:51</div>
-<div class="weather-container">
-<div class="row">
-<div id="weather-description" class="inline">light rain</div>
-<div class="inline">-</div>
-<div id="temp" class="inline">24 C</div>
-</div>
-</div>
-<div class="bookmark-container">
-<div class="bookmark-set">
-<div class="bookmark-title">Daily</div>
-<div class="bookmark-inner-container">
-<a class="bookmark" href="https://inbox.google.com/" target="_blank">Inbox</a>
-<a class="bookmark" href="https://drive.google.com/" target="_blank">Drive</a>
-<a class="bookmark" href="https://trello.com/b/Oj2XOpQf/school" target="_blank">Trello</a>
-<a class="bookmark" href="https://sas.theteamie.com/dash/#/classroom/47090/newsfeed" target="_blank">Teamie</a>
-<a class="bookmark" href="https://sas.schoology.com/" target="_blank">Schoology</a>
-<a class="bookmark" href="https://twitter.com/" target="_blank">Twitter</a>
-</div>
-</div>
-<div class="bookmark-set">
-<div class="bookmark-title">Media</div>
-<div class="bookmark-inner-container">
-<a class="bookmark" href="https://youtube.com/" target="_blank">Youtube</a>
-<a class="bookmark" href="https://1337x.to/" target="_blank">1337x</a>
-<a class="bookmark" href="https://thepiratebay.org/" target="_blank">Pirate Bay</a>
-<a class="bookmark" href="https://arstechnica.com/" target="_blank">Ars Technica</a>
-<a class="bookmark" href="https://apnews.com/" target="_blank">AP News</a>
-</div>
-</div>
-<div class="bookmark-set">
-<a class="bookmark-title" href="https://www.reddit.com/" target="_blank" style="text-decoration: none">Reddit</a>
-<div class="bookmark-inner-container">
-<a class="bookmark" href="https://www.reddit.com/r/piracy" target="_blank">/r/piracy</a>
-<a class="bookmark" href="https://www.reddit.com/r/mechanicalkeyboards" target="_blank">/r/mechanicalkeyboards</a>
-<a class="bookmark" href="https://www.reddit.com/r/customkeyboards" target="_blank">/r/customkeyboards</a>
-<a class="bookmark" href="https://www.reddit.com/r/battlestations" target="_blank">/r/battlestations</a>
-<a class="bookmark" href="https://www.reddit.com/r/unixporn" target="_blank">/r/unixporn</a>
-<a class="bookmark" href="https://www.reddit.com/r/news" target="_blank">/r/news</a>
-</div>
-</div>
-<div class="bookmark-set">
-<div class="bookmark-title">Management</div>
-<div class="bookmark-inner-container">
-<a class="bookmark" href="http://radon.local" target="_blank">OMV RADON</a>
-<a class="bookmark" href="http://xenon.local" target="_blank">OMV XENON</a>
-<a class="bookmark" href="http://xenon.local:8181/admin/" target="_blank">PiHole</a>
-<a class="bookmark" href="http://xenon.local:8080/" target="_blank">QBittorrent</a>
-<a class="bookmark" href="http://radon.local:9000/" target="_blank">Portainer R</a>
-<a class="bookmark" href="http://xenon.local:9000/" target="_blank">Portainer X</a>
-</div>
-</div>
-<div class="bookmark-set">
-<div class="bookmark-title">Shopping</div>
-<div class="bookmark-inner-container">
-<a class="bookmark" href="https://aliexpress.com/" target="_blank">Aliexpress</a>
-<a class="bookmark" href="https://amazon.com/" target="_blank">Amazon</a>
-<a class="bookmark" href="https://amazon.sg/" target="_blank">Amazon SG</a>
-<a class="bookmark" href="https://banggood.com/" target="_blank">Banggood</a>
-</div>
-</div>
-</div>
-</div>
+/*colors*/
+body {
+	background-color: var(--bg);
+	color: var(--text);
+}
+
+body:not([data-page="1"]) .tab.extra.back:hover,
+body:not([data-page="3"]) .tab.extra.next:hover {
+	background: var(--extra);
+}
+
+.content {
+	border-color: var(--extra);
+}
+.content > a {
+	color: var(--text);
+}
+
+.tab.active[data-color="1"],
+.content[data-color="1"] a:hover {
+	background-color: var(--color-1);
+}
+.tab.active[data-color="2"],
+.content[data-color="2"] a:hover {
+	background-color: var(--color-2);
+}
+.tab.active[data-color="3"],
+.content[data-color="3"] a:hover {
+	background-color: var(--color-3);
+}
+.tab.active[data-color="4"],
+.content[data-color="4"] a:hover {
+	background-color: var(--color-4);
+}
+.tab.active[data-color="5"],
+.content[data-color="5"] a:hover {
+	background-color: var(--color-5);
+}
+
+.content[data-color="1"] {	border-color: var(--color-1);}
+.content[data-color="2"] {	border-color: var(--color-2);}
+.content[data-color="3"] {	border-color: var(--color-3);}
+.content[data-color="4"] {	border-color: var(--color-4);}
+.content[data-color="5"] {	border-color: var(--color-5);}
+
+
+.palette div[data-color="rainbow"] span {
+    border: 6px solid var(--grey);
+    box-sizing: border-box;
+}
+.palette div[data-color="random"] span {	background-color: var(--random);}
+.palette div[data-color="ice"] span {	background-color: var(--ice);}
+.palette div[data-color="red"] span {	background-color: var(--red);}
+.palette div[data-color="orange"] span {	background-color: var(--orange);}
+.palette div[data-color="green"] span {	background-color: var(--green);}
+.palette div[data-color="blue"] span {	background-color: var(--blue);}
+.palette div[data-color="purple"] span {	background-color: var(--purple);}
+
+.palette div.selected[data-color="rainbow"] {	border-color: var(--grey);}
+.palette div.selected[data-color="random"] {	border-color: var(--random);}
+.palette div.selected[data-color="ice"] {	border-color: var(--ice);}
+.palette div.selected[data-color="red"] {	border-color: var(--red);}
+.palette div.selected[data-color="orange"] {	border-color: var(--orange);}
+.palette div.selected[data-color="green"] {	border-color: var(--green);}
+.palette div.selected[data-color="blue"] {	border-color: var(--blue);}
+.palette div.selected[data-color="purple"] {	border-color: var(--purple);}
+
+
+
+
+/*mobile*/
+@media screen and (max-width: 500px) {
+	.tab {
+		width: 30px;
+	}
+}
+
+
+</style>
+
 <script>
-        // Search on enter key event
-        function search(e) {
-            if (e.keyCode == 13) {
-                var val = document.getElementById("search-field").value;
-                window.open("https://google.com/search?q=" + val);
-            }
-        }
-        // Get current time and format
-        function getTime() {
-            let date = new Date(),
-                min = date.getMinutes(),
-                sec = date.getSeconds(),
-                hour = date.getHours();
 
-            return "" + 
-                (hour < 10 ? ("0" + hour) : hour) + ":" + 
-                (min < 10 ? ("0" + min) : min) + ":" + 
-                (sec < 10 ? ("0" + sec) : sec);
-        }
+	//links
 
-        window.onload = () => {
-            let xhr = new XMLHttpRequest();
-            // Request to open weather map
-            xhr.open('GET', 'https://api.openweathermap.org/data/2.5/weather?id=1880252&units=metric&appid=e5b292ae2f9dae5f29e11499c2d82ece');
-            xhr.onload = () => {
-                if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
-                        let json = JSON.parse(xhr.responseText);
-                        console.log(json);
-                        document.getElementById("temp").innerHTML = json.main.temp.toFixed(0) + " C";
-                        document.getElementById("weather-description").innerHTML = json.weather[0].description;
-                    } else {
-                        console.log('error msg: ' + xhr.status);
-                    }
-                }
-            }
-            xhr.send();
-            // Set up the clock
-            document.getElementById("clock").innerHTML = getTime();
-            // Set clock interval to tick clock
-            setInterval( () => {
-                document.getElementById("clock").innerHTML = getTime();
-            },100);
-        }
+	var links_var = [
 
-        document.addEventListener("keydown", event => {
-            if (event.keyCode == 32) {          // Spacebar code to open search
-                document.getElementById('search').style.display = 'flex';
-                document.getElementById('search-field').focus();
-            } else if (event.keyCode == 27) {   // Esc to close search
-                document.getElementById('search-field').value = '';
-                document.getElementById('search-field').blur();
-                document.getElementById('search').style.display = 'none';
-            }
-        });
-    </script>
-<div at-magnifier-wrapper=""><div class="at-theme-dark"><div class="at-base notranslate" translate="no"><div class="Z1-AJ" style="top: 0px; left: 0px;"></div></div></div></div><div at-external-link-wrapper=""><div class="at-theme-dark"><div class="at-base notranslate" translate="no"><div class="__react_component_tooltip place-top type-dark " data-id="tooltip"><div class="at-tooltip-container__content" style="width: 423px; height: auto;"><div></div><div class="_1mJpe"><div class="iYXld"><span class="Afhjo">Alitools</span>&nbsp;<span>Guide <span>βeta</span></span></div><span class="_2PUhS">Link checked<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="_3nz6u"><path fill-rule="evenodd" clip-rule="evenodd" d="M1.696 1.545C3.11.777 4.546.378 6 .378c1.454 0 2.89.399 4.304 1.167a.374.374 0 0 1 .196.33v.137c0 2.365 0 4.054-.538 5.523-.55 1.497-1.664 2.697-3.76 4.031a.374.374 0 0 1-.403 0c-2.097-1.334-3.212-2.534-3.76-4.03-.54-1.47-.54-3.159-.539-5.524v-.137a.375.375 0 0 1 .196-.33zm6.71 2.746a.5.5 0 1 0-.813-.582L5.514 6.62l-.598-.896a.5.5 0 1 0-.832.554l1 1.5a.5.5 0 0 0 .823.014l2.5-3.5z" fill="#C8C8C8"></path></svg></span></div></div></div></div></div></div></body></html>
+	[
+		['inbox', 'https://inbox.google.com'],
+		['drive', 'https://drive.google.com'],
+		['trello', 'https://trello.com/b/Oj2XOpQf/school'],
+		['teamie', 'https://sas.theteamie.com/dash/#/classroom/47090/newsfeed'],
+		['twitter', 'https://twitter.com'],
+	],
+	[
+		['amazon', 'https://amazon.com'],
+		['aliexpress', 'https://aliexpress.com'],
+		['banggood', 'https://banggood.com'],
+		['amazon sg', 'https://amazon.sg'],
+		['ebay', 'https://ebay.com'],
+	],
+	[
+		['/r/piracy', 'aaa'],
+		['/r/mechaniaclkeyboards', 'aaa'],
+		['/r/customkeyboards', 'aaa'],
+		['/r/unixporn', 'aaa'],
+		['/r/news', 'aaa'],
+	],
+	[
+		['youtube', 'https://youtube.com'],
+		['1337x', 'https://1337x.to'],
+		['pirate bay', 'https://thepiratebay.org'],
+		['ars technica', 'https://arstechnica.com'],
+		['associated press', 'https://apnews.com'],
+
+	],
+	[
+		['xenon omv', 'http://xenon.local:88'],
+		['radon omv', 'http://radon.local:88'],
+		['xenon portainer', 'http://xenon.local:9000'],
+		['radon portainer', 'http://radon.local:9000'],
+		['router', 'http://10.0.0.1'],
+
+	],
+	//-----------------------6-10
+	[
+		['link-26', 'aaa'],
+		['link-27', 'aaa'],
+		['link-28', 'aaa'],
+		['link-29', 'aaa'],
+		['link-30', 'aaa'],
+
+	],
+	[
+		['link-31', 'aaa'],
+		['link-32', 'aaa'],
+		['link-33', 'aaa'],
+		['link-34', 'aaa'],
+		['link-35', 'aaa'],
+
+	],
+	[
+		['link-36', 'aaa'],
+		['link-37', 'aaa'],
+		['link-38', 'aaa'],
+		['link-39', 'aaa'],
+		['link-40', 'aaa'],
+
+	],
+	[
+		['link-41', 'aaa'],
+		['link-42', 'aaa'],
+		['link-43', 'aaa'],
+		['link-44', 'aaa'],
+		['link-45', 'aaa'],
+	],
+	[
+		['link-46', 'aaa'],
+		['link-47', 'aaa'],
+		['link-48', 'aaa'],
+		['link-49', 'aaa'],
+		['link-50', 'aaa'],
+	],
+	//-----------------------11-15
+	[
+		['link-51', 'aaa'],
+		['link-52', 'aaa'],
+		['link-53', 'aaa'],
+		['link-54', 'aaa'],
+		['link-55', 'aaa'],
+	],
+	[
+		['link-56', 'aaa'],
+		['link-57', 'aaa'],
+		['link-58', 'aaa'],
+		['link-59', 'aaa'],
+		['link-60', 'aaa'],
+	],
+	[
+		['link-61', 'aaa'],
+		['link-62', 'aaa'],
+		['link-63', 'aaa'],
+		['link-64', 'aaa'],
+		['link-65', 'aaa'],
+	],
+	[
+		['link-66', 'aaa'],
+		['link-67', 'aaa'],
+		['link-68', 'aaa'],
+		['link-69', 'aaa'],
+		['link-70', 'aaa'],
+	],
+	[
+		['link-71', 'aaa'],
+		['link-72', 'aaa'],
+		['link-73', 'aaa'],
+		['link-74', 'aaa'],
+		['link-75', 'aaa'],
+	],
+
+
+
+	]
+//--------------------------------------------------------------------
+
+
+	//set color
+	if (typeof localStorage.palette == 'undefined'){
+		localStorage.setItem('palette', 'rainbow');
+	}
+
+	document.querySelector('body').dataset.palette = localStorage.getItem('palette');
+	var palette_spans = document.querySelectorAll('.palette span');
+	for (let j=0; j<palette_spans.length; j++){
+		if (palette_spans[j].parentElement.dataset.color == localStorage.getItem('palette')){
+			palette_spans[j].parentElement.classList.add('selected');
+		}
+	}
+
+
+	//palette
+	document.querySelector('.palette').addEventListener('mouseenter', function(){
+		document.querySelector('.palette-content').style.opacity = '1';
+	})
+	document.querySelector('.palette').addEventListener('mouseleave', function(){
+		document.querySelector('.palette-content').style.opacity = '0';
+	})
+
+	for (let i=0; i<palette_spans.length; i++){
+		palette_spans[i].addEventListener('click', function(){
+			for (let j=0; j<palette_spans.length; j++){
+				palette_spans[j].parentElement.classList.remove('selected');
+			}
+			palette_spans[i].parentElement.classList.add('selected');
+			document.querySelector('body').dataset.palette = palette_spans[i].parentElement.dataset.color;
+			localStorage.setItem('palette', palette_spans[i].parentElement.dataset.color);
+		})
+	}
+
+
+	//links
+	var contents = document.querySelectorAll('.content');
+	for (let i=0; i<contents.length; i++){
+		for (let j=0; j<links_var[i].length; j++){
+
+			var a_element = document.createElement('a');
+			a_element.setAttribute('data-id', 'i' + i + '_j' + j);
+			a_element.innerHTML = links_var[i][j][0];
+
+			if (typeof links_var[i][j][1] == 'string'){
+
+				a_element.href = links_var[i][j][1];
+				contents[i].appendChild(a_element);
+			}
+			else {
+
+				contents[i].appendChild(a_element);
+				for (let k=0; k<links_var[i][j][1].length; k++){
+					document.querySelector('a[data-id="i' + i + '_j' + j + '"]').setAttribute('data-link_' + k, links_var[i][j][1][k][1]);
+				}
+				document.querySelector('a[data-id="i' + i + '_j' + j + '"]').addEventListener('click', function(event){
+					for (let k=0; k<links_var[i][j][1].length; k++){
+						event.preventDefault();
+						window.open(document.querySelector('a[data-id="i' + i + '_j' + j + '"]').getAttribute('data-link_' + k));
+					}
+				})
+			}
+		}
+	}
+
+
+	//random color
+	var temp_random = Math.floor((Math.random() * 360) + 1);
+	document.documentElement.style.setProperty('--random-color', 'hsl(' + temp_random + 'deg 41% 46%)');
+	document.querySelector('.palette div[data-color="random"').addEventListener('click', function(){
+		var temp_random = Math.floor((Math.random() * 360) + 1);
+		document.documentElement.style.setProperty('--random-color', 'hsl(' + temp_random + 'deg 41% 46%)');
+	})
+
+
+	//tabs
+	var tabs = document.querySelectorAll('.tab:not(.space):not(.extra)');
+	var contents = document.querySelectorAll('.content');
+	console.log('tabs', tabs);
+	console.log('contents', contents);
+	for (let i=0; i<tabs.length; i++){
+		tabs[i].addEventListener('mouseenter', function(){
+			for (let j=0; j<tabs.length; j++){
+				tabs[j].classList.remove('active');
+			}
+			tabs[i].classList.add('active');
+			for (let j=0; j<contents.length; j++){
+				contents[j].classList.remove('active');
+			}
+			contents[i].classList.add('active');
+		})
+	}
+
+
+	//extra
+	function show_page(x){
+		for (let i=0; i<tabs.length; i++){
+			tabs[i].classList.add('notVisible');
+			tabs[i].classList.remove('active');
+			contents[i].classList.remove('active');
+		}
+		var pageTabs = document.querySelectorAll('.tab.page' + x);
+		for (let i=0; i<pageTabs.length; i++){
+			pageTabs[i].classList.remove('notVisible');
+		}
+		document.querySelector('.tab.page' + x).classList.add('active');
+		document.querySelector('.content.page' + x).classList.add('active');
+		document.querySelector('body').dataset.page = x;
+	}
+
+	var pages = 3;
+	document.querySelector('.tab.extra.back').addEventListener('click', function(){
+		var current_page = Number(document.querySelector('body').dataset.page);
+		if (current_page-1 >= 1){
+			show_page(current_page-1);
+		}
+	})
+	document.querySelector('.tab.extra.next').addEventListener('click', function(){
+		var current_page = Number(document.querySelector('body').dataset.page);
+		if (current_page+1 <= pages){
+			show_page(current_page+1);
+		}
+	})
+
+
+</script>;
