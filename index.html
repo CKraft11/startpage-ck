@@ -57,16 +57,16 @@
 				<div class="content page3" data-color="3"></div>
 				<div class="content page3" data-color="4"></div>
 				<div class="content page3" data-color="5"></div>
-				<div id="st1" class="stats redst clock1" style="float: left;" data-color="1"></div>
-				<div id="temp1" class="stats redst" style="width: 70.3%; float: right;" data-color="1"></div>
-				<div id="st2" class="stats oranst clock2" style="float: left;" data-color="2"></div>
-				<div id="temp2" class="stats oranst" style="width: 70.3%; float: right;" data-color="2"></div>
-				<div id="st3" class="stats grest clock3" style="float: left;" data-color="3"></div>
-				<div id="temp3" class="stats grest" style="width: 70.3%; float: right;" data-color="3"></div>
-				<div id="st4" class="stats blust clock4" style="float: left;" data-color="4"></div>
-				<div id="temp4" class="stats blust" style="width: 70.3%; float: right;" data-color="4"></div>
-				<div id="st5" class="stats purst clock5" style="float: left;" data-color="5"></div>
-				<div id="temp5" class="stats purst" style="width: 70.3%; float: right;" data-color="5"></div>
+				<div id="st1" class="stats redst clock" style="float: left;" data-color="1"></div>
+				<div id="temp1" class="stats redst" style="margin-left: 5px; padding-left: 30px; padding-right: 30px; float: right;" data-color="1"></div>
+				<div id="st2" class="stats oranst clock" style="float: left;" data-color="2"></div>
+				<div id="temp2" class="stats oranst" style="margin-left: 5px; padding-left: 30px; padding-right: 30px; float: right;" data-color="2"></div>
+				<div id="st3" class="stats grest clock" style="float: left;" data-color="3"></div>
+				<div id="temp3" class="stats grest" style="margin-left: 5px; padding-left: 30px; padding-right: 30px; float: right;" data-color="3"></div>
+				<div id="st4" class="stats blust clock" style="float: left;" data-color="4"></div>
+				<div id="temp4" class="stats blust" style="margin-left: 5px; padding-left: 30px; padding-right: 30px; float: right;" data-color="4"></div>
+				<div id="st5" class="stats purst clock" style="float: left;" data-color="5"></div>
+				<div id="temp5" class="stats purst" style="margin-left: 5px; padding-left: 30px; padding-right: 30px; float: right;" data-color="5"></div>
 		</div>
 		<div>
 		</div>
@@ -206,7 +206,9 @@ main {
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
-
+.clock{
+	margin-right: 5px;
+}
 /*tabs*/
 .tabs {
 	display: flex;
@@ -289,6 +291,7 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 .content.active[data-color="5"] ~ .purst{
 	display: flex;
 }
+
 .palette {
 	display: flex;
 	justify-content: center;
