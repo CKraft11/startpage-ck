@@ -67,6 +67,29 @@
 				<div id="temp4" class="stats blust" style="margin-left: 5px; padding-left: 30px; padding-right: 30px;" data-color="4"></div>
 				<div id="st5" class="stats purst clock" style="float: left;" data-color="5"></div>
 				<div id="temp5" class="stats purst" style="margin-left: 5px; padding-left: 30px; padding-right: 30px;" data-color="5"></div>
+				<div class="stats redst oranst grest blust purst ticker-wrap">
+					<div class="ticker">
+						<div class="ticker__item" style="position:relative;">
+							<div id="ticker1" style="float:left; position:relative;"></div>
+							<div id="stock1" style="float:right;"></div>
+						</div>
+						<div class="ticker__item" style="position:relative;">
+							<div id="ticker2" style="float:left; position:relative;"></div>
+							<div id="stock2" style="float:right;"></div>
+						</div>
+						<div class="ticker__item" style="position:relative;">
+							<div id="ticker3" style="float:left; position:relative;"></div>
+							<div id="stock3" style="float:right;"></div>
+						</div>
+						<div class="ticker__item" style="position:relative;">
+							<div id="ticker4" style="float:left; position:relative;"></div>
+							<div id="stock4" style="float:right;"></div>
+						</div>
+						<div class="ticker__item" style="position:relative;">
+							<div id="last_update" style="float:left; position:relative;"></div>
+						</div>
+					</div>
+				</div>
 		</div>
 		<div>
 		</div>
@@ -94,7 +117,75 @@
 
 
 <style>
+	* {
+		font-family: 'Roboto Mono';
+		text-decoration: none;
+		transition: .1s;
+	}
+	@-webkit-keyframes ticker {
+		0% {
+			-webkit-transform: translate3d(0, 0, 0);
+			transform: translate3d(0, 0, 0);
+			visibility: visible;
+	   }
+		100% {
+			-webkit-transform: translate3d(-100%, 0, 0);
+			transform: translate3d(-100%, 0, 0);
+	   }
+   }
+	@keyframes ticker {
+		0% {
+			-webkit-transform: translate3d(0, 0, 0);
+			transform: translate3d(0, 0, 0);
+			visibility: visible;
+	   }
+		100% {
+			-webkit-transform: translate3d(-100%, 0, 0);
+			transform: translate3d(-100%, 0, 0);
+	   }
+   }
+	.ticker-wrap {
+		overflow: hidden;
+		height: 20px;
+		width: 450px;
+		
+   }
+	.ticker-wrap .ticker {
+		display: inline-block;
+		height: 20px;
+		line-height: 20px;
+		text-align: right;
+		white-space: nowrap;
+		-webkit-animation-iteration-count: infinite;
+		animation-iteration-count: infinite;
+		-webkit-animation-timing-function: linear;
+		animation-timing-function: linear;
+		-webkit-animation-name: ticker;
+		animation-name: ticker;
+		-webkit-animation-duration: 10s;
+		animation-duration: 10s;
+   }
+	.ticker-wrap .ticker__item {
+		display: inline-block;
+	}
 
+	.ticker__item{
+
+		padding-right: 4%;
+	}
+
+	.ticker{
+		position: sticky;
+		display: flex;
+		box-sizing: content-box;
+		padding-left: 250% !important;
+		margin-left: 100%;
+	}
+	
+	
+	
+	
+	
 :root {
 	--bg: #2B2A33;
 	--text: #D8DEE9;
@@ -172,11 +263,7 @@
 
 
 
-* {
-	font-family: 'Roboto Mono';
-	text-decoration: none;
-	transition: .1s;
-}
+
 
 html, body {
 	width: 100%;
@@ -261,7 +348,6 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 	justify-content: center;
 	align-items: center;
 	border: 3px solid;
-	height: 20px;
 	margin-top: 10px;
 }
 .stats.active {
@@ -278,18 +364,24 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 /*palette*/
 .content.active[data-color="1"] ~ .redst{
 	display: flex;
+	border-color: #BF616A;
 }
 .content.active[data-color="2"] ~ .oranst{
 	display: flex;
+	border-color: #D08770;
 }
 .content.active[data-color="3"] ~ .grest{
 	display: flex;
+	border-color: #A3BE8C;
 }
 .content.active[data-color="4"] ~ .blust{
 	display: flex;
+	border-color: #5E81AC;
 }
 .content.active[data-color="5"] ~ .purst{
 	display: flex;
+	border-color: #B48EAD;
+
 }
 
 .palette {
@@ -453,7 +545,63 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 
 
 </style>
+<script src="stocks.js"></script>
+<script>
+	async function stockTicker(stock){
+		var stocks = new Stocks('8OSQY6KIKSU4GCW2');
+		var options = {
+			symbol: stock,
+			interval: 'daily',
+			amount: '2'
+	  	};
+		result = await stocks.timeSeries(options);
+		var delta = result[0].close-result[1].close;
+		var perc = ((result[0].close/result[1].close)*100)-100;
+		delta = delta.toFixed(2);
+		perc = perc.toFixed(2);
+		var update = result[0].date
+		console.log(result);
+		if (Math.abs(delta) != delta) {
+			var output = ["$" + stock +": ",delta + " (▼" + Math.abs(perc) + "%)"];
+		} else {
+			var output = ["$" + stock +": ",delta + " (▲" + perc + "%)"];
+		}
+		output[2] = update;
+		return output;
+	}
+	stocks = [
+			"TSM",
+			"NVDA",
+			"TSLA",
+			"SPY"
+			];
+	for (var i = 0; i<stocks.length; i++) {
+		stnum = 1
+		console.log("stock"+stnum)
+		var output = Promise.resolve(stockTicker(stocks[i]));
+			output.then(function(v) {
+				document.getElementById("ticker"+stnum).innerHTML = v[0];
+				document.getElementById("stock"+stnum).innerHTML = v[1];
+				if (v[1].indexOf("▼")>0){
+					document.getElementById("stock"+stnum).style.color="#BF616A"
+				}
+				else {
+					document.getElementById("stock"+stnum).style.color="#A3BE8C"
+				}
+				console.log(v);
+				console.log(v[2]);
+				date = String(v[2]);
+				console.log(typeof date);
+				subDate = date.split(" ");
+				console.log(subDate);
+				updated = "Last Updated: " + subDate[0] + " " + subDate[1] + " " + subDate[2] + " " + subDate[3];
+				document.getElementById("last_update").innerHTML = updated;
+				stnum++;
+			})
+	}
 
+	
+</script>
 <script>
 
 	//links
