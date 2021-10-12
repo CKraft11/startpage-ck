@@ -566,7 +566,7 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 		if (Math.abs(delta) != delta) {
 			var output = ["$" + stock +": " + price + "\xa0",delta + " (▼" + Math.abs(perc) + "%)"];
 		} else {
-			var output = ["$" + stock +": " + price + "\xa0",delta + " (▲" + perc + "%)"];
+			var output = ["$" + stock +": " + price + "\xa0","+" + delta + " (▲" + perc + "%)"];
 		}
 		output[2] = update;
 		return output;
