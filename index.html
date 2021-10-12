@@ -179,7 +179,7 @@
 		display: flex;
 		box-sizing: content-box;
 		padding-left: 250% !important;
-		margin-left: 100%;
+		margin-left: 50%;
 	}
 	
 	
@@ -557,14 +557,16 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 		result = await stocks.timeSeries(options);
 		var delta = result[0].close-result[1].close;
 		var perc = ((result[0].close/result[1].close)*100)-100;
+		var price = result[0].close;
+		price = price.toFixed(2);
 		delta = delta.toFixed(2);
 		perc = perc.toFixed(2);
 		var update = result[0].date
 		console.log(result);
 		if (Math.abs(delta) != delta) {
-			var output = ["$" + stock +": ",delta + " (▼" + Math.abs(perc) + "%)"];
+			var output = ["$" + stock +": " + price + "\xa0",delta + " (▼" + Math.abs(perc) + "%)"];
 		} else {
-			var output = ["$" + stock +": ",delta + " (▲" + perc + "%)"];
+			var output = ["$" + stock +": " + price + "\xa0",delta + " (▲" + perc + "%)"];
 		}
 		output[2] = update;
 		return output;
