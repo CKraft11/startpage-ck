@@ -545,7 +545,7 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 
 
 </style>
-<script src="/stocks.js"></script>
+<script src="stocks.js"></script>
 <script>
 	async function stockTicker(stock){
 		var stocks = new Stocks('8OSQY6KIKSU4GCW2');
@@ -615,8 +615,12 @@ body:not([data-page="3"]) .tab.extra.next:hover {
             if (event.keyCode == 32) {          // Spacebar code to open search
                 document.getElementById('search').style.display = 'flex';
 				var divsToHide = document.getElementsByClassName("container"); //divsToHide is an array
-    				for(var i = 0; i < divsToHide.length; i++){
+					for(var i = 0; i < divsToHide.length; i++){
         				divsToHide[i].style.visibility = "hidden"; // or
+    			}
+				var stockHide = document.getElementsByClassName("ticker__item"); //divsToHide is an array
+					for(var i = 0; i < stockHide.length; i++){
+        				stockHide[i].style.visibility = "hidden"; // or
     			}
 				
                 document.getElementById('search-field').focus();
@@ -624,9 +628,13 @@ body:not([data-page="3"]) .tab.extra.next:hover {
                 document.getElementById('search-field').value = '';
                 document.getElementById('search-field').blur();
                 document.getElementById('search').style.display = 'none';
-				var divsToHide = document.getElementsByClassName("container"); //divsToHide is an array
-    				for(var i = 0; i < divsToHide.length; i++){
+				var divsToHide = document.getElementsByClassName("container"); //divsToHide is an array	
+					for(var i = 0; i < divsToHide.length; i++){
         				divsToHide[i].style.visibility = "visible"; // or
+    			}
+				var stockHide = document.getElementsByClassName("ticker__item"); //divsToHide is an array
+					for(var i = 0; i < stockHide.length; i++){
+        				stockHide[i].style.visibility = "visible"; // or
     			}
             }
     });
