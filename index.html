@@ -7,7 +7,7 @@
 	<title>Home</title>
 </head>
 <link href='https://fonts.googleapis.com/css?family=Roboto Mono' rel='stylesheet'>
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <body data-palette="rainbow" data-page="1">
 
 <main>
@@ -69,22 +69,6 @@
 				<div id="temp5" class="stats purst" style="margin-left: 5px; padding-left: 30px; padding-right: 30px;" data-color="5"></div>
 				<div class="stats redst oranst grest blust purst ticker-wrap">
 					<div class="ticker">
-						<div class="ticker__item" style="position:relative;">
-							<div id="ticker1" style="float:left; position:relative;"></div>
-							<div id="stock1" style="float:right;"></div>
-						</div>
-						<div class="ticker__item" style="position:relative;">
-							<div id="ticker2" style="float:left; position:relative;"></div>
-							<div id="stock2" style="float:right;"></div>
-						</div>
-						<div class="ticker__item" style="position:relative;">
-							<div id="ticker3" style="float:left; position:relative;"></div>
-							<div id="stock3" style="float:right;"></div>
-						</div>
-						<div class="ticker__item" style="position:relative;">
-							<div id="ticker4" style="float:left; position:relative;"></div>
-							<div id="stock4" style="float:right;"></div>
-						</div>
 						<div class="ticker__item" style="position:relative;">
 							<div id="last_update" style="float:left; position:relative;"></div>
 						</div>
@@ -162,8 +146,8 @@
 		animation-timing-function: linear;
 		-webkit-animation-name: ticker;
 		animation-name: ticker;
-		-webkit-animation-duration: 10s;
-		animation-duration: 10s;
+		/*-webkit-animation-duration: 10s;
+		animation-duration: 10s*/;
    }
 	.ticker-wrap .ticker__item {
 		display: inline-block;
@@ -178,7 +162,7 @@
 		position: sticky;
 		display: flex;
 		box-sizing: content-box;
-		padding-left: 250% !important;
+		padding-left: 0px;
 		margin-left: 50%;
 	}
 	
@@ -548,60 +532,116 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 <script src="stocks.js"></script>
 <script>
 	async function stockTicker(stock){
-		var stocks = new Stocks('8OSQY6KIKSU4GCW2');
-		var options = {
-			symbol: stock,
-			interval: 'daily',
-			amount: '2'
-	  	};
-		result = await stocks.timeSeries(options);
-		var delta = result[0].close-result[1].close;
+		// var apiBalance = new Date();
+        // var seconds = apiBalance.getSeconds();
+		// console.log(seconds);
+		// if (seconds%2==0) {
+		// 	var stocks = new Stocks('8OSQY6KIKSU4GCW2');
+		// 	console.log("api key #1 used");
+		// } else {
+		// 	var stocks = new Stocks('AJWEPIG90ZIZG55A');
+		// 	console.log("api key #2 used");
+		// }
+		try {
+			var stocks = new Stocks('8OSQY6KIKSU4GCW2');
+			var options = {
+				symbol: stock,
+				interval: '60min',
+				amount: '2'
+			};
+			result = await stocks.timeSeries(options);
+			var delta = result[0].close-result[1].close;
+		}catch{
+			console.log("Using fallback api key");
+			var stocks = new Stocks('NPJ3BB5K0I826NDN');
+			var options = {
+				symbol: stock,
+				interval: '60min',
+				amount: '2'
+	  		};
+			result = await stocks.timeSeries(options);
+			var delta = result[0].close-result[1].close;
+		}
+		
 		var perc = ((result[0].close/result[1].close)*100)-100;
 		var price = result[0].close;
 		price = price.toFixed(2);
 		delta = delta.toFixed(2);
 		perc = perc.toFixed(2);
 		var update = result[0].date
-		console.log(result);
+		//console.log(result);
 		if (Math.abs(delta) != delta) {
 			var output = ["$" + stock +": " + price + "\xa0",delta + " (▼" + Math.abs(perc) + "%)"];
 		} else {
 			var output = ["$" + stock +": " + price + "\xa0","+" + delta + " (▲" + perc + "%)"];
 		}
 		output[2] = update;
+		$(document).ready(function() {
+				jQuery("<div/>", {
+					class: "ticker__item",
+					id: stock,
+					style: "position: relative;"
+				}).prependTo(".ticker");
+				jQuery("<div/>", {
+					text: output[0],
+					style: "position: relative; float: left;"
+				}).appendTo("#"+stock);
+				if(output[1].indexOf("▼")>0){
+					jQuery("<div/>", {
+						text: output[1],
+						style: "float: right; color: #BF616A;"
+					}).appendTo("#"+stock);
+				} else {
+					jQuery("<div/>", {
+						text: output[1],
+						style: "float: right; color: #A3BE8C;"
+					}).appendTo("#"+stock);
+				}
+			});
 		return output;
 	}
 	stocks = [
 			"TSM",
 			"AAPL",
 			"AMZN",
+			"GOOGL",
+			"MSFT",
 			"SPY"
 			];
 	for (var i = 0; i<stocks.length; i++) {
 		stnum = 1
-		console.log("stock"+stnum)
+		//console.log("stock"+stnum)
 		var output = Promise.resolve(stockTicker(stocks[i]));
 			output.then(function(v) {
-				document.getElementById("ticker"+stnum).innerHTML = v[0];
-				document.getElementById("stock"+stnum).innerHTML = v[1];
-				if (v[1].indexOf("▼")>0){
-					document.getElementById("stock"+stnum).style.color="#BF616A"
-				}
-				else {
-					document.getElementById("stock"+stnum).style.color="#A3BE8C"
-				}
-				console.log(v);
-				console.log(v[2]);
+				// document.getElementById("ticker"+stnum).innerHTML = v[0];
+				// document.getElementById("stock"+stnum).innerHTML = v[1];
+				// if (v[1].indexOf("▼")>0){
+				// 	document.getElementById("stock"+stnum).style.color="#BF616A"
+				// }
+				// else {
+				// 	document.getElementById("stock"+stnum).style.color="#A3BE8C"
+				// }
+				// console.log(v);
+				// console.log(v[2]);
 				date = String(v[2]);
-				console.log(typeof date);
+				//console.log(typeof date);
 				subDate = date.split(" ");
-				console.log(subDate);
-				updated = "Last Updated: " + subDate[0] + " " + subDate[1] + " " + subDate[2] + " " + subDate[3];
+				//console.log(subDate);
+				updated = "Last Updated: " + subDate[0] + " " + subDate[1] + " " + subDate[2] + " " + subDate[3] + " at " + subDate[4] + " CST";
 				document.getElementById("last_update").innerHTML = updated;
 				stnum++;
+				//console.log(document.getElementsByClassName('ticker')[0].clientWidth);
+				stockWidth = document.getElementsByClassName('ticker')[0].clientWidth;
+				document.getElementsByClassName("ticker")[0].style["-webkit-animation-duration"] = (stockWidth/120) + "s";
+				document.getElementsByClassName("ticker")[0].style["animation-duration"] = (stockWidth/120) + "s";
+				//console.log(stockWidth);
+				document.getElementsByClassName("ticker")[0].style.padding = "0px 0px 0px " + (stockWidth*1.25) + "px";
 			})
 	}
 
+	
+</script>
+<script>
 	
 </script>
 <script>
@@ -713,7 +753,7 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 		['ghost blog', 'http://ghost.cadenkraft.com/ghost'],
 		['3D printer', 'http://fluidd.cadenkraft.com'],
 		['radon portainer', 'http://radon.cadenkraft.com:9000'],
-		['router', 'http://router.cadenkraft.com'],
+		['router', 'https://router.cadenkraft.com'],
 
 	],
 	//-----------------------6-10
@@ -833,29 +873,35 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 	window.onload = () => {
             let xhr = new XMLHttpRequest();
             // Request to open weather map
-            xhr.open('GET', 'https://api.openweathermap.org/data/2.5/weather?id=4846834&units=metric&appid=e5b292ae2f9dae5f29e11499c2d82ece');
-            xhr.onload = () => {
-                if (xhr.readyState === 4) {
-                    if (xhr.status === 200) {
-                        let json = JSON.parse(xhr.responseText);
-                        console.log(json);
-                        
-                        document.getElementById("temp1").innerHTML = json.weather[0].description + ", ";
-						document.getElementById("temp1").innerHTML += json.main.temp.toFixed(0) + " celsius";
-						document.getElementById("temp2").innerHTML = json.weather[0].description + ", ";
-						document.getElementById("temp2").innerHTML += json.main.temp.toFixed(0) + " celsius";
-						document.getElementById("temp3").innerHTML = json.weather[0].description + ", ";
-						document.getElementById("temp3").innerHTML += json.main.temp.toFixed(0) + " celsius";
-						document.getElementById("temp4").innerHTML = json.weather[0].description + ", ";
-						document.getElementById("temp4").innerHTML += json.main.temp.toFixed(0) + " celsius";
-						document.getElementById("temp5").innerHTML = json.weather[0].description + ", ";
-						document.getElementById("temp5").innerHTML += json.main.temp.toFixed(0) + " celsius";
-                    } else {
-                        console.log('error msg: ' + xhr.status);
-                    }
-                }
-            }
-            xhr.send();
+			navigator.geolocation.getCurrentPosition((position) => {
+    			let lat = position.coords.latitude.toFixed(2);
+    			let long = position.coords.longitude.toFixed(2);
+				//console.log(lat, long);
+				xhr.open('GET', 'https://api.openweathermap.org/data/2.5/weather?lat='+lat+'&lon='+long+'&units=imperial&appid=e5b292ae2f9dae5f29e11499c2d82ece');
+            	xhr.onload = () => {
+					if (xhr.readyState === 4) {
+						if (xhr.status === 200) {
+							let json = JSON.parse(xhr.responseText);
+							//console.log(json);
+							
+							document.getElementById("temp1").innerHTML = json.weather[0].description + ", ";
+							document.getElementById("temp1").innerHTML += json.main.temp.toFixed(0) + "°F in " + json.name;
+							document.getElementById("temp2").innerHTML = json.weather[0].description + ", ";
+							document.getElementById("temp2").innerHTML += json.main.temp.toFixed(0) + "°F in "+ json.name;
+							document.getElementById("temp3").innerHTML = json.weather[0].description + ", ";
+							document.getElementById("temp3").innerHTML += json.main.temp.toFixed(0) + "°F in "+ json.name;
+							document.getElementById("temp4").innerHTML = json.weather[0].description + ", ";
+							document.getElementById("temp4").innerHTML += json.main.temp.toFixed(0) + "°F in "+ json.name;
+							document.getElementById("temp5").innerHTML = json.weather[0].description + ", ";
+							document.getElementById("temp5").innerHTML += json.main.temp.toFixed(0) + "°F in "+ json.name;
+						} else {
+							console.log('weather error msg: ' + xhr.status);
+						}
+					}
+				}
+				xhr.send();
+			});
+            
         }
 
 
@@ -904,9 +950,9 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 	var stats = document.querySelectorAll('.stats');
 	var tabs = document.querySelectorAll('.tab:not(.space):not(.extra)');
 	var contents = document.querySelectorAll('.content');
-	console.log('tabs', tabs);
-	console.log('stats', stats);
-	console.log('contents', contents);
+	//console.log('tabs', tabs);
+	//console.log('stats', stats);
+	//console.log('contents', contents);
 	for (let i=0; i<tabs.length; i++){
 		tabs[i].addEventListener('mouseenter', function(){
 			for (let j=0; j<tabs.length; j++){
