@@ -546,17 +546,17 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 			var stocks = new Stocks('8OSQY6KIKSU4GCW2');
 			var options = {
 				symbol: stock,
-				interval: '60min',
+				interval: 'daily_adjusted',
 				amount: '2'
 			};
 			result = await stocks.timeSeries(options);
 			var delta = result[0].close-result[1].close;
 		}catch{
 			console.log("Using fallback api key");
-			var stocks = new Stocks('NPJ3BB5K0I826NDN');
+			var stocks = new Stocks('AJWEPIG90ZIZG55A');
 			var options = {
 				symbol: stock,
-				interval: '60min',
+				interval: 'daily_adjusted',
 				amount: '2'
 	  		};
 			result = await stocks.timeSeries(options);
@@ -569,7 +569,7 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 		delta = delta.toFixed(2);
 		perc = perc.toFixed(2);
 		var update = result[0].date
-		//console.log(result);
+		console.log(result);
 		if (Math.abs(delta) != delta) {
 			var output = ["$" + stock +": " + price + "\xa0",delta + " (▼" + Math.abs(perc) + "%)"];
 		} else {

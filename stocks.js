@@ -124,7 +124,7 @@ Stocks.prototype = {
   API_KEY_URL: 'https://www.alphavantage.co/support/#api-key',
 
   INTERVALS: [
-    '1min', '5min', '15min', '30min', '60min', 'daily', 'weekly', 'monthly'
+    '1min', '5min', '15min', '30min', '60min', 'daily','daily_adjusted', 'weekly', 'monthly'
   ],
   PERFORMANCES: [
     'real-time', '1day', '5day', '1month', '3month', 'year-to-date', '1year',
