@@ -871,13 +871,22 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 		})
 	}
 	window.onload = () => {
-            let xhr = new XMLHttpRequest();
+			document.getElementById("temp1").innerHTML = "Loading...";
+			document.getElementById("temp2").innerHTML = "Loading...";
+			document.getElementById("temp3").innerHTML = "Loading...";
+			document.getElementById("temp4").innerHTML = "Loading...";
+			document.getElementById("temp5").innerHTML = "Loading...";
+			let xhr = new XMLHttpRequest();
             // Request to open weather map
 			navigator.geolocation.getCurrentPosition((position) => {
     			let lat = position.coords.latitude.toFixed(2);
     			let long = position.coords.longitude.toFixed(2);
+				localStorage['lat'] = lat.toString();
+				localStorage['long'] = long.toString();
+				var cacheLat = localStorage['lat'];
+				var cacheLong = localStorage['long'];
 				//console.log(lat, long);
-				xhr.open('GET', 'https://api.openweathermap.org/data/2.5/weather?lat='+lat+'&lon='+long+'&units=imperial&appid=e5b292ae2f9dae5f29e11499c2d82ece');
+				xhr.open('GET', 'https://api.openweathermap.org/data/2.5/weather?lat='+cacheLat+'&lon='+cacheLong+'&units=imperial&appid=e5b292ae2f9dae5f29e11499c2d82ece');
             	xhr.onload = () => {
 					if (xhr.readyState === 4) {
 						if (xhr.status === 200) {
