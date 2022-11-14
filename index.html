@@ -546,7 +546,7 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 			var stocks = new Stocks('8OSQY6KIKSU4GCW2');
 			var options = {
 				symbol: stock,
-				interval: 'daily_adjusted',
+				interval: '60min',
 				amount: '2'
 			};
 			result = await stocks.timeSeries(options);
@@ -556,7 +556,7 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 			var stocks = new Stocks('AJWEPIG90ZIZG55A');
 			var options = {
 				symbol: stock,
-				interval: 'daily_adjusted',
+				interval: '60min',
 				amount: '2'
 	  		};
 			result = await stocks.timeSeries(options);
