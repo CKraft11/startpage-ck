@@ -75,9 +75,9 @@
 						<div class="mirror">
 
 						</div>
-						<!-- <div class="ticker__item" style="position:relative;">
+						<div class="update" style="position:relative;">
 							<div id="last_update" style="float:left; position:relative;"></div>
-						</div> -->
+						</div>
 					</div>
 				</div>
 		</div>
@@ -206,11 +206,27 @@
 		display: flex;
 		box-sizing: content-box;
 		padding-left: 0px;
-		margin-left: 50%;
 	}
-	
-	
-	
+
+	.update{ 
+	display: none;
+	}
+	.ticker:hover .update{
+	display : inline-block;
+	margin-left: 0%;
+	}
+	.ticker:hover .original{
+	display : none;
+	}
+	.ticker:hover .mirror{
+	display : none;
+	}
+	.ticker:hover .mirror{
+	display : none;
+	}
+	.ticker:hover .original{
+	display : none;
+	}
 	
 	
 :root {
@@ -660,8 +676,8 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 				//console.log(typeof date);
 				subDate = date.split(" ");
 				//console.log(subDate);
-				//updated = "Last Updated: " + subDate[0] + " " + subDate[1] + " " + subDate[2] + " " + subDate[3] + " at " + subDate[4] + " CST";
-				//document.getElementById("last_update").innerHTML = updated;
+				updated = "Last Updated: " + subDate[0] + " " + subDate[1] + " " + subDate[2] + " " + subDate[3] + " at " + subDate[4] + " CST";
+				document.getElementsByClassName("update")[0].innerHTML = updated;
 				stnum++;
 				//console.log(document.getElementsByClassName('ticker')[0].clientWidth);
 				//stockWidth = document.getElementsByClassName('ticker')[0].clientWidth;
@@ -927,15 +943,15 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 							//console.log(json);
 							
 							document.getElementById("temp1").innerHTML = json.weather[0].description + ", ";
-							document.getElementById("temp1").innerHTML += json.main.temp.toFixed(0) + "°F in " + json.name;
+							document.getElementById("temp1").innerHTML += json.main.temp.toFixed(0) + "°F";// + json.name;
 							document.getElementById("temp2").innerHTML = json.weather[0].description + ", ";
-							document.getElementById("temp2").innerHTML += json.main.temp.toFixed(0) + "°F in "+ json.name;
+							document.getElementById("temp2").innerHTML += json.main.temp.toFixed(0) + "°F";//+ json.name;
 							document.getElementById("temp3").innerHTML = json.weather[0].description + ", ";
-							document.getElementById("temp3").innerHTML += json.main.temp.toFixed(0) + "°F in "+ json.name;
+							document.getElementById("temp3").innerHTML += json.main.temp.toFixed(0) + "°F";//+ json.name;
 							document.getElementById("temp4").innerHTML = json.weather[0].description + ", ";
-							document.getElementById("temp4").innerHTML += json.main.temp.toFixed(0) + "°F in "+ json.name;
+							document.getElementById("temp4").innerHTML += json.main.temp.toFixed(0) + "°F";//+ json.name;
 							document.getElementById("temp5").innerHTML = json.weather[0].description + ", ";
-							document.getElementById("temp5").innerHTML += json.main.temp.toFixed(0) + "°F in "+ json.name;
+							document.getElementById("temp5").innerHTML += json.main.temp.toFixed(0) + "°F";//+ json.name;
 						} else {
 							console.log('weather error msg: ' + xhr.status);
 						}
