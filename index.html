@@ -69,9 +69,15 @@
 				<div id="temp5" class="stats purst" style="margin-left: 5px; padding-left: 30px; padding-right: 30px;" data-color="5"></div>
 				<div class="stats redst oranst grest blust purst ticker-wrap">
 					<div class="ticker">
-						<div class="ticker__item" style="position:relative;">
-							<div id="last_update" style="float:left; position:relative;"></div>
+						<div class="original">
+
 						</div>
+						<div class="mirror">
+
+						</div>
+						<!-- <div class="ticker__item" style="position:relative;">
+							<div id="last_update" style="float:left; position:relative;"></div>
+						</div> -->
 					</div>
 				</div>
 		</div>
@@ -106,26 +112,48 @@
 		text-decoration: none;
 		transition: .1s;
 	}
-	@-webkit-keyframes ticker {
+	@-webkit-keyframes mirror {
 		0% {
-			-webkit-transform: translate3d(0, 0, 0);
-			transform: translate3d(0, 0, 0);
+			-webkit-transform: translate3d(50%, 0, 0);
+			transform: translate3d(50%, 0, 0);
 			visibility: visible;
 	   }
 		100% {
-			-webkit-transform: translate3d(-100%, 0, 0);
-			transform: translate3d(-100%, 0, 0);
+			-webkit-transform: translate3d(-50% 0, 0);
+			transform: translate3d(-50%, 0, 0);
 	   }
    }
-	@keyframes ticker {
+	@keyframes mirror {
 		0% {
-			-webkit-transform: translate3d(0, 0, 0);
-			transform: translate3d(0, 0, 0);
+			-webkit-transform: translate3d(50%, 0, 0);
+			transform: translate3d(50%, 0, 0);
 			visibility: visible;
 	   }
 		100% {
-			-webkit-transform: translate3d(-100%, 0, 0);
-			transform: translate3d(-100%, 0, 0);
+			-webkit-transform: translate3d(-50%, 0, 0);
+			transform: translate3d(-50%, 0, 0);
+	   }
+   }
+   @-webkit-keyframes original {
+		0% {
+			-webkit-transform: translate3d(50%, 0, 0);
+			transform: translate3d(50%, 0, 0);
+			visibility: visible;
+	   }
+		100% {
+			-webkit-transform: translate3d(-50%, 0, 0);
+			transform: translate3d(-50%, 0, 0);
+	   }
+   }
+	@keyframes original {
+		0% {
+			-webkit-transform: translate3d(50%, 0, 0);
+			transform: translate3d(50%, 0, 0);
+			visibility: visible;
+	   }
+		100% {
+			-webkit-transform: translate3d(-50%, 0, 0);
+			transform: translate3d(-50%, 0, 0);
 	   }
    }
 	.ticker-wrap {
@@ -135,27 +163,42 @@
 		
    }
 	.ticker-wrap .ticker {
-		display: inline-block;
 		height: 20px;
 		line-height: 20px;
-		text-align: right;
 		white-space: nowrap;
+		
+   }
+   .original {
 		-webkit-animation-iteration-count: infinite;
 		animation-iteration-count: infinite;
 		-webkit-animation-timing-function: linear;
 		animation-timing-function: linear;
-		-webkit-animation-name: ticker;
-		animation-name: ticker;
-		/*-webkit-animation-duration: 10s;
-		animation-duration: 10s*/;
+		-webkit-animation-name: original;
+		animation-name: original;
+		-webkit-animation-duration: 6s;
+		animation-duration: 6s;
+		float: right;
+   }
+   .mirror {
+		-webkit-animation-iteration-count: infinite;
+		animation-iteration-count: infinite;
+		-webkit-animation-timing-function: linear;
+		animation-timing-function: linear;
+		-webkit-animation-name: mirror;
+		animation-name: mirror;
+		-webkit-animation-duration: 6s;
+		animation-duration: 6s;
+		float: right;
    }
 	.ticker-wrap .ticker__item {
 		display: inline-block;
 	}
 
 	.ticker__item{
+		width: max-content;
+		padding-right: 20px;
+		padding-left: 20px;
 
-		padding-right: 4%;
 	}
 
 	.ticker{
@@ -542,27 +585,15 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 		// 	var stocks = new Stocks('AJWEPIG90ZIZG55A');
 		// 	console.log("api key #2 used");
 		// }
-		try {
-			var stocks = new Stocks('8OSQY6KIKSU4GCW2');
-			var options = {
+		apiKeys = ['8OSQY6KIKSU4GCW2','NPJ3BB5K0I826NDN','AJWEPIG90ZIZG55A']
+		var stocks = new Stocks(apiKeys[Math.floor(Math.random()*apiKeys.length)]);
+		var options = {
 				symbol: stock,
 				interval: '60min',
 				amount: '2'
 			};
-			result = await stocks.timeSeries(options);
-			var delta = result[0].close-result[1].close;
-		}catch{
-			console.log("Using fallback api key");
-			var stocks = new Stocks('NPJ3BB5K0I826NDN');
-			var options = {
-				symbol: stock,
-				interval: '60min',
-				amount: '2'
-	  		};
-			result = await stocks.timeSeries(options);
-			var delta = result[0].close-result[1].close;
-		}
-		
+		result = await stocks.timeSeries(options);
+		var delta = result[0].close-result[1].close;
 		var perc = ((result[0].close/result[1].close)*100)-100;
 		var price = result[0].close;
 		price = price.toFixed(2);
@@ -578,24 +609,27 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 		output[2] = update;
 		$(document).ready(function() {
 				jQuery("<div/>", {
-					class: "ticker__item",
-					id: stock,
+					class: "ticker__item "+stock,
 					style: "position: relative;"
-				}).prependTo(".ticker");
+				}).appendTo(".original");
+				jQuery("<div/>", {
+					class: "ticker__item "+stock,
+					style: "position: relative;"
+				}).appendTo(".mirror");
 				jQuery("<div/>", {
 					text: output[0],
 					style: "position: relative; float: left;"
-				}).appendTo("#"+stock);
+				}).appendTo("."+stock);
 				if(output[1].indexOf("▼")>0){
 					jQuery("<div/>", {
 						text: output[1],
 						style: "float: right; color: #BF616A;"
-					}).appendTo("#"+stock);
+					}).appendTo("."+stock);
 				} else {
 					jQuery("<div/>", {
 						text: output[1],
 						style: "float: right; color: #A3BE8C;"
-					}).appendTo("#"+stock);
+					}).appendTo("."+stock);
 				}
 			});
 		return output;
@@ -605,7 +639,6 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 			"AAPL",
 			"AMZN",
 			"GOOGL",
-			"MSFT",
 			"SPY"
 			];
 	for (var i = 0; i<stocks.length; i++) {
@@ -627,15 +660,15 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 				//console.log(typeof date);
 				subDate = date.split(" ");
 				//console.log(subDate);
-				updated = "Last Updated: " + subDate[0] + " " + subDate[1] + " " + subDate[2] + " " + subDate[3] + " at " + subDate[4] + " CST";
-				document.getElementById("last_update").innerHTML = updated;
+				//updated = "Last Updated: " + subDate[0] + " " + subDate[1] + " " + subDate[2] + " " + subDate[3] + " at " + subDate[4] + " CST";
+				//document.getElementById("last_update").innerHTML = updated;
 				stnum++;
 				//console.log(document.getElementsByClassName('ticker')[0].clientWidth);
-				stockWidth = document.getElementsByClassName('ticker')[0].clientWidth;
-				document.getElementsByClassName("ticker")[0].style["-webkit-animation-duration"] = (stockWidth/120) + "s";
-				document.getElementsByClassName("ticker")[0].style["animation-duration"] = (stockWidth/120) + "s";
+				//stockWidth = document.getElementsByClassName('ticker')[0].clientWidth;
+				//document.getElementsByClassName("ticker")[0].style["-webkit-animation-duration"] = (stockWidth/120) + "s";
+				//document.getElementsByClassName("ticker")[0].style["animation-duration"] = (stockWidth/120) + "s";
 				//console.log(stockWidth);
-				document.getElementsByClassName("ticker")[0].style.padding = "0px 0px 0px " + (stockWidth*1.25) + "px";
+				//document.getElementsByClassName("ticker")[0].style.padding = "0px 0px 0px " + (stockWidth*1.25) + "px";
 			})
 	}
 
