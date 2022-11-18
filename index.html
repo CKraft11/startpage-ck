@@ -388,13 +388,13 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding: 5px 20px;
+	padding: 5px 10px;
 	cursor: pointer;
 	height: 20px;
 }
 .stats {
 	display: flex;
-	padding: 5px 5px;
+	padding: 5px 20px;
 	justify-content: center;
 	align-items: center;
 	border: 3px solid;
@@ -890,24 +890,17 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 			a_element.innerHTML = links_var[i][j][0];
 			pingStatus = links_var[i][j][2];
 			if(pingStatus.indexOf('ping')>-1){
-				var b_element = document.createElement('span');
-					b_element.setAttribute('ping-id', 'i' + i + '_j' + j);
-					b_element.setAttribute('class', 'linksel');
-					b_element.style.position="relative";
-					b_element.style.marginLeft="10px";
-					b_element.style.float="right";
-					b_element.style.justifyContent="right";
 				ping(links_var[i][j][1]).then(function(delta) {
 					console.log(links_var[i][j][1]+ ' Ping time was ' + String(delta) + ' ms');
 					var b_element = document.createElement('span');
 					b_element.setAttribute('ping-id', 'i' + i + '_j' + j);
 					b_element.setAttribute('class', 'linksel');
 					b_element.style.position="relative";
-					b_element.style.marginLeft="10px";
+					b_element.style.marginLeft="auto";
 					b_element.style.float="right";
 					b_element.style.justifyContent="right";
 					b_element.style.color="#A3BE8C";
-					b_element.innerHTML = "  ⬤ Online ("+String(delta)+"ms)";
+					b_element.innerHTML = "Online ("+String(delta)+"ms) ⬤";
 					document.querySelector('a[data-id="i' + i + '_j' + j + '"]').insertAdjacentElement('beforeend', b_element)
 					
 
@@ -916,11 +909,11 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 					b_element.setAttribute('ping-id', 'i' + i + '_j' + j);
 					b_element.setAttribute('class', 'linksel');
 					b_element.style.position="relative";
-					b_element.style.marginLeft="10px";
+					b_element.style.marginLeft="auto";
 					b_element.style.float="right";
 					b_element.style.justifyContent="right";
 					b_element.style.color="#BF616A";
-					b_element.innerHTML = "  ⬤ Offline";
+					b_element.innerHTML = "Offline ⬤";
 					document.querySelector('a[data-id="i' + i + '_j' + j + '"]').insertAdjacentElement('beforeend', b_element)
 					console.error(links_var[i][j][1]+ 'Could not ping remote URL', err);
 				});
