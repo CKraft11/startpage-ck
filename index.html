@@ -61,7 +61,7 @@
 				<div class="content color page3" data-color="4"></div>
 				<div class="content color page3" data-color="5"></div>
 				<div id="clock" class="stats color clock" style="float: left;" data-color="1"></div>
-				<a id="weather" class="stats color" style="text-decoration: none; margin-left: 5px; padding-left: 20px; padding-right: 20px;" data-color="1"></a>
+				<a id="weather" class="stats color" style="text-decoration: none; margin-left: 0.5ex; padding-left: 20ex; padding-right: 20ex;" data-color="1"></a>
 				<div class="ticker-wrap color">
 					<div class="ticker">
 						<div class="original">
@@ -154,26 +154,25 @@
 	.ticker-wrap {
 		display: flex;
 		overflow: hidden;
-		height: 20px;
-		width: 450px;
-		padding: 5px 5px;
+		height: 2.5ex;
+		padding: 0.5ex 0.5ex;
 		justify-content: center;
 		align-items: center;
-		border: 3px solid;
-		margin-top: 10px;
+		border: 0.3ex solid;
+		margin-top: 1ex;
 		border-color: var(--color-1);
-		border-radius: 10px;
+		border-radius: 1ex;
 
    }
 	.ticker-wrap .ticker {
-		height: 20px;
-		line-height: 20px;
+		height: 2ex;
+		line-height: 2ex;
 		white-space: nowrap;
 		
 		
    }
    .linksel {
-	   border-radius: 5px;
+	   border-radius: 0.5x;
    }
 #weather { color: inherit; } 
    .original {
@@ -204,8 +203,8 @@
 
 	.ticker__item{
 		width: max-content;
-		padding-right: 20px;
-		padding-left: 20px;
+		padding-right: 2ex;
+		padding-left: 2ex;
 
 	}
 
@@ -213,7 +212,6 @@
 		position: sticky;
 		display: flex;
 		box-sizing: content-box;
-		padding-left: 0px;
 	}
 
 	.update{ 
@@ -340,9 +338,10 @@ main {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+	width: 25vw;
 }
 .clock{
-	margin-right: 10px;
+	margin-right: 1ex;
 }
 /*tabs*/
 .tabs {
@@ -352,11 +351,12 @@ main {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 50px;
-	height: 30px;
+	width: 6ex;
+	height: 4ex;
 	cursor: default;
-	border-radius: 10px;
-	margin-bottom: 10px;
+	border-radius: 1ex;
+	margin-bottom: 1ex;
+	margin-right:1ex;
 }
 .tab.notVisible {
 	display: none;
@@ -378,9 +378,9 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 .content {
 	display: none;
 	flex-direction: column;
-	padding: 10px 10px;
-	border: 3px solid;
-	border-radius: 10px;
+	padding: 1ex 1ex;
+	border: 0.3ex solid;
+	border-radius: 1ex;
 }
 .content.active {
 	display: flex;
@@ -389,24 +389,25 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding: 5px 10px;
+	padding: 0.5ex 1ex;
 	cursor: pointer;
-	height: 20px;
+	height: 2ex;
 }
 .stats {
 	display: flex;
-	padding: 5px 20px;
+	padding: 0.5ex 2ex;
 	justify-content: center;
 	align-items: center;
-	border: 3px solid;
-	margin-top: 10px;
-	border-radius: 10px;
+	border: 0.3ex solid;
+	margin-top: 1ex;
+	border-radius: 1ex;
+	height: 2.5ex;
 }
 
 .palette {
 	display: flex;
 	justify-content: center;
-	margin: 20px;
+	margin: 2ex;
 }
 .palette-content {
 	display: flex;
@@ -416,16 +417,16 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 	transition: .3s;
 }
 .palette div[data-color] {
-	padding-bottom: 2px;
-	border-bottom: 3px solid transparent;
+	padding-bottom: 0.2ex;
+	border-bottom: 0.3ex solid transparent;
 }
 .palette div span {
 	display: flex;
 	justify-content: center;
-	width: 20px;
-	height: 20px;
+	width: 2ex;
+	height: 2ex;
 	border-radius: 100%;
-	margin: 2px;
+	margin: 0.2ex;
 }
 
 
@@ -470,7 +471,7 @@ body:not([data-page="3"]) .tab.extra.next:hover {
   font-size: 4rem;
   color: var(--fg);
   outline: none;
-  border-radius: 3px;
+  border-radius: 0.3ex;
   margin-bottom: 1em;
   text-align: center;
 }
@@ -503,7 +504,7 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 .color[data-color="5"] {	border-color: var(--color-5);}
 
 .palette div[data-color="rainbow"] span {
-    border: 6px solid var(--grey);
+    border: 0.6ex solid var(--grey);
     box-sizing: border-box;
 }
 .palette div[data-color="random"] span {	background-color: var(--random);}
@@ -527,9 +528,9 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 
 
 /*mobile*/
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 25ew) {
 	.tab {
-		width: 30px;
+		width: 3ex;
 	}
 }
 
