@@ -7,7 +7,10 @@
 	<title>Home</title>
 </head>
 <link href='https://fonts.googleapis.com/css?family=Roboto Mono' rel='stylesheet'>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="ping.min.js" type="text/javascript"></script>
+<script src="ping.js"></script>
+
 <body data-palette="rainbow" data-page="1">
 
 <main>
@@ -37,37 +40,29 @@
 			<div class="tab extra next">+</div>
 		</div>
 		<div>
-				<div class="content page1 active" data-color="1"></div>
+				<div class="content color page1 active" data-color="1"></div>
 					
-				<div class="content page1" data-color="2"></div>
+				<div class="content color page1" data-color="2"></div>
 					
-				<div class="content page1" data-color="3"></div>
+				<div class="content color page1" data-color="3"></div>
 					
-				<div class="content page1" data-color="4"></div>
+				<div class="content color page1" data-color="4"></div>
 					
-				<div class="content page1" data-color="5"></div>
+				<div class="content color page1" data-color="5"></div>
 					
-				<div class="content page2" data-color="1"></div>
-				<div class="content page2" data-color="2"></div>
-				<div class="content page2" data-color="3"></div>
-				<div class="content page2" data-color="4"></div>
-				<div class="content page2" data-color="5"></div>
-				<div class="content page3" data-color="1"></div>
-				<div class="content page3" data-color="2"></div>
-				<div class="content page3" data-color="3"></div>
-				<div class="content page3" data-color="4"></div>
-				<div class="content page3" data-color="5"></div>
-				<div id="st1" class="stats redst clock" style="float: left;" data-color="1"></div>
-				<div id="temp1" class="stats redst" style="margin-left: 5px; padding-left: 30px; padding-right: 30px;" data-color="1"></div>
-				<div id="st2" class="stats oranst clock" style="float: left;" data-color="2"></div>
-				<div id="temp2" class="stats oranst" style="margin-left: 5px; padding-left: 30px; padding-right: 30px;" data-color="2"></div>
-				<div id="st3" class="stats grest clock" style="float: left;" data-color="3"></div>
-				<div id="temp3" class="stats grest" style="margin-left: 5px; padding-left: 30px; padding-right: 30px;" data-color="3"></div>
-				<div id="st4" class="stats blust clock" style="float: left;" data-color="4"></div>
-				<div id="temp4" class="stats blust" style="margin-left: 5px; padding-left: 30px; padding-right: 30px;" data-color="4"></div>
-				<div id="st5" class="stats purst clock" style="float: left;" data-color="5"></div>
-				<div id="temp5" class="stats purst" style="margin-left: 5px; padding-left: 30px; padding-right: 30px;" data-color="5"></div>
-				<div class="stats redst oranst grest blust purst ticker-wrap">
+				<div class="content color page2" data-color="1"></div>
+				<div class="content color page2" data-color="2"></div>
+				<div class="content color page2" data-color="3"></div>
+				<div class="content color page2" data-color="4"></div>
+				<div class="content color page2" data-color="5"></div>
+				<div class="content color page3" data-color="1"></div>
+				<div class="content color page3" data-color="2"></div>
+				<div class="content color page3" data-color="3"></div>
+				<div class="content color page3" data-color="4"></div>
+				<div class="content color page3" data-color="5"></div>
+				<div id="clock" class="stats color clock" style="float: left;" data-color="1"></div>
+				<a id="weather" class="stats color" style="text-decoration: none; margin-left: 5px; padding-left: 20px; padding-right: 20px;" data-color="1"></a>
+				<div class="ticker-wrap color">
 					<div class="ticker">
 						<div class="original">
 
@@ -157,9 +152,16 @@
 	   }
    }
 	.ticker-wrap {
+		display: flex;
 		overflow: hidden;
 		height: 20px;
 		width: 450px;
+		padding: 5px 5px;
+		justify-content: center;
+		align-items: center;
+		border: 3px solid;
+		margin-top: 10px;
+		border-color: var(--color-1);
 		
    }
 	.ticker-wrap .ticker {
@@ -167,7 +169,9 @@
 		line-height: 20px;
 		white-space: nowrap;
 		
+		
    }
+#weather { color: inherit; } 
    .original {
 		-webkit-animation-iteration-count: infinite;
 		animation-iteration-count: infinite;
@@ -185,7 +189,7 @@
 		-webkit-animation-timing-function: linear;
 		animation-timing-function: linear;
 		-webkit-animation-name: mirror;
-		animation-name: mirror;
+		animation-name: original;
 		-webkit-animation-duration: 8s;
 		animation-duration: 8s;
 		float: right;
@@ -210,6 +214,7 @@
 
 	.update{ 
 	display: none;
+	text-align: center;
 	}
 	.ticker:hover .update{
 	display : inline-block;
@@ -303,11 +308,6 @@
 	--color-4: var(--purple);
 	--color-5: var(--purple);
 }
-
-
-
-
-
 html, body {
 	width: 100%;
 	height: 100vh;
@@ -386,45 +386,12 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 	height: 20px;
 }
 .stats {
-	display: none;
+	display: flex;
 	padding: 5px 5px;
 	justify-content: center;
 	align-items: center;
 	border: 3px solid;
 	margin-top: 10px;
-}
-.stats.active {
-	display: none;
-}
-/* .stats > a {
-	display: ;
-	justify-content: center;
-	align-items: center;
-	padding: 5px 20px;
-	cursor: pointer;
-	height: 20px;
-} */
-/*palette*/
-.content.active[data-color="1"] ~ .redst{
-	display: flex;
-	border-color: #BF616A;
-}
-.content.active[data-color="2"] ~ .oranst{
-	display: flex;
-	border-color: #D08770;
-}
-.content.active[data-color="3"] ~ .grest{
-	display: flex;
-	border-color: #A3BE8C;
-}
-.content.active[data-color="4"] ~ .blust{
-	display: flex;
-	border-color: #5E81AC;
-}
-.content.active[data-color="5"] ~ .purst{
-	display: flex;
-	border-color: #B48EAD;
-
 }
 
 .palette {
@@ -467,31 +434,10 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 .content {
 	border-color: var(--extra);
 }
-/* .stats {
-	border-color: var(--extra);
-} */
+
 .content > a {
 	color: var(--text);
 }
-/* .search {
-	color: var(--text);
-	background-color: var(--bg);
-	border-color: var(--color-bg);
-	outline: none;
-	justify-content: center;
-	align-items: center;
-	padding: 5px 20px;
-	cursor: pointer;
-	width: 336px;
-	height: 20px;
-	-webkit-appearance: none; 
-    -moz-appearance: none; 
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	
-} */
 
 #search {
   width: 100%;
@@ -541,19 +487,11 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 	background-color: var(--color-5);
 }
 
-.content[data-color="1"] {	border-color: var(--color-1);}
-.content[data-color="2"] {	border-color: var(--color-2);}
-.content[data-color="3"] {	border-color: var(--color-3);}
-.content[data-color="4"] {	border-color: var(--color-4);}
-.content[data-color="5"] {	border-color: var(--color-5);}
-
-
-
-.stats[data-color="1"] {	border-color: var(--color-1);}
-.stats[data-color="2"] {	border-color: var(--color-2);}
-.stats[data-color="3"] {	border-color: var(--color-3);}
-.stats[data-color="4"] {	border-color: var(--color-4);}
-.stats[data-color="5"] {	border-color: var(--color-5);}
+.color[data-color="1"] {	border-color: var(--color-1);}
+.color[data-color="2"] {	border-color: var(--color-2);}
+.color[data-color="3"] {	border-color: var(--color-3);}
+.color[data-color="4"] {	border-color: var(--color-4);}
+.color[data-color="5"] {	border-color: var(--color-5);}
 
 .palette div[data-color="rainbow"] span {
     border: 6px solid var(--grey);
@@ -590,25 +528,27 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 </style>
 <script src="stocks.js"></script>
 <script>
+	var resultCache = {};
 	async function stockTicker(stock){
-		// var apiBalance = new Date();
-        // var seconds = apiBalance.getSeconds();
-		// console.log(seconds);
-		// if (seconds%2==0) {
-		// 	var stocks = new Stocks('8OSQY6KIKSU4GCW2');
-		// 	console.log("api key #1 used");
-		// } else {
-		// 	var stocks = new Stocks('AJWEPIG90ZIZG55A');
-		// 	console.log("api key #2 used");
-		// }
-		apiKeys = ['8OSQY6KIKSU4GCW2','NPJ3BB5K0I826NDN','AJWEPIG90ZIZG55A']
-		var stocks = new Stocks(apiKeys[Math.floor(Math.random()*apiKeys.length)]);
-		var options = {
-				symbol: stock,
-				interval: '60min',
-				amount: '2'
-			};
-		result = await stocks.timeSeries(options);
+		try{
+			apiKeys = ['8OSQY6KIKSU4GCW2','NPJ3BB5K0I826NDN','AJWEPIG90ZIZG55A']
+			var stocks = new Stocks(apiKeys[Math.floor(Math.random()*apiKeys.length)]);
+			var options = {
+					symbol: stock,
+					interval: '60min',
+					amount: '2'
+				};
+			result = await stocks.timeSeries(options);
+			var delta = result[0].close-result[1].close;
+			console.log("Using latest result for " + stock);
+		} catch {
+			var stored = localStorage['resultCache'];
+			if (stored) resultObj = JSON.parse(stored);
+			console.log("Using cached result for " + stock);
+			result = resultObj[stock];
+			var delta = result[0].close-result[1].close;
+		}
+		
 		var delta = result[0].close-result[1].close;
 		var perc = ((result[0].close/result[1].close)*100)-100;
 		var price = result[0].close;
@@ -616,7 +556,7 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 		delta = delta.toFixed(2);
 		perc = perc.toFixed(2);
 		var update = result[0].date
-		console.log(result);
+		//console.log(result);
 		if (Math.abs(delta) != delta) {
 			var output = ["$" + stock +": " + price + "\xa0",delta + " (▼" + Math.abs(perc) + "%)"];
 		} else {
@@ -648,8 +588,12 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 					}).appendTo("."+stock);
 				}
 			});
+		//console.log(result);
+		
+		resultCache[stock] = result;
 		return output;
 	}
+
 	stocks = [
 			"TSM",
 			"AAPL",
@@ -658,41 +602,31 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 			"SPY"
 			];
 	for (var i = 0; i<stocks.length; i++) {
-		stnum = 1
-		//console.log("stock"+stnum)
+		var stnum = 1;
 		var output = Promise.resolve(stockTicker(stocks[i]));
 			output.then(function(v) {
-				// document.getElementById("ticker"+stnum).innerHTML = v[0];
-				// document.getElementById("stock"+stnum).innerHTML = v[1];
-				// if (v[1].indexOf("▼")>0){
-				// 	document.getElementById("stock"+stnum).style.color="#BF616A"
-				// }
-				// else {
-				// 	document.getElementById("stock"+stnum).style.color="#A3BE8C"
-				// }
-				// console.log(v);
-				// console.log(v[2]);
+				
 				date = String(v[2]);
-				//console.log(typeof date);
 				subDate = date.split(" ");
-				//console.log(subDate);
 				updated = "Last Updated: " + subDate[0] + " " + subDate[1] + " " + subDate[2] + " " + subDate[3] + " at " + subDate[4] + " CST";
-				document.getElementsByClassName("update")[0].innerHTML = updated;
+				if(updated.indexOf("undefined")>0){
+					document.getElementsByClassName("update")[0].innerHTML = "using cached data";
+				} else{
+					document.getElementsByClassName("update")[0].innerHTML = updated;
+				}
+				
+				if(stnum==stocks.length){
+					localStorage['resultCache'] = JSON.stringify(resultCache);
+				}
 				stnum++;
-				//console.log(document.getElementsByClassName('ticker')[0].clientWidth);
-				//stockWidth = document.getElementsByClassName('ticker')[0].clientWidth;
-				//document.getElementsByClassName("ticker")[0].style["-webkit-animation-duration"] = (stockWidth/120) + "s";
-				//document.getElementsByClassName("ticker")[0].style["animation-duration"] = (stockWidth/120) + "s";
-				//console.log(stockWidth);
-				//document.getElementsByClassName("ticker")[0].style.padding = "0px 0px 0px " + (stockWidth*1.25) + "px";
 			})
+		
 	}
+	
 
-	
+
 </script>
-<script>
-	
-</script>
+
 <script>
 
 	//links
@@ -741,144 +675,124 @@ body:not([data-page="3"]) .tab.extra.next:hover {
                 (sec < 10 ? ("0" + sec) : sec);
         }
 	// Set up the clock
-	document.getElementById("st1").innerHTML = getTime();
+	document.getElementById("clock").innerHTML = getTime();
             // Set clock interval to tick clock
             setInterval( () => {
-                document.getElementById("st1").innerHTML = getTime();
-    },100);
-	document.getElementById("st2").innerHTML = getTime();
-            // Set clock interval to tick clock
-            setInterval( () => {
-                document.getElementById("st2").innerHTML = getTime();
-    },100);
-	document.getElementById("st3").innerHTML = getTime();
-            // Set clock interval to tick clock
-            setInterval( () => {
-                document.getElementById("st3").innerHTML = getTime();
-    },100);
-	document.getElementById("st4").innerHTML = getTime();
-            // Set clock interval to tick clock
-            setInterval( () => {
-                document.getElementById("st4").innerHTML = getTime();
-    },100);
-	document.getElementById("st5").innerHTML = getTime();
-            // Set clock interval to tick clock
-            setInterval( () => {
-                document.getElementById("st5").innerHTML = getTime();
+                document.getElementById("clock").innerHTML = getTime();
     },100);
 	var links_var = [
 
 	[
-		['inbox', 'https://inbox.google.com'],
-		['drive', 'https://drive.google.com'],
-		['trello', 'https://trello.com/b/EWzYRoDI/school'],
-		['okta', 'https://iastate.okta.com/app/UserHome'],
-		['canvas', 'https://canvas.iastate.edu/?login_success=1'],
+		['inbox', 'https://inbox.google.com', ' '],
+		['drive', 'https://drive.google.com', ' '],
+		['trello', 'https://trello.com/b/EWzYRoDI/school', ' '],
+		['okta', 'https://iastate.okta.com/app/UserHome', ' '],
+		['canvas', 'https://canvas.iastate.edu/?login_success=1', ' '],
 	],
 	[
-		['amazon', 'https://amazon.com'],
-		['aliexpress', 'https://aliexpress.com'],
-		['shopmech', 'https://shopmech.com'],
-		['thocstock', 'https://thocstock.com'],
-		['ebay', 'https://ebay.com'],
+		['amazon', 'https://amazon.com', ' '],
+		['aliexpress', 'https://aliexpress.com', ' '],
+		['shopmech', 'https://shopmech.com', ' '],
+		['thocstock', 'https://thocstock.com', ' '],
+		['ebay', 'https://ebay.com', ' '],
 	],
 	[
-		['/r/3dprinting', 'https://reddit.com/r/3dprinting'],
-		['/r/mechanicalkeyboards', 'https://reddit.com/r/mechanicalkeyboards'],
-		['/r/customkeyboards', 'https://reddit.com/r/customkeyboards'],
-		['/r/startpages', 'https://reddit.com/r/startpages'],
-		['/r/news', 'https://reddit.com/r/news'],
+		['/r/3dprinting', 'https://reddit.com/r/3dprinting', ' '],
+		['/r/mechanicalkeyboards', 'https://reddit.com/r/mechanicalkeyboards', ' '],
+		['/r/customkeyboards', 'https://reddit.com/r/customkeyboards', ' '],
+		['/r/startpages', 'https://reddit.com/r/startpages', ' '],
+		['/r/news', 'https://reddit.com/r/news', ' '],
 	],
 	[
-		['fivethirtyeight', 'https://fivethirtyeight.com/'],
-		['associated press', 'https://apnews.com'],
-		['reuters', 'https://www.reuters.com/'],
-		['aljazeera', 'https://www.aljazeera.com/'],
-		['ars technica', 'https://arstechnica.com'],
+		['fivethirtyeight', 'https://fivethirtyeight.com/', ' '],
+		['associated press', 'https://apnews.com', ' '],
+		['reuters', 'https://www.reuters.com/', ' '],
+		['aljazeera', 'https://www.aljazeera.com/', ' '],
+		['ars technica', 'https://arstechnica.com', ' '],
 
 	],
 	[
-		['dashboard', 'https://dash.cadenkraft.com'],
-		['ghost blog', 'http://ghost.cadenkraft.com/ghost'],
-		['3D printer', 'http://fluidd.cadenkraft.com'],
-		['radon portainer', 'http://radon.cadenkraft.com:9000'],
-		['router', 'https://router.cadenkraft.com'],
+		['dashboard', 'https://dash.cadenkraft.com', 'ping'],
+		['ghost blog', 'http://ghost.cadenkraft.com/ghost', 'ping'],
+		['3D printer', 'http://fluidd.cadenkraft.com', 'ping'],
+		['radon portainer', 'http://radon.cadenkraft.com:9000', 'ping'],
+		['router', 'https://router.cadenkraft.com', 'ping'],
 
 	],
 	//-----------------------6-10
 	[
-		['link-26', 'aaa'],
-		['link-27', 'aaa'],
-		['link-28', 'aaa'],
-		['link-29', 'aaa'],
-		['link-30', 'aaa'],
+		['link-26', 'aaa', ' '],
+		['link-27', 'aaa', ' '],
+		['link-28', 'aaa', ' '],
+		['link-29', 'aaa', ' '],
+		['link-30', 'aaa', ' '],
 
 	],
 	[
-		['link-31', 'aaa'],
-		['link-32', 'aaa'],
-		['link-33', 'aaa'],
-		['link-34', 'aaa'],
-		['link-35', 'aaa'],
+		['link-31', 'aaa', ' '],
+		['link-32', 'aaa', ' '],
+		['link-33', 'aaa', ' '],
+		['link-34', 'aaa', ' '],
+		['link-35', 'aaa', ' '],
 
 	],
 	[
-		['link-36', 'aaa'],
-		['link-37', 'aaa'],
-		['link-38', 'aaa'],
-		['link-39', 'aaa'],
-		['link-40', 'aaa'],
+		['link-36', 'aaa', ' '],
+		['link-37', 'aaa', ' '],
+		['link-38', 'aaa', ' '],
+		['link-39', 'aaa', ' '],
+		['link-40', 'aaa', ' '],
 
 	],
 	[
-		['link-41', 'aaa'],
-		['link-42', 'aaa'],
-		['link-43', 'aaa'],
-		['link-44', 'aaa'],
-		['link-45', 'aaa'],
+		['link-41', 'aaa', ' '],
+		['link-42', 'aaa', ' '],
+		['link-43', 'aaa', ' '],
+		['link-44', 'aaa', ' '],
+		['link-45', 'aaa', ' '],
 	],
 	[
-		['link-46', 'aaa'],
-		['link-47', 'aaa'],
-		['link-48', 'aaa'],
-		['link-49', 'aaa'],
-		['link-50', 'aaa'],
+		['link-46', 'aaa', ' '],
+		['link-47', 'aaa', ' '],
+		['link-48', 'aaa', ' '],
+		['link-49', 'aaa', ' '],
+		['link-50', 'aaa', ' '],
 	],
 	//-----------------------11-15
 	[
-		['link-51', 'aaa'],
-		['link-52', 'aaa'],
-		['link-53', 'aaa'],
-		['link-54', 'aaa'],
-		['link-55', 'aaa'],
+		['link-51', 'aaa', ' '],
+		['link-52', 'aaa', ' '],
+		['link-53', 'aaa', ' '],
+		['link-54', 'aaa', ' '],
+		['link-55', 'aaa', ' '],
 	],
 	[
-		['link-56', 'aaa'],
-		['link-57', 'aaa'],
-		['link-58', 'aaa'],
-		['link-59', 'aaa'],
-		['link-60', 'aaa'],
+		['link-56', 'aaa', ' '],
+		['link-57', 'aaa', ' '],
+		['link-58', 'aaa', ' '],
+		['link-59', 'aaa', ' '],
+		['link-60', 'aaa', ' '],
 	],
 	[
-		['link-61', 'aaa'],
-		['link-62', 'aaa'],
-		['link-63', 'aaa'],
-		['link-64', 'aaa'],
-		['link-65', 'aaa'],
+		['link-61', 'aaa', ' '],
+		['link-62', 'aaa', ' '],
+		['link-63', 'aaa', ' '],
+		['link-64', 'aaa', ' '],
+		['link-65', 'aaa', ' '],
 	],
 	[
-		['link-66', 'aaa'],
-		['link-67', 'aaa'],
-		['link-68', 'aaa'],
-		['link-69', 'aaa'],
-		['link-70', 'aaa'],
+		['link-66', 'aaa', ' '],
+		['link-67', 'aaa', ' '],
+		['link-68', 'aaa', ' '],
+		['link-69', 'aaa', ' '],
+		['link-70', 'aaa', ' '],
 	],
 	[
-		['link-71', 'aaa'],
-		['link-72', 'aaa'],
-		['link-73', 'aaa'],
-		['link-74', 'aaa'],
-		['link-75', 'aaa'],
+		['link-71', 'aaa', ' '],
+		['link-72', 'aaa', ' '],
+		['link-73', 'aaa', ' '],
+		['link-74', 'aaa', ' '],
+		['link-75', 'aaa', ' '],
 	],
 
 
@@ -920,18 +834,10 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 		})
 	}
 	window.onload = () => {
-			document.getElementById("temp1").innerHTML = "Loading...";
-			document.getElementById("temp2").innerHTML = "Loading...";
-			document.getElementById("temp3").innerHTML = "Loading...";
-			document.getElementById("temp4").innerHTML = "Loading...";
-			document.getElementById("temp5").innerHTML = "Loading...";
+			document.getElementById("weather").innerHTML = "Loading...";
 			let xhr = new XMLHttpRequest();
             // Request to open weather map
 			navigator.geolocation.getCurrentPosition((position) => {
-    			let lat = position.coords.latitude.toFixed(2);
-    			let long = position.coords.longitude.toFixed(2);
-				localStorage['lat'] = lat.toString();
-				localStorage['long'] = long.toString();
 				var cacheLat = localStorage['lat'];
 				var cacheLong = localStorage['long'];
 				//console.log(lat, long);
@@ -941,22 +847,24 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 						if (xhr.status === 200) {
 							let json = JSON.parse(xhr.responseText);
 							//console.log(json);
-							
-							document.getElementById("temp1").innerHTML = json.weather[0].description + ", ";
-							document.getElementById("temp1").innerHTML += json.main.temp.toFixed(0) + "°F";// + json.name;
-							document.getElementById("temp2").innerHTML = json.weather[0].description + ", ";
-							document.getElementById("temp2").innerHTML += json.main.temp.toFixed(0) + "°F";//+ json.name;
-							document.getElementById("temp3").innerHTML = json.weather[0].description + ", ";
-							document.getElementById("temp3").innerHTML += json.main.temp.toFixed(0) + "°F";//+ json.name;
-							document.getElementById("temp4").innerHTML = json.weather[0].description + ", ";
-							document.getElementById("temp4").innerHTML += json.main.temp.toFixed(0) + "°F";//+ json.name;
-							document.getElementById("temp5").innerHTML = json.weather[0].description + ", ";
-							document.getElementById("temp5").innerHTML += json.main.temp.toFixed(0) + "°F";//+ json.name;
+							let location = json.name; 
+							if(location.indexOf(' ')>-1){
+								let locationArr = location.split(" ");
+								console.log(locationArr);
+								location = locationArr[0]+" "+locationArr[1];
+							}
+							document.getElementById("weather").innerHTML = json.weather[0].description + ", ";
+							document.getElementById("weather").innerHTML += json.main.temp.toFixed(0) + "°F in " + location;
+							document.getElementById("weather").setAttribute("href", "https://openweathermap.org/weathermap?basemap=map&cities=true&layer=temperature&lat="+cacheLat+"&lon="+cacheLong+"&zoom=12");
 						} else {
 							console.log('weather error msg: ' + xhr.status);
 						}
 					}
 				}
+				let lat = position.coords.latitude.toFixed(2);
+    			let long = position.coords.longitude.toFixed(2);
+				localStorage['lat'] = lat.toString();
+				localStorage['long'] = long.toString();
 				xhr.send();
 			});
             
@@ -967,16 +875,54 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 	var contents = document.querySelectorAll('.content');
 	for (let i=0; i<contents.length; i++){
 		for (let j=0; j<links_var[i].length; j++){
-
+			var k = 0;
 			var a_element = document.createElement('a');
 			a_element.setAttribute('data-id', 'i' + i + '_j' + j);
 			a_element.setAttribute('class', 'linksel');
 			a_element.innerHTML = links_var[i][j][0];
+			pingStatus = links_var[i][j][2];
+			if(pingStatus.indexOf('ping')>-1){
+				var b_element = document.createElement('span');
+					b_element.setAttribute('ping-id', 'i' + i + '_j' + j);
+					b_element.setAttribute('class', 'linksel');
+					b_element.style.position="relative";
+					b_element.style.marginLeft="10px";
+					b_element.style.float="right";
+					b_element.style.justifyContent="right";
+				ping(links_var[i][j][1]).then(function(delta) {
+					console.log(links_var[i][j][1]+ ' Ping time was ' + String(delta) + ' ms');
+					var b_element = document.createElement('span');
+					b_element.setAttribute('ping-id', 'i' + i + '_j' + j);
+					b_element.setAttribute('class', 'linksel');
+					b_element.style.position="relative";
+					b_element.style.marginLeft="10px";
+					b_element.style.float="right";
+					b_element.style.justifyContent="right";
+					b_element.style.color="#A3BE8C";
+					b_element.innerHTML = "  ⬤ Online ("+String(delta)+"ms)";
+					document.querySelector('a[data-id="i' + i + '_j' + j + '"]').insertAdjacentElement('beforeend', b_element)
+					
+
+				}).catch(function(err) {
+					var b_element = document.createElement('span');
+					b_element.setAttribute('ping-id', 'i' + i + '_j' + j);
+					b_element.setAttribute('class', 'linksel');
+					b_element.style.position="relative";
+					b_element.style.marginLeft="10px";
+					b_element.style.float="right";
+					b_element.style.justifyContent="right";
+					b_element.style.color="#BF616A";
+					b_element.innerHTML = "  ⬤ Offline";
+					document.querySelector('a[data-id="i' + i + '_j' + j + '"]').insertAdjacentElement('beforeend', b_element)
+					console.error(links_var[i][j][1]+ 'Could not ping remote URL', err);
+				});
+			}
 
 			if (typeof links_var[i][j][1] == 'string'){
-
+				//console.log(links_var[i][j]);
 				a_element.href = links_var[i][j][1];
 				contents[i].appendChild(a_element);
+				a_element.style.display="flex"
 			}
 			else {
 
@@ -1005,7 +951,7 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 
 
 	//tabs
-	var stats = document.querySelectorAll('.stats');
+	var color = document.querySelectorAll('.color');
 	var tabs = document.querySelectorAll('.tab:not(.space):not(.extra)');
 	var contents = document.querySelectorAll('.content');
 	//console.log('tabs', tabs);
@@ -1013,10 +959,15 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 	//console.log('contents', contents);
 	for (let i=0; i<tabs.length; i++){
 		tabs[i].addEventListener('mouseenter', function(){
+			color.forEach(element => {
+  				element.setAttribute('data-color', i+1);
+			});
+			//document.getElementsByClassName('color')[0].setAttribute('data-color', i+1);
 			for (let j=0; j<tabs.length; j++){
 				tabs[j].classList.remove('active');
 			}
 			tabs[i].classList.add('active');
+			
 			for (let j=0; j<contents.length; j++){
 				contents[j].classList.remove('active');
 			}
