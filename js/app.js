@@ -142,150 +142,149 @@ function getTime() {
         document.getElementById("clock").innerHTML = getTime();
 	},100);
 
+
 // Weather API ####################################
 
-document.getElementById("weather").innerHTML = localStorage['weather'];
-let xhr = new XMLHttpRequest();
-// Request to open weather map
-navigator.geolocation.getCurrentPosition((position) => {
-	var cacheLat = localStorage['lat'];
-	var cacheLong = localStorage['long'];
-	xhr.open('GET', 'https://api.openweathermap.org/data/2.5/weather?lat='+cacheLat+'&lon='+cacheLong+'&units=imperial&appid='+weather_API_key);
-	xhr.onload = () => {
-		if (xhr.readyState === 4) {
-			if (xhr.status === 200) {
-				let json = JSON.parse(xhr.responseText);
-				if (debug_mode==true) {console.log(json)};
-				let location = json.name; 
-				if(location.indexOf(' ')>-1){
-					let locationArr = location.split(" ");
-					if (debug_mode==true) {console.log(locationArr)};
-					location = locationArr[0]+" "+locationArr[1];
+	document.getElementById("weather").innerHTML = localStorage['weather'];
+	let xhr = new XMLHttpRequest();
+	// Request to open weather map
+	navigator.geolocation.getCurrentPosition((position) => {
+		var cacheLat = localStorage['lat'];
+		var cacheLong = localStorage['long'];
+		xhr.open('GET', 'https://api.openweathermap.org/data/2.5/weather?lat='+cacheLat+'&lon='+cacheLong+'&units=imperial&appid='+weather_API_key);
+		xhr.onload = () => {
+			if (xhr.readyState === 4) {
+				if (xhr.status === 200) {
+					let json = JSON.parse(xhr.responseText);
+					if (debug_mode==true) {console.log(json)};
+					let location = json.name; 
+					if(location.indexOf(' ')>-1){
+						let locationArr = location.split(" ");
+						if (debug_mode==true) {console.log(locationArr)};
+						location = locationArr[0]+" "+locationArr[1];
+					}
+					document.getElementById("weather").innerHTML = json.weather[0].description + ", ";
+					document.getElementById("weather").innerHTML += json.main.temp.toFixed(0) + "°F in " + location;
+					localStorage['weather'] = document.getElementById("weather").innerHTML;
+					document.getElementById("weather").setAttribute("href", "https://openweathermap.org/weathermap?basemap=map&cities=true&layer=temperature&lat="+cacheLat+"&lon="+cacheLong+"&zoom=12");
+				} else {
+					console.log('weather error msg: ' + xhr.status);
 				}
-				document.getElementById("weather").innerHTML = json.weather[0].description + ", ";
-				document.getElementById("weather").innerHTML += json.main.temp.toFixed(0) + "°F in " + location;
-				localStorage['weather'] = document.getElementById("weather").innerHTML;
-				document.getElementById("weather").setAttribute("href", "https://openweathermap.org/weathermap?basemap=map&cities=true&layer=temperature&lat="+cacheLat+"&lon="+cacheLong+"&zoom=12");
-			} else {
-				console.log('weather error msg: ' + xhr.status);
 			}
 		}
-	}
-	let lat = position.coords.latitude.toFixed(2);
-	let long = position.coords.longitude.toFixed(2);
-	localStorage['lat'] = lat.toString();
-	localStorage['long'] = long.toString();
-	xhr.send();
-});
-
-
-
+		let lat = position.coords.latitude.toFixed(2);
+		let long = position.coords.longitude.toFixed(2);
+		localStorage['lat'] = lat.toString();
+		localStorage['long'] = long.toString();
+		xhr.send();
+	});
+	
 // Color Palette ##################################
 
-//set color
-if (typeof localStorage.palette == 'undefined'){
-	localStorage.setItem('palette', 'rainbow');
-}
-
-document.querySelector('body').dataset.palette = localStorage.getItem('palette');
-var palette_spans = document.querySelectorAll('.palette span');
-for (let j=0; j<palette_spans.length; j++){
-	if (palette_spans[j].parentElement.dataset.color == localStorage.getItem('palette')){
-		palette_spans[j].parentElement.classList.add('selected');
+	//set color
+	if (typeof localStorage.palette == 'undefined'){
+		localStorage.setItem('palette', 'rainbow');
 	}
-}
 
-
-//palette
-document.querySelector('.palette').addEventListener('mouseenter', function(){
-	document.querySelector('.palette-content').style.opacity = '1';
-})
-document.querySelector('.palette').addEventListener('mouseleave', function(){
-	document.querySelector('.palette-content').style.opacity = '0';
-})
-
-for (let i=0; i<palette_spans.length; i++){
-	palette_spans[i].addEventListener('click', function(){
-		for (let j=0; j<palette_spans.length; j++){
-			palette_spans[j].parentElement.classList.remove('selected');
+	document.querySelector('body').dataset.palette = localStorage.getItem('palette');
+	var palette_spans = document.querySelectorAll('.palette span');
+	for (let j=0; j<palette_spans.length; j++){
+		if (palette_spans[j].parentElement.dataset.color == localStorage.getItem('palette')){
+			palette_spans[j].parentElement.classList.add('selected');
 		}
-		palette_spans[i].parentElement.classList.add('selected');
-		document.querySelector('body').dataset.palette = palette_spans[i].parentElement.dataset.color;
-		localStorage.setItem('palette', palette_spans[i].parentElement.dataset.color);
-	})
-}
+	}
 
-//random color
-var temp_random = Math.floor((Math.random() * 360) + 1);
-document.documentElement.style.setProperty('--random-color', 'hsl(' + temp_random + 'deg 41% 46%)');
-document.querySelector('.palette div[data-color="random"').addEventListener('click', function(){
+
+	//palette
+	document.querySelector('.palette').addEventListener('mouseenter', function(){
+		document.querySelector('.palette-content').style.opacity = '1';
+	})
+	document.querySelector('.palette').addEventListener('mouseleave', function(){
+		document.querySelector('.palette-content').style.opacity = '0';
+	})
+
+	for (let i=0; i<palette_spans.length; i++){
+		palette_spans[i].addEventListener('click', function(){
+			for (let j=0; j<palette_spans.length; j++){
+				palette_spans[j].parentElement.classList.remove('selected');
+			}
+			palette_spans[i].parentElement.classList.add('selected');
+			document.querySelector('body').dataset.palette = palette_spans[i].parentElement.dataset.color;
+			localStorage.setItem('palette', palette_spans[i].parentElement.dataset.color);
+		})
+	}
+
+	//random color
 	var temp_random = Math.floor((Math.random() * 360) + 1);
 	document.documentElement.style.setProperty('--random-color', 'hsl(' + temp_random + 'deg 41% 46%)');
-})
+	document.querySelector('.palette div[data-color="random"').addEventListener('click', function(){
+		var temp_random = Math.floor((Math.random() * 360) + 1);
+		document.documentElement.style.setProperty('--random-color', 'hsl(' + temp_random + 'deg 41% 46%)');
+	})
 
 
 // Link Manipulation ##################################
+window.onload = () => {
+	var contents = document.querySelectorAll('.content:not(.info)');
+		for (let i=0; i<contents.length; i++){
+			for (let j=0; j<links_var[i].length; j++){
+				var k = 0;
+				var a_element = document.createElement('a');
+				a_element.setAttribute('data-id', 'i' + i + '_j' + j);
+				a_element.setAttribute('class', 'linksel');
+				a_element.innerHTML = links_var[i][j][0];
+				pingStatus = links_var[i][j][2];
+				if(pingStatus.indexOf('true')>-1){
+					ping(links_var[i][j][1]).then(function(delta) {
+						if (debug_mode==true) {console.log(links_var[i][j][1]+ ' Ping time was ' + String(delta) + ' ms')};
+						var b_element = document.createElement('span');
+						b_element.setAttribute('ping-id', 'i' + i + '_j' + j);
+						b_element.setAttribute('class', 'linksel');
+						b_element.style.position="relative";
+						b_element.style.marginLeft="auto";
+						b_element.style.float="right";
+						b_element.style.justifyContent="right";
+						b_element.style.color="#A3BE8C";
+						b_element.innerHTML = "Online ("+String(delta)+"ms) ⬤";
+						document.querySelector('a[data-id="i' + i + '_j' + j + '"]').insertAdjacentElement('beforeend', b_element)
+						
 
-var contents = document.querySelectorAll('.content:not(.info)');
-	for (let i=0; i<contents.length; i++){
-		for (let j=0; j<links_var[i].length; j++){
-			var k = 0;
-			var a_element = document.createElement('a');
-			a_element.setAttribute('data-id', 'i' + i + '_j' + j);
-			a_element.setAttribute('class', 'linksel');
-			a_element.innerHTML = links_var[i][j][0];
-			pingStatus = links_var[i][j][2];
-			if(pingStatus.indexOf('true')>-1){
-				ping(links_var[i][j][1]).then(function(delta) {
-					if (debug_mode==true) {console.log(links_var[i][j][1]+ ' Ping time was ' + String(delta) + ' ms')};
-					var b_element = document.createElement('span');
-					b_element.setAttribute('ping-id', 'i' + i + '_j' + j);
-					b_element.setAttribute('class', 'linksel');
-					b_element.style.position="relative";
-					b_element.style.marginLeft="auto";
-					b_element.style.float="right";
-					b_element.style.justifyContent="right";
-					b_element.style.color="#A3BE8C";
-					b_element.innerHTML = "Online ("+String(delta)+"ms) ⬤";
-					document.querySelector('a[data-id="i' + i + '_j' + j + '"]').insertAdjacentElement('beforeend', b_element)
-					
-
-				}).catch(function(err) {
-					var b_element = document.createElement('span');
-					b_element.setAttribute('ping-id', 'i' + i + '_j' + j);
-					b_element.setAttribute('class', 'linksel');
-					b_element.style.position="relative";
-					b_element.style.marginLeft="auto";
-					b_element.style.float="right";
-					b_element.style.justifyContent="right";
-					b_element.style.color="#BF616A";
-					b_element.innerHTML = "Offline ⬤";
-					document.querySelector('a[data-id="i' + i + '_j' + j + '"]').insertAdjacentElement('beforeend', b_element)
-					console.error(links_var[i][j][1]+ 'Could not ping remote URL', err);
-				});
-			}
-
-			if (typeof links_var[i][j][1] == 'string'){
-				a_element.href = links_var[i][j][1];
-				contents[i].appendChild(a_element);
-				a_element.style.display="flex"
-			}
-			else {
-
-				contents[i].appendChild(a_element);
-				for (let k=0; k<links_var[i][j][1].length; k++){
-					document.querySelector('a[data-id="i' + i + '_j' + j + '"]').setAttribute('data-link_' + k, links_var[i][j][1][k][1]);
+					}).catch(function(err) {
+						var b_element = document.createElement('span');
+						b_element.setAttribute('ping-id', 'i' + i + '_j' + j);
+						b_element.setAttribute('class', 'linksel');
+						b_element.style.position="relative";
+						b_element.style.marginLeft="auto";
+						b_element.style.float="right";
+						b_element.style.justifyContent="right";
+						b_element.style.color="#BF616A";
+						b_element.innerHTML = "Offline ⬤";
+						document.querySelector('a[data-id="i' + i + '_j' + j + '"]').insertAdjacentElement('beforeend', b_element)
+						console.error(links_var[i][j][1]+ 'Could not ping remote URL', err);
+					});
 				}
-				document.querySelector('a[data-id="i' + i + '_j' + j + '"]').addEventListener('click', function(event){
+
+				if (typeof links_var[i][j][1] == 'string'){
+					a_element.href = links_var[i][j][1];
+					contents[i].appendChild(a_element);
+					a_element.style.display="flex"
+				}
+				else {
+
+					contents[i].appendChild(a_element);
 					for (let k=0; k<links_var[i][j][1].length; k++){
-						event.preventDefault();
-						window.open(document.querySelector('a[data-id="i' + i + '_j' + j + '"]').getAttribute('data-link_' + k));
+						document.querySelector('a[data-id="i' + i + '_j' + j + '"]').setAttribute('data-link_' + k, links_var[i][j][1][k][1]);
 					}
-				})
+					document.querySelector('a[data-id="i' + i + '_j' + j + '"]').addEventListener('click', function(event){
+						for (let k=0; k<links_var[i][j][1].length; k++){
+							event.preventDefault();
+							window.open(document.querySelector('a[data-id="i' + i + '_j' + j + '"]').getAttribute('data-link_' + k));
+						}
+					})
+				}
 			}
 		}
 	}
-
 // Color Changing #################################
 
 var color = document.querySelectorAll('.color');
@@ -297,6 +296,7 @@ for (let i=0; i<tabs.length; i++){
 			b=i+1;
 			if(b>=7 && b<=12){b = b-6};
 			if(b>=13 && b<=18){b = b-12};
+			console.log(b);
 			element.setAttribute('data-color', b);
 
 		});
