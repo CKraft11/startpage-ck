@@ -136,97 +136,94 @@ function getTime() {
         (min < 10 ? ("0" + min) : min) + ":" + 
         (sec < 10 ? ("0" + sec) : sec);
 }
-
-window.onload = () => {
-	
 	document.getElementById("clock").innerHTML = getTime();
     // Set clock interval to tick clock
     setInterval( () => {
         document.getElementById("clock").innerHTML = getTime();
 	},100);
 
-
 // Weather API ####################################
 
-	document.getElementById("weather").innerHTML = localStorage['weather'];
-	let xhr = new XMLHttpRequest();
-	// Request to open weather map
-	navigator.geolocation.getCurrentPosition((position) => {
-		var cacheLat = localStorage['lat'];
-		var cacheLong = localStorage['long'];
-		xhr.open('GET', 'https://api.openweathermap.org/data/2.5/weather?lat='+cacheLat+'&lon='+cacheLong+'&units=imperial&appid='+weather_API_key);
-		xhr.onload = () => {
-			if (xhr.readyState === 4) {
-				if (xhr.status === 200) {
-					let json = JSON.parse(xhr.responseText);
-					if (debug_mode==true) {console.log(json)};
-					let location = json.name; 
-					if(location.indexOf(' ')>-1){
-						let locationArr = location.split(" ");
-						if (debug_mode==true) {console.log(locationArr)};
-						location = locationArr[0]+" "+locationArr[1];
-					}
-					document.getElementById("weather").innerHTML = json.weather[0].description + ", ";
-					document.getElementById("weather").innerHTML += json.main.temp.toFixed(0) + "°F in " + location;
-					localStorage['weather'] = document.getElementById("weather").innerHTML;
-					document.getElementById("weather").setAttribute("href", "https://openweathermap.org/weathermap?basemap=map&cities=true&layer=temperature&lat="+cacheLat+"&lon="+cacheLong+"&zoom=12");
-				} else {
-					console.log('weather error msg: ' + xhr.status);
+document.getElementById("weather").innerHTML = localStorage['weather'];
+let xhr = new XMLHttpRequest();
+// Request to open weather map
+navigator.geolocation.getCurrentPosition((position) => {
+	var cacheLat = localStorage['lat'];
+	var cacheLong = localStorage['long'];
+	xhr.open('GET', 'https://api.openweathermap.org/data/2.5/weather?lat='+cacheLat+'&lon='+cacheLong+'&units=imperial&appid='+weather_API_key);
+	xhr.onload = () => {
+		if (xhr.readyState === 4) {
+			if (xhr.status === 200) {
+				let json = JSON.parse(xhr.responseText);
+				if (debug_mode==true) {console.log(json)};
+				let location = json.name; 
+				if(location.indexOf(' ')>-1){
+					let locationArr = location.split(" ");
+					if (debug_mode==true) {console.log(locationArr)};
+					location = locationArr[0]+" "+locationArr[1];
 				}
+				document.getElementById("weather").innerHTML = json.weather[0].description + ", ";
+				document.getElementById("weather").innerHTML += json.main.temp.toFixed(0) + "°F in " + location;
+				localStorage['weather'] = document.getElementById("weather").innerHTML;
+				document.getElementById("weather").setAttribute("href", "https://openweathermap.org/weathermap?basemap=map&cities=true&layer=temperature&lat="+cacheLat+"&lon="+cacheLong+"&zoom=12");
+			} else {
+				console.log('weather error msg: ' + xhr.status);
 			}
 		}
-		let lat = position.coords.latitude.toFixed(2);
-		let long = position.coords.longitude.toFixed(2);
-		localStorage['lat'] = lat.toString();
-		localStorage['long'] = long.toString();
-		xhr.send();
-	});
-	
+	}
+	let lat = position.coords.latitude.toFixed(2);
+	let long = position.coords.longitude.toFixed(2);
+	localStorage['lat'] = lat.toString();
+	localStorage['long'] = long.toString();
+	xhr.send();
+});
+
 
 
 // Color Palette ##################################
 
-	//set color
-	if (typeof localStorage.palette == 'undefined'){
-		localStorage.setItem('palette', 'rainbow');
-	}
+//set color
+if (typeof localStorage.palette == 'undefined'){
+	localStorage.setItem('palette', 'rainbow');
+}
 
-	document.querySelector('body').dataset.palette = localStorage.getItem('palette');
-	var palette_spans = document.querySelectorAll('.palette span');
-	for (let j=0; j<palette_spans.length; j++){
-		if (palette_spans[j].parentElement.dataset.color == localStorage.getItem('palette')){
-			palette_spans[j].parentElement.classList.add('selected');
+document.querySelector('body').dataset.palette = localStorage.getItem('palette');
+var palette_spans = document.querySelectorAll('.palette span');
+for (let j=0; j<palette_spans.length; j++){
+	if (palette_spans[j].parentElement.dataset.color == localStorage.getItem('palette')){
+		palette_spans[j].parentElement.classList.add('selected');
+	}
+}
+
+
+//palette
+document.querySelector('.palette').addEventListener('mouseenter', function(){
+	document.querySelector('.palette-content').style.opacity = '1';
+})
+document.querySelector('.palette').addEventListener('mouseleave', function(){
+	document.querySelector('.palette-content').style.opacity = '0';
+})
+
+for (let i=0; i<palette_spans.length; i++){
+	palette_spans[i].addEventListener('click', function(){
+		for (let j=0; j<palette_spans.length; j++){
+			palette_spans[j].parentElement.classList.remove('selected');
 		}
-	}
-
-
-	//palette
-	document.querySelector('.palette').addEventListener('mouseenter', function(){
-		document.querySelector('.palette-content').style.opacity = '1';
-	})
-	document.querySelector('.palette').addEventListener('mouseleave', function(){
-		document.querySelector('.palette-content').style.opacity = '0';
-	})
-
-	for (let i=0; i<palette_spans.length; i++){
-		palette_spans[i].addEventListener('click', function(){
-			for (let j=0; j<palette_spans.length; j++){
-				palette_spans[j].parentElement.classList.remove('selected');
-			}
-			palette_spans[i].parentElement.classList.add('selected');
-			document.querySelector('body').dataset.palette = palette_spans[i].parentElement.dataset.color;
-			localStorage.setItem('palette', palette_spans[i].parentElement.dataset.color);
-		})
-	}
-
-	//random color
-	var temp_random = Math.floor((Math.random() * 360) + 1);
-	document.documentElement.style.setProperty('--random-color', 'hsl(' + temp_random + 'deg 41% 46%)');
-	document.querySelector('.palette div[data-color="random"').addEventListener('click', function(){
-		var temp_random = Math.floor((Math.random() * 360) + 1);
-		document.documentElement.style.setProperty('--random-color', 'hsl(' + temp_random + 'deg 41% 46%)');
+		palette_spans[i].parentElement.classList.add('selected');
+		document.querySelector('body').dataset.palette = palette_spans[i].parentElement.dataset.color;
+		localStorage.setItem('palette', palette_spans[i].parentElement.dataset.color);
 	})
 }
+
+//random color
+var temp_random = Math.floor((Math.random() * 360) + 1);
+document.documentElement.style.setProperty('--random-color', 'hsl(' + temp_random + 'deg 41% 46%)');
+document.querySelector('.palette div[data-color="random"').addEventListener('click', function(){
+	var temp_random = Math.floor((Math.random() * 360) + 1);
+	document.documentElement.style.setProperty('--random-color', 'hsl(' + temp_random + 'deg 41% 46%)');
+})
+
+
 // Link Manipulation ##################################
 
 var contents = document.querySelectorAll('.content:not(.info)');
@@ -238,7 +235,7 @@ var contents = document.querySelectorAll('.content:not(.info)');
 			a_element.setAttribute('class', 'linksel');
 			a_element.innerHTML = links_var[i][j][0];
 			pingStatus = links_var[i][j][2];
-			if(pingStatus.indexOf('ping')>-1){
+			if(pingStatus.indexOf('true')>-1){
 				ping(links_var[i][j][1]).then(function(delta) {
 					if (debug_mode==true) {console.log(links_var[i][j][1]+ ' Ping time was ' + String(delta) + ' ms')};
 					var b_element = document.createElement('span');
@@ -297,9 +294,13 @@ var contents = document.querySelectorAll('.content');
 for (let i=0; i<tabs.length; i++){
 	tabs[i].addEventListener('mouseenter', function(){
 		color.forEach(element => {
-			element.setAttribute('data-color', i+1);
+			b=i+1;
+			if(b>=7 && b<=12){b = b-6};
+			if(b>=13 && b<=18){b = b-12};
+			element.setAttribute('data-color', b);
+
 		});
-		//document.getElementsByClassName('color')[0].setAttribute('data-color', i+1);
+		
 		for (let j=0; j<tabs.length; j++){
 			tabs[j].classList.remove('active');
 		}
@@ -330,12 +331,18 @@ function show_page(x){
 }
 
 document.querySelector('.tab.extra.back').addEventListener('click', function(){
+	color.forEach(element => {
+		element.setAttribute('data-color', 1);
+	});
 	var current_page = Number(document.querySelector('body').dataset.page);
 	if (current_page-1 >= 1){
 		show_page(current_page-1);
 	}
 })
 document.querySelector('.tab.extra.next').addEventListener('click', function(){
+	color.forEach(element => {
+		element.setAttribute('data-color', 1);
+	});
 	var current_page = Number(document.querySelector('body').dataset.page);
 	if (current_page+1 <= num_of_pages){
 		show_page(current_page+1);
