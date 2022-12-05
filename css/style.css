@@ -223,11 +223,15 @@ flex-direction: column;
 .tab.next {
     margin-right: 0ex;
 }
+.tab:last-child {
+    margin-right: 0ex;
+}
 .tab {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 6ex;
+    width: fill-available;
+    width: -moz-available;
     height: 4ex;
     cursor: default;
     border-radius: 1ex;
@@ -357,6 +361,7 @@ outline: none;
 border-radius: 0.3ex;
 margin-bottom: 1em;
 text-align: center;
+border:0em;
 }
 
 .tab.active[data-color="1"],
@@ -419,7 +424,7 @@ box-sizing: border-box;
 
 /* Mobile ##################################### */
 
-@media screen and (max-height: ) {
+@media screen and (max-width: 640px) {
 .tab {
     width: 10ex;
 }

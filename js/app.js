@@ -225,8 +225,8 @@ function getTime() {
 
 // Link Manipulation ##################################
 window.onload = () => {
-	var contents = document.querySelectorAll('.content:not(.info)');
-		for (let i=0; i<contents.length; i++){
+	var tabs = document.querySelectorAll('.tab:not(.space):not(.extra)');
+		for (let i=0; i<tabs.length; i++){
 			for (let j=0; j<links_var[i].length; j++){
 				var k = 0;
 				var a_element = document.createElement('a');
@@ -240,6 +240,7 @@ window.onload = () => {
 						var b_element = document.createElement('span');
 						b_element.setAttribute('ping-id', 'i' + i + '_j' + j);
 						b_element.setAttribute('class', 'linksel');
+						b_element.setAttribute('class', 'linksel tab'+(i+1));
 						b_element.style.position="relative";
 						b_element.style.marginLeft="auto";
 						b_element.style.float="right";
@@ -252,7 +253,7 @@ window.onload = () => {
 					}).catch(function(err) {
 						var b_element = document.createElement('span');
 						b_element.setAttribute('ping-id', 'i' + i + '_j' + j);
-						b_element.setAttribute('class', 'linksel');
+						b_element.setAttribute('class', 'linksel tab'+(i+1));
 						b_element.style.position="relative";
 						b_element.style.marginLeft="auto";
 						b_element.style.float="right";
@@ -263,15 +264,17 @@ window.onload = () => {
 						console.error(links_var[i][j][1]+ 'Could not ping remote URL', err);
 					});
 				}
-
+				//a_element = a_element.style.display = 'none';	
 				if (typeof links_var[i][j][1] == 'string'){
 					a_element.href = links_var[i][j][1];
-					contents[i].appendChild(a_element);
-					a_element.style.display="flex"
+					a_element.classList.add("tab"+(i+1));
+					document.getElementsByClassName("content")[0].appendChild(a_element);
+					a_element = a_element.style.display = 'none';	
 				}
 				else {
-
-					contents[i].appendChild(a_element);
+					a_element.classList.add("tab"+(i+1));
+					document.getElementsByClassName("content")[0].appendChild(a_element);
+					a_element = a_element.style.display = 'none';
 					for (let k=0; k<links_var[i][j][1].length; k++){
 						document.querySelector('a[data-id="i' + i + '_j' + j + '"]').setAttribute('data-link_' + k, links_var[i][j][1][k][1]);
 					}
@@ -284,67 +287,49 @@ window.onload = () => {
 				}
 			}
 		}
-	}
+	
 // Color Changing #################################
 
-var color = document.querySelectorAll('.color');
-var tabs = document.querySelectorAll('.tab:not(.space):not(.extra)');
-var contents = document.querySelectorAll('.content');
-for (let i=0; i<tabs.length; i++){
-	tabs[i].addEventListener('mouseenter', function(){
-		color.forEach(element => {
-			b=i+1;
-			if(b>=7 && b<=12){b = b-6};
-			if(b>=13 && b<=18){b = b-12};
-			console.log(b);
-			element.setAttribute('data-color', b);
-
-		});
-		
-		for (let j=0; j<tabs.length; j++){
-			tabs[j].classList.remove('active');
-		}
-		tabs[i].classList.add('active');
-		
-		for (let j=0; j<contents.length; j++){
-			contents[j].classList.remove('active');
-		}
-		contents[i].classList.add('active');
-	})
-}
-
-// Extra Pages ####################################
-
-function show_page(x){
+	var color = document.querySelectorAll('.color');
+	var tabs = document.querySelectorAll('.tab:not(.space):not(.extra)');
+	var contents = document.querySelectorAll('.content');
+	document.querySelectorAll('.tab1').forEach(element => {
+		element.style.display = 'flex';
+	});
 	for (let i=0; i<tabs.length; i++){
-		tabs[i].classList.add('notVisible');
-		tabs[i].classList.remove('active');
-		contents[i].classList.remove('active');
+		tabs[i].addEventListener('mouseenter', function(){
+			document.querySelectorAll('.linksel').forEach(element => {
+				element.style.display = 'none';
+			});
+			document.querySelectorAll('.tab'+(i+1)).forEach(element => {
+				element.style.display = 'flex';
+			});
+			color.forEach(element => {
+				b=i+1;
+				if(b>=7 && b<=12){b = b-6};
+				if(b>=13 && b<=18){b = b-12};
+				element.setAttribute('data-color', b);
+			});
+			for (let j=0; j<tabs.length; j++){
+				tabs[j].classList.remove('active');
+			}
+			tabs[i].classList.add('active');
+		})
 	}
-	var pageTabs = document.querySelectorAll('.tab.page' + x);
-	for (let i=0; i<pageTabs.length; i++){
-		pageTabs[i].classList.remove('notVisible');
-	}
-	document.querySelector('.tab.page' + x).classList.add('active');
-	document.querySelector('.content.page' + x).classList.add('active');
-	document.querySelector('body').dataset.page = x;
-}
 
-document.querySelector('.tab.extra.back').addEventListener('click', function(){
-	color.forEach(element => {
-		element.setAttribute('data-color', 1);
-	});
-	var current_page = Number(document.querySelector('body').dataset.page);
-	if (current_page-1 >= 1){
-		show_page(current_page-1);
-	}
-})
-document.querySelector('.tab.extra.next').addEventListener('click', function(){
-	color.forEach(element => {
-		element.setAttribute('data-color', 1);
-	});
-	var current_page = Number(document.querySelector('body').dataset.page);
-	if (current_page+1 <= num_of_pages){
-		show_page(current_page+1);
-	}
-})
+	// // Extra Pages ####################################
+	// function show_page(x){
+	// 	for (let i=0; i<tabs.length; i++){
+	// 		tabs[i].classList.add('notVisible');
+	// 		tabs[i].classList.remove('active');
+	// 		contents[i].classList.remove('active');
+	// 	}
+	// 	var pageTabs = document.querySelectorAll('.tab.page' + x);
+	// 	for (let i=0; i<pageTabs.length; i++){
+	// 		pageTabs[i].classList.remove('notVisible');
+	// 	}
+	// 	document.querySelector('.tab.page' + x).classList.add('active');
+	// 	document.querySelector('.content.page' + x).classList.add('active');
+	// 	document.querySelector('body').dataset.page = x;
+	// }
+}

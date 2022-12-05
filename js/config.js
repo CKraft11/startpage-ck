@@ -2,8 +2,6 @@
 
 // Page Configuration ############################
 
-var num_of_pages = 3; // Number of pages (groups of 5 tabs)
-
 var debug_mode = false; // Debug mode (true/false)
 
 // OpenWeatherMap API Key ########################
@@ -94,94 +92,4 @@ var links_var = [
         ['router', 'https://router.cadenkraft.com', 'true'],
     
     ],
-    //-----------------------7-12
-    [
-        ['link-26', 'aaa', 'false'],
-        ['link-27', 'aaa', 'false'],
-        ['link-28', 'aaa', 'false'],
-        ['link-29', 'aaa', 'false'],
-        ['link-30', 'aaa', 'false'],
-    
-    ],
-    [
-        ['link-31', 'aaa', 'false'],
-        ['link-32', 'aaa', 'false'],
-        ['link-33', 'aaa', 'false'],
-        ['link-34', 'aaa', 'false'],
-        ['link-35', 'aaa', 'false'],
-    
-    ],
-    [
-        ['link-36', 'aaa', 'false'],
-        ['link-37', 'aaa', 'false'],
-        ['link-38', 'aaa', 'false'],
-        ['link-39', 'aaa', 'false'],
-        ['link-40', 'aaa', 'false'],
-    
-    ],
-    [
-        ['link-41', 'aaa', 'false'],
-        ['link-42', 'aaa', 'false'],
-        ['link-43', 'aaa', 'false'],
-        ['link-44', 'aaa', 'false'],
-        ['link-45', 'aaa', 'false'],
-    ],
-    [
-        ['link-46', 'aaa', 'false'],
-        ['link-47', 'aaa', 'false'],
-        ['link-48', 'aaa', 'false'],
-        ['link-49', 'aaa', 'false'],
-        ['link-50', 'aaa', 'false'],
-    ],
-    [
-        ['link-51', 'aaa', 'false'],
-        ['link-52', 'aaa', 'false'],
-        ['link-53', 'aaa', 'false'],
-        ['link-54', 'aaa', 'false'],
-        ['link-55', 'aaa', 'false'],
-    ],
-    //-----------------------13-18
-    [
-        ['link-56', 'aaa', 'false'],
-        ['link-57', 'aaa', 'false'],
-        ['link-58', 'aaa', 'false'],
-        ['link-59', 'aaa', 'false'],
-        ['link-60', 'aaa', 'false'],
-    ],
-    [
-        ['link-61', 'aaa', 'false'],
-        ['link-62', 'aaa', 'false'],
-        ['link-63', 'aaa', 'false'],
-        ['link-64', 'aaa', 'false'],
-        ['link-65', 'aaa', 'false'],
-    ],
-    [
-        ['link-66', 'aaa', 'false'],
-        ['link-67', 'aaa', 'false'],
-        ['link-68', 'aaa', 'false'],
-        ['link-69', 'aaa', 'false'],
-        ['link-70', 'aaa', 'false'],
-    ],
-    [
-        ['link-71', 'aaa', 'false'],
-        ['link-72', 'aaa', 'false'],
-        ['link-73', 'aaa', 'false'],
-        ['link-74', 'aaa', 'false'],
-        ['link-75', 'aaa', 'false'],
-    ],
-    [
-        ['link-76', 'aaa', 'false'],
-        ['link-77', 'aaa', 'false'],
-        ['link-78', 'aaa', 'false'],
-        ['link-79', 'aaa', 'false'],
-        ['link-80', 'aaa', 'false'],
-    ],
-    [
-        ['link-81', 'aaa', 'false'],
-        ['link-82', 'aaa', 'false'],
-        ['link-83', 'aaa', 'false'],
-        ['link-84', 'aaa', 'false'],
-        ['link-85', 'aaa', 'false'],
-    ],
-    
 ];
