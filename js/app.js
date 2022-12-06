@@ -37,21 +37,22 @@ async function stockTicker(stock){
 	}
 	output[2] = update;
 	$(document).ready(function() {
-			jQuery("<div/>", {
+			jQuery("<a/>", {
 				class: "ticker__item "+stock,
-				style: "position: relative;"
+				style: "position: relative;",
+				href: "https://finance.yahoo.com/quote/"+stock+"?p="+stock+"&.tsrc=fin-srch"
 			}).appendTo(".ticker-scroll");
-			jQuery("<div/>", {
+			jQuery("<a/>", {
 				text: output[0],
 				style: "position: relative; float: left;"
 			}).appendTo("."+stock);
 			if(output[1].indexOf("▼")>0){
-				jQuery("<div/>", {
+				jQuery("<a/>", {
 					text: output[1],
 					style: "float: right; color: #BF616A;"
 				}).appendTo("."+stock);
 			} else {
-				jQuery("<div/>", {
+				jQuery("<a/>", {
 					text: output[1],
 					style: "float: right; color: #A3BE8C;"
 				}).appendTo("."+stock);
