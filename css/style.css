@@ -170,13 +170,13 @@ flex-direction: column;
 }
 
 /* Show Last Stock Update When Hovering */
-/* .ticker:hover .update{
+.ticker:hover .update{
     display : block;
     margin-left: 0%;
 }
 .ticker:hover .ticker-scroll{
     display : none;
-} */
+}
 .update{ 
     display: none;
     background-color: var(--bg) !important;
