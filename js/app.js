@@ -41,10 +41,6 @@ async function stockTicker(stock){
 				class: "ticker__item "+stock,
 				style: "position: relative;"
 			}).appendTo(".ticker-scroll");
-			// jQuery("<div/>", {
-			// 	class: "ticker__item "+stock,
-			// 	style: "position: relative;"
-			// }).appendTo(".mirror");
 			jQuery("<div/>", {
 				text: output[0],
 				style: "position: relative; float: left;"
@@ -193,8 +189,6 @@ function getTime() {
 			palette_spans[j].parentElement.classList.add('selected');
 		}
 	}
-
-
 	//palette
 	document.querySelector('.palette').addEventListener('mouseenter', function(){
 		document.querySelector('.palette-content').style.opacity = '1';
@@ -202,7 +196,6 @@ function getTime() {
 	document.querySelector('.palette').addEventListener('mouseleave', function(){
 		document.querySelector('.palette-content').style.opacity = '0';
 	})
-
 	for (let i=0; i<palette_spans.length; i++){
 		palette_spans[i].addEventListener('click', function(){
 			for (let j=0; j<palette_spans.length; j++){
@@ -213,7 +206,6 @@ function getTime() {
 			localStorage.setItem('palette', palette_spans[i].parentElement.dataset.color);
 		})
 	}
-
 	//random color
 	var temp_random = Math.floor((Math.random() * 360) + 1);
 	document.documentElement.style.setProperty('--random-color', 'hsl(' + temp_random + 'deg 41% 46%)');
@@ -221,8 +213,6 @@ function getTime() {
 		var temp_random = Math.floor((Math.random() * 360) + 1);
 		document.documentElement.style.setProperty('--random-color', 'hsl(' + temp_random + 'deg 41% 46%)');
 	})
-
-
 // Link Manipulation ##################################
 window.onload = () => {
 	var tabs = document.querySelectorAll('.tab:not(.space):not(.extra)');
@@ -316,20 +306,4 @@ window.onload = () => {
 			tabs[i].classList.add('active');
 		})
 	}
-
-	// // Extra Pages ####################################
-	// function show_page(x){
-	// 	for (let i=0; i<tabs.length; i++){
-	// 		tabs[i].classList.add('notVisible');
-	// 		tabs[i].classList.remove('active');
-	// 		contents[i].classList.remove('active');
-	// 	}
-	// 	var pageTabs = document.querySelectorAll('.tab.page' + x);
-	// 	for (let i=0; i<pageTabs.length; i++){
-	// 		pageTabs[i].classList.remove('notVisible');
-	// 	}
-	// 	document.querySelector('.tab.page' + x).classList.add('active');
-	// 	document.querySelector('.content.page' + x).classList.add('active');
-	// 	document.querySelector('body').dataset.page = x;
-	// }
 }

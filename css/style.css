@@ -286,8 +286,7 @@ body:not([data-page="3"]) .tab.extra.next:hover {
 
 .linksel {
     border-radius: 0.5ex;
-    margin-top: 0.4ex;
-    margin-bottom:0.4ex;
+    margin: 0.4ex;
  }
 
 /* Palette #################################### */
