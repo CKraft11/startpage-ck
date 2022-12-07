@@ -2,41 +2,47 @@
 
 // Stock Ticker API ###############################
 
-var resultCache = {};
-async function stockTicker(stock){
-	try{
-		var stocks = new Stocks(stock_API_keys[Math.floor(Math.random()*stock_API_keys.length)]);
-		var options = {
-				symbol: stock,
-				interval: '60min',
-				amount: '2'
-			};
-		result = await stocks.timeSeries(options);
-		var delta = result[0].close-result[1].close;
-		if (debug_mode==true) {console.log("Using latest result for " + stock)};
-	} catch {
-		var stored = localStorage['resultCache'];
-		if (stored) resultObj = JSON.parse(stored);
-		if (debug_mode==true) {console.log("Using cached result for " + stock)};
-		result = resultObj[stock];
-		var delta = result[0].close-result[1].close;
+var stockString = stocks.toString();
+stockString = stockString.replace(/,/g,'%2C');
+stockString = stockString.replace('^','%5E');
+
+var apiBalance = Math.round(Math.random())
+
+const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': rapid_API_keys[apiBalance],
+		'X-RapidAPI-Host': 'mboum-finance.p.rapidapi.com'
 	}
-	
-	var delta = result[0].close-result[1].close;
-	var perc = ((result[0].close/result[1].close)*100)-100;
-	var price = result[0].close;
-	price = price.toFixed(2);
-	delta = delta.toFixed(2);
-	perc = perc.toFixed(2);
-	var update = result[0].date
-	if (debug_mode==true) {console.log(result)};
-	if (Math.abs(delta) != delta) {
-		var output = ["$" + stock +": " + price + "\xa0",delta + " (▼" + Math.abs(perc) + "%)"];
-	} else {
-		var output = ["$" + stock +": " + price + "\xa0","+" + delta + " (▲" + perc + "%)"];
-	}
-	output[2] = update;
-	$(document).ready(function() {
+};
+
+fetch('https://mboum-finance.p.rapidapi.com/qu/quote?symbol='+stockString, options)
+	.then(response => response.json())
+	.then(response => stockParse(response))
+	.catch(err => console.error(err));
+
+function stockParse(apiData){
+	for (var i = 0; i<stocks.length; i++) {
+		var stock = apiData[i].symbol;
+		stock = stock.replace('^','');
+		var price = apiData[i].regularMarketPrice;
+		var delta = apiData[i].regularMarketChange;
+		var perc = apiData[i].regularMarketChangePercent;
+		price = price.toFixed(2);
+		delta = delta.toFixed(2);
+		perc = perc.toFixed(2);
+		var timestamp = apiData[i].regularMarketTime.timestamp;
+		var update = new Date(0); // The 0 there is the key, which sets the date to the epoch
+		update.setUTCSeconds(timestamp);
+		update = update.toString();
+		var update = update.split(" ");
+		var updated = "Last Updated: " + update[0] + " " + update[1] + " " + update[2] + " " + update[3] + " at " + update[4] + " CST";
+		if (Math.abs(delta) != delta) {
+			var output = ["$" + stock +": " + price + "\xa0",delta + " (▼" + Math.abs(perc) + "%)"];
+		} else {
+			var output = ["$" + stock +": " + price + "\xa0","+" + delta + " (▲" + perc + "%)"];
+		}
+		$(document).ready(function() {
 			jQuery("<a/>", {
 				class: "ticker__item "+stock,
 				style: "position: relative;",
@@ -58,29 +64,10 @@ async function stockTicker(stock){
 				}).appendTo("."+stock);
 			}
 		});
-	resultCache[stock] = result;
+		if (debug_mode==true) {console.log(output)};
+	}
+	document.getElementsByClassName("update")[0].innerHTML = updated;
 	return output;
-}
-
-for (var i = 0; i<stocks.length; i++) {
-	var stnum = 1;
-	var output = Promise.resolve(stockTicker(stocks[i]));
-		output.then(function(v) {
-			
-			date = String(v[2]);
-			subDate = date.split(" ");
-			updated = "Last Updated: " + subDate[0] + " " + subDate[1] + " " + subDate[2] + " " + subDate[3] + " at " + subDate[4] + " CST";
-			if(updated.indexOf("undefined")>0){
-				document.getElementsByClassName("update")[0].innerHTML = "using cached data";
-			} else{
-				document.getElementsByClassName("update")[0].innerHTML = updated;
-			}
-			
-			if(stnum==stocks.length){
-				localStorage['resultCache'] = JSON.stringify(resultCache);
-			}
-			stnum++;
-		})
 	
 }
 

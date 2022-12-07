@@ -1,4 +1,4 @@
-// JS for Caden Kraft's Startpage
+// JS configuration for Caden Kraft's Startpage
 
 // Page Configuration ############################
 
@@ -8,25 +8,21 @@ var debug_mode = false; // Debug mode (true/false)
 
 var weather_API_key = 'e5b292ae2f9dae5f29e11499c2d82ece';
 
-// AlphaVantage Stock API Keys ###################
+// Mboum Finance RapidAPI Keys ###################
 
 /* 
 Notes:
-    - Single API key limited to 5 requests per minute and 500 requests per day.
-    - One API key per pageload will be randomly selected from the array below to prevent hitting the limit.
+    - Single API key limited to 500 requests per month and 10 requests per minute.
+    - link to API: https://rapidapi.com/sparior/api/mboum-finance/
 */
 
-var stock_API_keys = [
-    '8OSQY6KIKSU4GCW2',
-    'NPJ3BB5K0I826NDN',
-    'AJWEPIG90ZIZG55A'
-];
+var rapid_API_keys = ['2b481c0d48msh7b3ae80c17e8e0dp1733f9jsn854791a17134','3651f35b61msh6e13de27c1bf677p102fe9jsn9b81f28c1726'];
 
 // Stock Tickers #################################
 
 /* 
 Notes:
-    - API Allows Max 5 Tickers.
+    - Add "^" before ticker for index (e.g. ^SPX for S&P 500)
 */
 
 var stocks = [
@@ -34,7 +30,7 @@ var stocks = [
     'AAPL',
     'AMZN',
     'GOOGL',
-    'SPY'
+    '^SPX'
     ];
 
 // Startpage Links ################################
