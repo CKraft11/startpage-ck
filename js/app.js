@@ -214,7 +214,7 @@ window.onload = () => {
 					document.getElementById("weather").innerHTML = json.weather[0].description + ", ";
 					document.getElementById("weather").innerHTML += json.main.temp.toFixed(0) + "°F in " + location;
 					localStorage['weather'] = document.getElementById("weather").innerHTML;
-					document.getElementById("weather").setAttribute("href", "https://openweathermap.org/weathermap?basemap=map&cities=true&layer=temperature&lat="+cacheLat+"&lon="+cacheLong+"&zoom=12");
+					document.getElementById("weather").setAttribute("href", "https://openweathermap.org/weathermap?basemap=map&cities=true&layer=temperature&lat="+lat+"&lon="+long+"&zoom=12");
 				} else {
 					console.log('weather error msg: ' + xhr.status);
 				}
