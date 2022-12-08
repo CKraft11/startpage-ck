@@ -36,7 +36,7 @@ function stockParse(apiData){
 		update.setUTCSeconds(timestamp);
 		update = update.toString();
 		var update = update.split(" ");
-		var updated = "Last Updated: " + update[0] + " " + update[1] + " " + update[2] + " " + update[3] + " at " + update[4] + " CST";
+		var updated = "Updated: " + update[0] + " " + update[1] + " " + update[2] + " " + update[3] + " at " + update[4] + " CST";
 		if (Math.abs(delta) != delta) {
 			var output = ["$" + stock +": " + price + "\xa0",delta + " (▼" + Math.abs(perc) + "%)"];
 		} else {
