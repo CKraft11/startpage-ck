@@ -197,9 +197,9 @@ window.onload = () => {
 	let xhr = new XMLHttpRequest();
 	// Request to open weather map
 	navigator.geolocation.getCurrentPosition((position) => {
-		var cacheLat = localStorage['lat'];
-		var cacheLong = localStorage['long'];
-		xhr.open('GET', 'https://api.openweathermap.org/data/2.5/weather?lat='+cacheLat+'&lon='+cacheLong+'&units=imperial&appid='+weather_API_key);
+		let lat = position.coords.latitude.toFixed(2);
+		let long = position.coords.longitude.toFixed(2);
+		xhr.open('GET', 'https://api.openweathermap.org/data/2.5/weather?lat='+lat+'&lon='+long+'&units=imperial&appid='+weather_API_key);
 		xhr.onload = () => {
 			if (xhr.readyState === 4) {
 				if (xhr.status === 200) {
@@ -220,10 +220,6 @@ window.onload = () => {
 				}
 			}
 		}
-		let lat = position.coords.latitude.toFixed(2);
-		let long = position.coords.longitude.toFixed(2);
-		localStorage['lat'] = lat.toString();
-		localStorage['long'] = long.toString();
 		xhr.send();
 	});
 	

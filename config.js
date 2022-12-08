@@ -33,6 +33,7 @@ var stocks = [
     'TSM',
     'AAPL',
     'AMZN',
+    'TSLA',
     'GOOGL',
     '^SPX'
     ];
