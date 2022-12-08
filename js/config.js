@@ -4,6 +4,10 @@
 
 var debug_mode = false; // Debug mode (true/false)
 
+// New York Times API Key ########################
+
+var nyt_API_key = "xeNKN3icndLMzdwb4eGwgkjhqc2DRM40";
+
 // OpenWeatherMap API Key ########################
 
 var weather_API_key = 'e5b292ae2f9dae5f29e11499c2d82ece';

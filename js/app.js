@@ -8,7 +8,7 @@ stockString = stockString.replace('^','%5E');
 
 var apiBalance = Math.round(Math.random())
 
-const options = {
+const stockOptions = {
 	method: 'GET',
 	headers: {
 		'X-RapidAPI-Key': rapid_API_keys[apiBalance],
@@ -16,7 +16,7 @@ const options = {
 	}
 };
 
-fetch('https://mboum-finance.p.rapidapi.com/qu/quote?symbol='+stockString, options)
+fetch('https://mboum-finance.p.rapidapi.com/qu/quote?symbol='+stockString, stockOptions)
 	.then(response => response.json())
 	.then(response => stockParse(response))
 	.catch(err => console.error(err));
@@ -71,55 +71,119 @@ function stockParse(apiData){
 	
 }
 
-// Search #########################################
+// News API #######################################
+window.onload = () => {
+	var newsQueryUrl = "https://api.nytimes.com/svc/topstories/v2/home.json?api-key=" + nyt_API_key;
+	fetch(newsQueryUrl)
+	.then(function (newsData) {
+		return newsData.json();
+	})
+	.then(function (newsData) {
+		newsParse(newsData);
+	});
 
-function search(e) {
-    if (e.keyCode == 13) {
-        var val = document.getElementById("search-field").value;
-        window.open("https://google.com/search?q=" + val);
-    }
-}
-document.addEventListener("keydown", event => {
-    if (event.keyCode == 32) {          // Spacebar code to open search
-        document.getElementById('search').style.display = 'flex';
-        var divsToHide = document.getElementsByClassName("container"); //divsToHide is an array
-            for(var i = 0; i < divsToHide.length; i++){
-                divsToHide[i].style.visibility = "hidden"; // or
-        }
-        var stockHide = document.getElementsByClassName("ticker__item"); //divsToHide is an array
-            for(var i = 0; i < stockHide.length; i++){
-                stockHide[i].style.visibility = "hidden"; // or
-        }
-        
-        document.getElementById('search-field').focus();
-    } else if (event.keyCode == 27) {   // Esc to close search
-        document.getElementById('search-field').value = '';
-        document.getElementById('search-field').blur();
-        document.getElementById('search').style.display = 'none';
-        var divsToHide = document.getElementsByClassName("container"); //divsToHide is an array	
-            for(var i = 0; i < divsToHide.length; i++){
-                divsToHide[i].style.visibility = "visible"; // or
-        }
-        var stockHide = document.getElementsByClassName("ticker__item"); //divsToHide is an array
-            for(var i = 0; i < stockHide.length; i++){
-                stockHide[i].style.visibility = "visible"; // or
-        }
-    }
-});
+	function getMultipleRandom(arr, num) {
+		const shuffled = [...arr].sort(() => 0.5 - Math.random());
+	
+		return shuffled.slice(0, num);
+	}
 
-// Clock ##########################################
+	function newsParse(apiData) {
+		console.log(apiData.results);
+		var apiArticles = apiData.results
+		ct = 0;
+		var stories = []
+		var world = 0;
+		var politics = 0;
+		var us = 0;
+		for (var i = 0; i < apiArticles.length; i++) {
+			if(apiArticles[i].section == "world" && world == 0) { // Making sure there is only one world story
+				stories.push(apiArticles[i]);
+				world++;
+			}
+			else if(apiArticles[i].section == "politics" && politics==0) { // Making sure there is only one politics story
+				stories.push(apiArticles[i]);
+				politics++;
+			}
+			else if(apiArticles[i].section == "us" && us==0) { // Making sure there is only one US story
+				stories.push(apiArticles[i]);
+				us++;
+			}
+			else if(apiArticles[i].section == "business" || apiArticles[i].section == "technology") {
+				stories.push(apiArticles[i]);
+			}
+		}
+		curated = getMultipleRandom(stories, 4)
+		console.log(curated);
+		for (var i = 0; i < curated.length; i++) {
+			var title = curated[i].title;
+			var url = curated[i].url;
+			var image = curated[i].multimedia[2].url;
+			var output = [title, url, image];
+			$(document).ready(function() {
+				jQuery("<a/>", {
+					class: "news__title",
+					text: output[0],
+					href: output[1]
+				}).appendTo(".story_"+i);
+				jQuery("<img/>", {
+					class: "news__image",
+					src: output[2]
+				}).appendTo(".story_"+i);
+			});
+			if (debug_mode==true) {console.log(output)};
+		}
+	}
 
-function getTime() {
-    let date = new Date(),
-        min = date.getMinutes(),
-        sec = date.getSeconds(),
-        hour = date.getHours();
+	// Search #########################################
 
-    return "" + 
-        (hour < 10 ? ("0" + hour) : hour) + ":" + 
-        (min < 10 ? ("0" + min) : min) + ":" + 
-        (sec < 10 ? ("0" + sec) : sec);
-}
+	function search(e) {
+		if (e.keyCode == 13) {
+			var val = document.getElementById("search-field").value;
+			window.open("https://google.com/search?q=" + val);
+		}
+	}
+	document.addEventListener("keydown", event => {
+		if (event.keyCode == 32) {          // Spacebar code to open search
+			document.getElementById('search').style.display = 'flex';
+			var divsToHide = document.getElementsByClassName("container"); //divsToHide is an array
+				for(var i = 0; i < divsToHide.length; i++){
+					divsToHide[i].style.visibility = "hidden"; // or
+			}
+			var stockHide = document.getElementsByClassName("ticker__item"); //divsToHide is an array
+				for(var i = 0; i < stockHide.length; i++){
+					stockHide[i].style.visibility = "hidden"; // or
+			}
+			
+			document.getElementById('search-field').focus();
+		} else if (event.keyCode == 27) {   // Esc to close search
+			document.getElementById('search-field').value = '';
+			document.getElementById('search-field').blur();
+			document.getElementById('search').style.display = 'none';
+			var divsToHide = document.getElementsByClassName("container"); //divsToHide is an array	
+				for(var i = 0; i < divsToHide.length; i++){
+					divsToHide[i].style.visibility = "visible"; // or
+			}
+			var stockHide = document.getElementsByClassName("ticker__item"); //divsToHide is an array
+				for(var i = 0; i < stockHide.length; i++){
+					stockHide[i].style.visibility = "visible"; // or
+			}
+		}
+	});
+
+	// Clock ##########################################
+
+	function getTime() {
+		let date = new Date(),
+			min = date.getMinutes(),
+			sec = date.getSeconds(),
+			hour = date.getHours();
+
+		return "" + 
+			(hour < 10 ? ("0" + hour) : hour) + ":" + 
+			(min < 10 ? ("0" + min) : min) + ":" + 
+			(sec < 10 ? ("0" + sec) : sec);
+	}
 	document.getElementById("clock").innerHTML = getTime();
     // Set clock interval to tick clock
     setInterval( () => {
@@ -163,46 +227,8 @@ function getTime() {
 		xhr.send();
 	});
 	
-// Color Palette ##################################
-
-	//set color
-	if (typeof localStorage.palette == 'undefined'){
-		localStorage.setItem('palette', 'rainbow');
-	}
-
-	document.querySelector('body').dataset.palette = localStorage.getItem('palette');
-	var palette_spans = document.querySelectorAll('.palette span');
-	for (let j=0; j<palette_spans.length; j++){
-		if (palette_spans[j].parentElement.dataset.color == localStorage.getItem('palette')){
-			palette_spans[j].parentElement.classList.add('selected');
-		}
-	}
-	//palette
-	document.querySelector('.palette').addEventListener('mouseenter', function(){
-		document.querySelector('.palette-content').style.opacity = '1';
-	})
-	document.querySelector('.palette').addEventListener('mouseleave', function(){
-		document.querySelector('.palette-content').style.opacity = '0';
-	})
-	for (let i=0; i<palette_spans.length; i++){
-		palette_spans[i].addEventListener('click', function(){
-			for (let j=0; j<palette_spans.length; j++){
-				palette_spans[j].parentElement.classList.remove('selected');
-			}
-			palette_spans[i].parentElement.classList.add('selected');
-			document.querySelector('body').dataset.palette = palette_spans[i].parentElement.dataset.color;
-			localStorage.setItem('palette', palette_spans[i].parentElement.dataset.color);
-		})
-	}
-	//random color
-	var temp_random = Math.floor((Math.random() * 360) + 1);
-	document.documentElement.style.setProperty('--random-color', 'hsl(' + temp_random + 'deg 41% 46%)');
-	document.querySelector('.palette div[data-color="random"').addEventListener('click', function(){
-		var temp_random = Math.floor((Math.random() * 360) + 1);
-		document.documentElement.style.setProperty('--random-color', 'hsl(' + temp_random + 'deg 41% 46%)');
-	})
 // Link Manipulation ##################################
-window.onload = () => {
+
 	var tabs = document.querySelectorAll('.tab:not(.space):not(.extra)');
 		for (let i=0; i<tabs.length; i++){
 			for (let j=0; j<links_var[i].length; j++){
@@ -283,10 +309,7 @@ window.onload = () => {
 				element.style.display = 'flex';
 			});
 			color.forEach(element => {
-				b=i+1;
-				if(b>=7 && b<=12){b = b-6};
-				if(b>=13 && b<=18){b = b-12};
-				element.setAttribute('data-color', b);
+				element.setAttribute('data-color', i+1);
 			});
 			for (let j=0; j<tabs.length; j++){
 				tabs[j].classList.remove('active');

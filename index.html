@@ -16,43 +16,44 @@
 	<div id="search" style="display: none;">
 		<input class="search" id="search-field" type="text" name="search-field" onkeypress="return search(event)"/>
 	</div>
-	<div class="container">
-		<div class="tabs">
-			<div class="tab page1 active" data-color="1">1</div>
-			<div class="tab page1" data-color="2">2</div>
-			<div class="tab page1" data-color="3">3</div>
-			<div class="tab page1" data-color="4">4</div>
-			<div class="tab page1" data-color="5">5</div>
-			<div class="tab page1" data-color="6">6</div>
-		</div>
-		<div>
-				<div class="color content page1 active" data-color="1"></div>
-				<div id="clock" class="content info color clock" data-color="1"></div>
-				<a id="weather" class="content info color" data-color="1">Loading...</a>
-				<div id="stock-ticker" class="content info ticker-wrap color">
-					<div class="ticker">
-						<div class="ticker-scroll">
+	<div class="container color" data-color="1">
+		<div class="dashboard">
+			<div class="tabs">
+				<div class="tab page1 active" data-color="1">1</div>
+				<div class="tab page1" data-color="2">2</div>
+				<div class="tab page1" data-color="3">3</div>
+				<div class="tab page1" data-color="4">4</div>
+				<div class="tab page1" data-color="5">5</div>
+				<div class="tab page1" data-color="6">6</div>
+			</div>
+			<div>
+					<div class="color content page1 active" data-color="1"></div>
+					<div id="clock" class="content info color clock" data-color="1"></div>
+					<a id="weather" class="content info color" data-color="1">Loading...</a>
+					<div id="stock-ticker" class="content info ticker-wrap color">
+						<div class="ticker">
+							<div class="ticker-scroll">
+							</div>
+							<div class="ticker-scroll">
+							</div>
+							<a href="https://finviz.com/map.ashx?settings=small" class="update">
+							</a>
 						</div>
-						<div class="ticker-scroll">
-						</div>
-						<a href="https://finviz.com/map.ashx?settings=small" class="update">
-						</a>
 					</div>
-				</div>
+			</div>
 		</div>
-		<div>
-		</div>
-		<div class="palette">
-			<div class="palette-content">
-				<div data-color="rainbow"><span></span></div>
-				<div data-color="random"><span>?</span></div>
-				<div data-color="ice"><span></span></div>
-				<div data-color="red"><span></span></div>
-				<div data-color="orange"><span></span></div>
-				<div data-color="green"><span></span></div>
-				<div data-color="blue"><span></span></div>
-				<div data-color="purple"><span></span></div>
-				<div data-color="yellow"><span></span></div>
+		<div class="news color" data-color="1">
+			<div class="news__item story_0">
+				<div class="news__bullet color"></div>
+			</div>
+			<div class="news__item story_1">
+				<div class="news__bullet color"></div>
+			</div>
+			<div class="news__item story_2">
+				<div class="news__bullet color"></div>
+			</div>
+			<div class="news__item story_3">
+				<div class="news__bullet color"></div>
 			</div>
 		</div>
 	</div>
