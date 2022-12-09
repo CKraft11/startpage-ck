@@ -122,6 +122,10 @@ window.onload = () => {
 			var output = [title, url, image];
 			$(document).ready(function() {
 				jQuery("<a/>", {
+					class: "news__item story_"+i,
+					href: output[1]
+				}).appendTo(".news");
+				jQuery("<div/>", {
 					class: "news__title",
 					text: output[0],
 					href: output[1]
@@ -240,7 +244,7 @@ window.onload = () => {
 						var b_element = document.createElement('span');
 						b_element.setAttribute('ping-id', 'i' + i + '_j' + j);
 						b_element.setAttribute('class', 'linksel');
-						b_element.setAttribute('class', 'linksel tab'+(i+1));
+						b_element.setAttribute('class', 'tab'+(i+1));
 						b_element.style.position="relative";
 						b_element.style.marginLeft="auto";
 						b_element.style.float="right";
@@ -253,7 +257,7 @@ window.onload = () => {
 					}).catch(function(err) {
 						var b_element = document.createElement('span');
 						b_element.setAttribute('ping-id', 'i' + i + '_j' + j);
-						b_element.setAttribute('class', 'linksel tab'+(i+1));
+						b_element.setAttribute('class', 'tab'+(i+1));
 						b_element.style.position="relative";
 						b_element.style.marginLeft="auto";
 						b_element.style.float="right";
