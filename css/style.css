@@ -198,6 +198,7 @@ flex-direction: column;
     overflow: hidden;
     background:transparent !important;
     pointer-events: none;
+    padding:0ex !important;
 }
 .outline__tl{
     top: calc(50% - 17ex);
@@ -282,16 +283,15 @@ flex-direction: column;
     flex: 1;
   }
 .news__title {
+    display:flex;
     overflow: hidden;
     text-overflow: ellipsis;
     align-items:center;
-    border-radius: 1.1ex;
     height:8ex;
     width:72%;
     padding-left:1ex;
     padding-right:1ex;
     /* margin-left:0.5ex; */
-
 }
 .news__image {
     flex-shrink: 0;
