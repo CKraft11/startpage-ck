@@ -2,7 +2,7 @@
 
 // Page Configuration ############################
 
-var debug_mode = false; // Debug mode (true/false)
+var debug_mode = true; // Debug mode (true/false)
 
 // New York Times API Key ########################
 
@@ -35,7 +35,7 @@ var stocks = [
     'AMZN',
     'TSLA',
     'GOOGL',
-    '^SPX'
+    'MSFT',
     ];
 
 // Startpage Links ################################

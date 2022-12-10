@@ -18,12 +18,13 @@ const stockOptions = {
 
 fetch('https://mboum-finance.p.rapidapi.com/qu/quote?symbol='+stockString, stockOptions)
 	.then(response => response.json())
-	.then(response => stockParse(response))
+	.then(response => stockStruct=stockParse(response))
 	.catch(err => console.error(err));
 
 function stockParse(apiData){
 	for (var i = 0; i<stocks.length; i++) {
 		var stock = apiData[i].symbol;
+		console.log(apiData);
 		stock = stock.replace('^','');
 		var price = apiData[i].regularMarketPrice;
 		var delta = apiData[i].regularMarketChange;
@@ -67,8 +68,107 @@ function stockParse(apiData){
 		if (debug_mode==true) {console.log(output)};
 	}
 	document.getElementsByClassName("update")[0].innerHTML = updated;
-	return output;
-	
+	var stockElements = document.querySelectorAll('.ticker__item');
+			console.log(stockElements);
+			for (let i=0; i<stockElements.length; i++){
+				stockElements[i].addEventListener('mouseenter', function(){
+					document.querySelectorAll('.news__item').forEach(element => {
+						element.style.display = 'none';
+					});
+					document.getElementsByClassName("stock__container")[0].style.display = 'flex';
+					document.querySelectorAll('.ticker-scroll')[0].style.animationPlayState = 'paused';
+					document.querySelectorAll('.ticker-scroll')[1].style.animationPlayState = 'paused';
+					var b = i;
+					if(b>=(stockElements.length)/2){
+						b = b-(stockElements.length)/2;
+					}
+					var name = apiData[b].shortName;
+					console.log(name);
+					var ticker = apiData[b].symbol;	
+					var ticker = ticker.replace('^','');	
+					var ask = apiData[b].regularMarketPrice;
+					ask = ask.toFixed(2);
+					var delta = apiData[b].regularMarketChange;
+					var perc = apiData[b].regularMarketChangePercent;
+					var bid = apiData[b].bid;
+					bid = bid.toFixed(2);
+					var exchange = apiData[b].exchange;
+					var exchange_TZ = apiData[b].exchangeTimezoneShortName;
+					var fifty_d_ave = apiData[b].fiftyDayAverage;
+					fifty_d_ave = fifty_d_ave.toFixed(2);
+					var fifty_d_delta = apiData[b].fiftyDayAverageChange;
+					fifty_d_delta = fifty_d_delta.toFixed(2);
+					var fifty_d_delta_perc = apiData[b].fiftyDayAverageChangePercent;
+					fifty_d_delta_perc = (fifty_d_delta_perc*100).toFixed(2);
+					var two_hund_d_ave = apiData[b].twoHundredDayAverage;
+					two_hund_d_ave = two_hund_d_ave.toFixed(2);
+					var two_hund_d_delta = apiData[b].twoHundredDayAverageChange;
+					two_hund_d_delta = two_hund_d_delta.toFixed(2);
+					var two_hund_d_delta_perc = apiData[b].twoHundredDayAverageChangePercent;
+					two_hund_d_delta_perc = (two_hund_d_delta_perc*100).toFixed(2);
+					var market_cap = apiData[b].marketCap;
+					market_cap = market_cap.toString();
+					if(market_cap.length>12){
+						market_cap = market_cap.substring(0,market_cap.length-12) + "T";
+					}
+					if(market_cap.length>9){
+						market_cap = market_cap.substring(0,market_cap.length-9) + "B";
+					} else if(market_cap.length>6){
+						market_cap = market_cap.substring(0,market_cap.length-6) + "M";
+					} else {
+						market_cap = market_cap;
+					}
+					console.log(market_cap);
+					var forward_PE = apiData[b].forwardPE;
+					forward_PE = forward_PE.toFixed(2);
+					var daily_high = apiData[b].regularMarketDayHigh;
+					daily_high = daily_high.toFixed(2);
+					var daily_low = apiData[b].regularMarketDayLow;
+					daily_low = daily_low.toFixed(2);
+					var fifty_two_w_high = apiData[b].fiftyTwoWeekHigh;
+					fifty_two_w_high = fifty_two_w_high.toFixed(2);
+					var fifty_two_w_low = apiData[b].fiftyTwoWeekLow;
+					fifty_two_w_low = fifty_two_w_low.toFixed(2);
+					if(name.length>18){
+						name = name.substring(0,18) + "...";
+					}
+					document.getElementById('stock__header').innerHTML = name + " ($" + ticker + ")";
+					document.getElementById('ask').innerHTML = "$" + ask;
+					document.getElementById('bid').innerHTML = "$" + bid;
+					document.getElementById('exchange').innerHTML = exchange;
+					document.getElementById('exchange__tz').innerHTML = exchange_TZ;
+					document.getElementById('50__ave').innerHTML = fifty_d_ave;
+					document.getElementById('50__change').innerHTML = fifty_d_delta;
+					document.getElementById('50__change__perc').innerHTML = fifty_d_delta_perc;
+					document.getElementById('200__ave').innerHTML = two_hund_d_ave;
+					document.getElementById('200__change').innerHTML = two_hund_d_delta;
+					document.getElementById('200__change__perc').innerHTML = two_hund_d_delta_perc;
+					document.getElementById('market__cap').innerHTML = market_cap;
+					document.getElementById('forward__pe').innerHTML = forward_PE;
+					var daily_scale = (daily_high - daily_low)/100;
+					var daily_ask = (ask-daily_low)/daily_scale;
+					document.getElementById('dl__value').innerHTML = daily_low;
+					document.getElementById('dh__value').innerHTML = daily_high;
+					document.getElementById('yl__value').innerHTML = fifty_two_w_low;
+					document.getElementById('yh__value').innerHTML = fifty_two_w_high;
+					var fifty_two_w_scale = (fifty_two_w_high - fifty_two_w_low)/100;
+					var fifty_two_w_ask = (ask-fifty_two_w_low)/fifty_two_w_scale;
+					document.getElementById('y__current').style.left = fifty_two_w_ask + "%";
+					document.getElementById('current__price__d').innerHTML = ask;
+					document.getElementById('current__price__y').innerHTML = ask;
+					document.getElementById('d__current').style.left = daily_ask + "%";
+
+				});
+				stockElements[i].addEventListener('mouseleave', function(){
+					document.querySelectorAll('.ticker-scroll')[0].style.animationPlayState = 'running';
+					document.querySelectorAll('.ticker-scroll')[1].style.animationPlayState = 'running';
+					document.querySelectorAll('.news__item').forEach(element => {
+						element.style.display = 'flex';
+					});
+					document.getElementsByClassName("stock__container")[0].style.display = 'none';
+				});
+			}
+	return apiData;
 }
 window.onload = () => {
 // News API #######################################
@@ -149,6 +249,8 @@ window.onload = () => {
 				}).appendTo(".story_"+i);
 			});
 			if (debug_mode==true) {console.log(output)};
+			}
+			
 		}
 		return;
 	}
@@ -331,4 +433,4 @@ window.onload = () => {
 			tabs[i].classList.add('active');
 		})
 	}
-}
+		

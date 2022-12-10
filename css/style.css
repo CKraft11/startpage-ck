@@ -143,6 +143,7 @@ flex-direction: column;
     width: max-content;
     padding-right: 2ex;
     padding-left: 2ex;
+    border-radius: 0.5ex;
 }
 
 .ticker{
@@ -153,18 +154,138 @@ flex-direction: column;
 }
 
 /* Show Last Stock Update When Hovering */
-.ticker:hover .update{
-    display : block;
-    margin-left: 0%;
-}
-.ticker:hover .ticker-scroll{
-    display : none;
-}
+
 .update{ 
-    display: none;
+    display: flex;
+    font-size:8px;
+    margin-left:1ex;
     background-color: var(--bg) !important;
     }
 
+/* Stock Stats ###############################*/
+
+.stock__container{
+    display: none;
+    flex-flow: column;
+    width: 100%;
+    height: 100%;
+}
+.stock__header{
+    flex: 0 1 3ex;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    font-size: 18px;
+}
+.stock__stats{
+    display: flex;
+    flex: 1 1 auto;
+    margin: 0 0.5ex 0ex 0.5ex;
+    width:auto;
+}
+td {
+    font-size: 10px;
+    border-bottom: 0.25ex solid rgba(255, 255, 255, .5);
+    padding: 0.25ex;
+    text-align: left;
+    color: rgba(255, 255, 255, .6);
+}
+tr {
+    width: 100%;
+    display:inline-table;
+}
+th {
+    font-size: 10px;
+    font-weight: 300;
+    text-align: left;
+}
+table {
+    width:100%;
+    border-collapse: collapse;
+}
+.value{
+    color:var(--text);
+}
+.price__chart{
+    display:flex;
+    flex-direction: column;
+    height: 8ex;
+    width: auto;
+    margin: 0 0.5ex 0ex 0.5ex;
+    position: relative;
+}
+.price__chart__border{
+    display:flex;
+    height:3ex;
+    width: auto;
+    justify-content: end;
+    margin: 2.45ex 0.5ex 0.25ex 0.5ex;
+    border:0.25ex solid rgba(255, 255, 255, .5);
+    position: relative;
+}
+.price__chart__title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+}
+.marker{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+}
+.marker__value{
+    display: flex;
+    font-size: 10px;
+}
+.marker__text{
+    display: flex;
+    font-size: 10px;
+    line-height: 8px;
+}
+.marker__line{
+    display: flex;
+    height: 3.25ex;
+    border-left: 0.125ex solid rgba(255, 255, 255, .5);
+    border-right: 0.125ex solid rgba(255, 255, 255, .5);
+    justify-content: baseline;
+    align-items: baseline;
+    position: relative;
+}
+
+#year__low,
+#day__low {
+    left: 0%;
+    top:0%;
+    align-items: baseline;
+}
+#year__high,
+#day__high {
+    right:0%;
+    top:0%;
+    align-items: end;
+}
+#current__price__d,
+#current__price__y {
+    background:var(--text);
+    color:var(--bg);
+    padding-left:0.25ex;
+    padding-right:0.25ex;
+    border-radius: 0.5ex;
+}
+/* #yh__value,
+#dh__value {
+    align-items: right;
+}
+#yl__value,
+#dl__value {
+    justify-content: left;
+} */
+.stock__footer{
+    flex: 0 1 2ex;
+}
 /* Clock #####################################*/
 
 .clock{
