@@ -737,6 +737,12 @@ background-color: var(--color-6);
     height:8ex;
     display:flex;
 }
+.news{
+    height:80ex;
+}
+.stock__stats{
+    margin-bottom: 3ex;
+}
 .outline__tl{
     top: calc(50% - 37ex);
     left: calc(50% - 22ex);
