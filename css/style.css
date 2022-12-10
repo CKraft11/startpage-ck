@@ -165,7 +165,7 @@ flex-direction: column;
 /* Stock Stats ###############################*/
 
 .stock__container{
-    display: flex;
+    display: none;
     flex-flow: column;
     width: 100%;
     height: 100%;
@@ -481,7 +481,7 @@ table {
     
 }
 .news__item {
-    display: none;
+    display: flex;
     background:var(--bg);
     flex-direction: column;
     /* flex-flow: row; */
