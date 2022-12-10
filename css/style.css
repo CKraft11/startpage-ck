@@ -120,6 +120,9 @@ flex-direction: column;
     margin-top: 1ex;
     border-color: var(--color-1);
     border-radius: 1.5ex;
+    padding:0ex 2ex !important;
+    border:0.5ex solid;
+    border-color:var(--bg) !important;
 
 }
 .ticker-wrap .ticker {
@@ -598,12 +601,15 @@ body:not([data-page="3"]) .tab.extra.next:hover {
     
 }
 .content.info {
-    padding: 0.5ex 2ex;
+    padding: 0ex 2ex;
     justify-content: center;
     align-items: center;
 }
 .info {
     display: flex;
+    padding-bottom: 0ex !important;
+    border: 0.5ex solid;
+    border-color: var(--bg)!important;
 }
 
 .linksel {
