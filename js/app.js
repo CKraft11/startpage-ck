@@ -36,7 +36,7 @@ function stockParse(apiData){
 		update.setUTCSeconds(timestamp);
 		update = update.toString();
 		var update = update.split(" ");
-		var updated = "Updated: " + update[0] + " " + update[1] + " " + update[2] + " " + update[3] + " at " + update[4] + " CST";
+		var updated = "Updated: " + update[0] + " " + update[1] + " " + update[2] + " " + update[3] + " at " + update[4];
 		if (Math.abs(delta) != delta) {
 			var output = ["$" + stock +": " + price + "\xa0",delta + " (▼" + Math.abs(perc) + "%)"];
 		} else {
@@ -70,9 +70,8 @@ function stockParse(apiData){
 	return output;
 	
 }
-
-// News API #######################################
 window.onload = () => {
+// News API #######################################
 	var newsQueryUrl = "https://api.nytimes.com/svc/topstories/v2/home.json?api-key=" + nyt_API_key;
 	fetch(newsQueryUrl)
 	.then(function (newsData) {
@@ -88,28 +87,23 @@ window.onload = () => {
 		return shuffled.slice(0, num);
 	}
 
-	function newsParse(apiData) {
+	async function newsParse(apiData) {
 		console.log(apiData.results);
 		var apiArticles = apiData.results
 		ct = 0;
 		var stories = []
 		var world = 0;
-		var politics = 0;
 		var us = 0;
 		for (var i = 0; i < apiArticles.length; i++) {
 			if(apiArticles[i].section == "world" && world == 0) { // Making sure there is only one world story
 				stories.push(apiArticles[i]);
 				world++;
 			}
-			else if(apiArticles[i].section == "politics" && politics==0) { // Making sure there is only one politics story
-				stories.push(apiArticles[i]);
-				politics++;
-			}
 			else if(apiArticles[i].section == "us" && us==0) { // Making sure there is only one US story
 				stories.push(apiArticles[i]);
 				us++;
 			}
-			else if(apiArticles[i].section == "business" || apiArticles[i].section == "technology") {
+			else if(apiArticles[i].section == "business" || apiArticles[i].section == "science" || apiArticles[i].section == "technology" || apiArticles[i].section == "politics") {
 				stories.push(apiArticles[i]);
 			}
 		}
@@ -119,16 +113,35 @@ window.onload = () => {
 			var title = curated[i].title;
 			var url = curated[i].url;
 			var image = curated[i].multimedia[2].url;
-			var output = [title, url, image];
+			var section = curated[i].section;
+			var date = curated[i].updated_date;
+			var date = date.substring(5,7) + "-" + date.substring(8,10) + "-" + date.substring(0,4);
+			console.log(date);
+			var output = [title, url, image, section, date];
 			$(document).ready(function() {
 				jQuery("<a/>", {
 					class: "news__item story_"+i,
 					href: output[1]
 				}).appendTo(".news");
 				jQuery("<div/>", {
+					class: "news__info info__"+i,
+					text: "NYTimes • "
+				}).appendTo(".story_"+i);
+				
+				jQuery("<div/>", {
+					class: "news__category color",
+					text: output[3]
+				}).appendTo(".info__"+i);
+				jQuery("<div/>", {
+					text: "• " + output[4],
+					style: "font-size: inherit;"
+				}).appendTo(".info__"+i);
+				document.querySelectorAll(".news__category").forEach(element => {
+					element.setAttribute('data-color', "1");
+				});
+				jQuery("<div/>", {
 					class: "news__title",
-					text: output[0],
-					href: output[1]
+					text: output[0]
 				}).appendTo(".story_"+i);
 				jQuery("<img/>", {
 					class: "news__image",
@@ -137,6 +150,7 @@ window.onload = () => {
 			});
 			if (debug_mode==true) {console.log(output)};
 		}
+		return;
 	}
 
 	// Search #########################################
@@ -293,8 +307,7 @@ window.onload = () => {
 		}
 	
 // Color Changing #################################
-
-	var color = document.querySelectorAll('.color');
+	
 	var tabs = document.querySelectorAll('.tab:not(.space):not(.extra)');
 	var contents = document.querySelectorAll('.content');
 	document.querySelectorAll('.tab1').forEach(element => {
@@ -302,6 +315,7 @@ window.onload = () => {
 	});
 	for (let i=0; i<tabs.length; i++){
 		tabs[i].addEventListener('mouseenter', function(){
+			var color = document.querySelectorAll('.color');
 			document.querySelectorAll('.linksel').forEach(element => {
 				element.style.display = 'none';
 			});

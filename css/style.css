@@ -265,7 +265,7 @@ flex-direction: column;
 /* News #######################################*/
 
 .news {
-    background:var(--bg) !important;
+    background-color: var(--bg) !important;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -274,9 +274,11 @@ flex-direction: column;
     /* border: 0.4ex solid; */
     border-radius: 1.5ex;
     width:inherit;
-    /* padding-bottom: 0.5ex; */
     /* gap:0.75ex; */
+    gap:0.5ex;
     overflow: hidden;
+    padding:0.5ex;
+    background-color: var(--color-1);
 }
 .news > a {
     /* these are the flex items */
@@ -287,18 +289,39 @@ flex-direction: column;
     overflow: hidden;
     text-overflow: ellipsis;
     align-items:center;
-    height:8ex;
     width:72%;
     padding-left:1ex;
     padding-right:1ex;
+    font-size: 13px;
+    font-weight: 300;
     /* margin-left:0.5ex; */
+}
+.news__info{
+    margin:1ex;
+    margin-bottom:0ex;
+    font-size:10px;
+    display:flex;
+    align-content: center;
+    height: auto;
+    padding:0ex 0.5ex 0ex 0.25ex;
+}
+.news__category{
+    display:flex;
+    font-size: 10px;
+    margin-left: 1ex;
+    margin-right: 1ex;
+    background: inherit;
+    align-content: center;
+    border-radius: 0.5ex;
+    padding-left:0.5ex;
+    padding-right:0.5ex;
 }
 .news__image {
     flex-shrink: 0;
     /* max-height:25%;  */
     height: calc(100% - 1ex);
     display: flex;
-    border-radius: 0.5ex;
+    border-radius: 0.75ex;
     float:right;
     /* margin:1ex; */
     object-fit: contain;
@@ -311,16 +334,13 @@ flex-direction: column;
 }
 .news__item {
     display: flex;
+    background:var(--bg);
+    flex-direction: column;
     /* flex-flow: row; */
-    justify-content: space-between;
-    align-items: center;
+    /* justify-content: space-between; */
+    /* align-items: center; */
     border-radius: 1.1ex;
-    margin-bottom: -0.5ex;
     position: relative;
-    border: 0.5ex solid var(--bg)
-}
-.news__item:last-child {
-    margin-bottom: 0ex;
 }
 .news__item > img {
     flex: 1;   
@@ -557,12 +577,16 @@ background-color: var(--color-6);
 .news {
     margin-top:1ex;
     margin-left:0ex;
+    width:auto;
 }
 .news__item{
     width:auto;
 }
 .news__title{
-    height:12ex;
+    font-size:14px;
+}
+.news__title{
+    height:8ex;
     display:flex;
 }
 .outline{
