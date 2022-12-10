@@ -50,18 +50,22 @@
 				</div>
 				<table class="stock__stats">
 					<tr>
-						<td>Market Price: </td>
+						<td>Asking: </td>
 						<td class="value divider" id="ask">$141.12</td>
-						<td>Bidding Price: </td>
+						<td>Bidding: </td>
 						<td class="value" id="bid">$141.34</td>
+						<td>Prev. Close: </td>
+						<td class="value" id="close">$141.34</td>
 					</tr>
 					<tr>
 						<td>Exchange: </td>
 						<td class="value divider" id="exchange">NYSE</td>
-						<td>Exchange TZ: </td>
+						<td>Timezone: </td>
 						<td class="value" id="exchange__tz">EST</td>
 						<td>Currency: </td>
 						<td class="value" id="currency">USD</td>
+						<td>State: </td>
+						<td class="value" id="market__state">USD</td>
 					</tr>
 					<tr>
 						<th>50 Day Overview:</th>
@@ -90,14 +94,11 @@
 						<td class="value divider" id="market__cap">$2.261T</td>
 						<td>Forward PE: </td>
 						<td class="value" id="forward__pe">20.90</td>
+						<td>Trailing PE: </td>
+						<td class="value" id="trailing__pe">20.90</td>
 					</tr>
 				  </table>
 				<div class="price__chart">
-					<div class="marker" id="d__current" style="left:17%;">
-						<div class="marker__value" id="current__price__d">$141.12</div>
-						<div class="marker__text">▽</div>
-						<div class="marker__line"></div>
-					</div>
 					<div class="marker" id="day__low">
 						<div class="marker__value" id="dl__value">$141.12</div>
 						<div class="marker__text">▼</div>
@@ -107,15 +108,22 @@
 						<div class="marker__text">▼</div>
 					</div>
 					<div class="price__chart__border" id="day__change">
+						<div class="price__chart__delta" id="dl__delta">
+							<div class="marker marker__bounds" style="left: calc(0% - 0.125ex) !important;">
+								<div class="marker__value" id="d__marker__left" >$141.12</div>
+								<div class="marker__text">▽</div>
+								<div class="marker__line"></div>
+							</div>
+							<div class="marker marker__bounds" style="left:calc(100% + 0.25ex) !important;">
+								<div class="marker__value" id="d__marker__right">$141.12</div>
+								<div class="marker__text">▽</div>
+								<div class="marker__line"></div>
+							</div>
+						</div>
 					</div>
 					<div class="price__chart__title">DAY'S RANGE</div>
 				</div>
 				<div class="price__chart">
-					<div class="marker" id="y__current" style="left:39%;">
-						<div class="marker__value" id="current__price__y">$141.12</div>
-						<div class="marker__text">▽</div>
-						<div class="marker__line"></div>
-					</div>
 					<div class="marker" id="year__low">
 						<div class="marker__value" id="yl__value">$141.12</div>
 						<div class="marker__text">▼</div>
@@ -125,6 +133,18 @@
 						<div class="marker__text">▼</div>
 					</div>
 					<div class="price__chart__border" id="year__change">
+						<div class="price__chart__delta" id="yr__delta">
+							<div class="marker marker__bounds" style="left: calc(0% - 0.125ex) !important;">
+								<div class="marker__value" id="y__marker__left" >$141.12</div>
+								<div class="marker__text">▽</div>
+								<div class="marker__line"></div>
+							</div>
+							<div class="marker marker__bounds" style="left:calc(100% + 0.25ex) !important;">
+								<div class="marker__value" id="y__marker__right">$141.12</div>
+								<div class="marker__text">▽</div>
+								<div class="marker__line"></div>
+							</div>
+						</div>
 					</div>
 					<div class="price__chart__title">52WK RANGE</div>
 				</div>

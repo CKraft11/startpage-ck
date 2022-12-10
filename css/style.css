@@ -112,7 +112,7 @@ flex-direction: column;
 .ticker-wrap {
     display: flex;
     overflow: hidden;
-    height: 2.5ex;
+    /* height: 2.5ex; */
     padding: 0.5ex 0.5ex;
     justify-content: center;
     align-items: center;
@@ -123,8 +123,8 @@ flex-direction: column;
 
 }
 .ticker-wrap .ticker {
-    height: 2ex;
-    line-height: 2ex;
+    /* height: 2ex;
+    line-height: 2ex; */
     white-space: nowrap;
 }
 
@@ -136,14 +136,14 @@ flex-direction: column;
     float: right;
 }
 .ticker-wrap .ticker__item {
-    display: inline-block;
+    display: inline-flex;
 }
 
 .ticker__item{
     width: max-content;
     padding-right: 2ex;
     padding-left: 2ex;
-    border-radius: 0.5ex;
+    border-radius: 1.1ex;
 }
 
 .ticker{
@@ -223,6 +223,16 @@ table {
     border:0.25ex solid rgba(255, 255, 255, .5);
     position: relative;
 }
+.price__chart__delta{
+    right:9%;
+    height: 3ex;
+    width:90%;
+    display:flex;
+    border-left:0.25ex solid;
+    border-right:0.25ex solid;
+    border-color:var(--red);
+    position: absolute;
+}
 .price__chart__title{
     display: flex;
     align-items: center;
@@ -267,13 +277,29 @@ table {
     top:0%;
     align-items: end;
 }
-#current__price__d,
-#current__price__y {
+.marker__bounds{
+    transform: translate(-50%, -50%);
+}
+.marker__bounds > .closing__price{
+    z-index: 2;
+}
+.marker__bounds > .current__price{
+    z-index: 3;
+}
+.current__price {
     background:var(--text);
     color:var(--bg);
     padding-left:0.25ex;
     padding-right:0.25ex;
     border-radius: 0.5ex;
+    border:0.25ex solid var(--text);
+}
+.closing__price {
+    padding-left:0.25ex;
+    padding-right:0.25ex;
+    border-radius: 0.5ex;
+    background:var(--bg);
+    border:0.25ex solid var(--text);
 }
 /* #yh__value,
 #dh__value {
@@ -399,6 +425,8 @@ table {
     gap:0.5ex;
     padding:0.5ex;
     background-color: var(--color-1);
+    z-index: 4;
+    overflow: hidden;
 }
 .news > a {
     /* these are the flex items */
@@ -575,7 +603,6 @@ body:not([data-page="3"]) .tab.extra.next:hover {
     align-items: center;
 }
 .info {
-    height: 2.5ex;
     display: flex;
 }
 

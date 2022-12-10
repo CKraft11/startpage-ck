@@ -88,12 +88,13 @@ function stockParse(apiData){
 					var ticker = ticker.replace('^','');	
 					var ask = apiData[b].regularMarketPrice;
 					ask = ask.toFixed(2);
-					var delta = apiData[b].regularMarketChange;
-					var perc = apiData[b].regularMarketChangePercent;
+					var close = apiData[b].regularMarketPreviousClose;
+					close = close.toFixed(2);
 					var bid = apiData[b].bid;
 					bid = bid.toFixed(2);
 					var exchange = apiData[b].exchange;
 					var exchange_TZ = apiData[b].exchangeTimezoneShortName;
+					var marketState = apiData[b].marketState;
 					var fifty_d_ave = apiData[b].fiftyDayAverage;
 					fifty_d_ave = fifty_d_ave.toFixed(2);
 					var fifty_d_delta = apiData[b].fiftyDayAverageChange;
@@ -121,6 +122,8 @@ function stockParse(apiData){
 					console.log(market_cap);
 					var forward_PE = apiData[b].forwardPE;
 					forward_PE = forward_PE.toFixed(2);
+					var trailing_PE = apiData[b].trailingPE;
+					trailing_PE = trailing_PE.toFixed(2);
 					var daily_high = apiData[b].regularMarketDayHigh;
 					daily_high = daily_high.toFixed(2);
 					var daily_low = apiData[b].regularMarketDayLow;
@@ -135,8 +138,15 @@ function stockParse(apiData){
 					document.getElementById('stock__header').innerHTML = name + " ($" + ticker + ")";
 					document.getElementById('ask').innerHTML = "$" + ask;
 					document.getElementById('bid').innerHTML = "$" + bid;
+					document.getElementById('close').innerHTML = "$" + close;
 					document.getElementById('exchange').innerHTML = exchange;
 					document.getElementById('exchange__tz').innerHTML = exchange_TZ;
+					document.getElementById('market__state').innerHTML = marketState;
+					if(marketState=="CLOSED"){
+						document.getElementById('market__state').style.color = "var(--red)";
+					} else {
+						document.getElementById('market__state').style.color = "var(--green)";
+					}
 					document.getElementById('50__ave').innerHTML = fifty_d_ave;
 					document.getElementById('50__change').innerHTML = fifty_d_delta;
 					document.getElementById('50__change__perc').innerHTML = fifty_d_delta_perc;
@@ -145,19 +155,76 @@ function stockParse(apiData){
 					document.getElementById('200__change__perc').innerHTML = two_hund_d_delta_perc;
 					document.getElementById('market__cap').innerHTML = market_cap;
 					document.getElementById('forward__pe').innerHTML = forward_PE;
+					document.getElementById('trailing__pe').innerHTML = forward_PE;
 					var daily_scale = (daily_high - daily_low)/100;
 					var daily_ask = (ask-daily_low)/daily_scale;
+					var fifty_two_w_scale = (fifty_two_w_high - fifty_two_w_low)/100;
+					var fifty_two_w_ask = (ask-fifty_two_w_low)/fifty_two_w_scale;
+					var daily_scale = (daily_high - daily_low)/100;
+					var daily_close = (close-daily_low)/daily_scale;
+					var daily_close_yr= (close-fifty_two_w_low)/fifty_two_w_scale;
+					daily_close_yr = daily_close_yr.toFixed(2);
+					if(daily_close_yr>100){
+						daily_close = 100;
+					}else if(daily_close_yr<0){
+						daily_close = 0;
+					}
+					daily_close = daily_close.toFixed(2);
+					if(daily_close>100){
+						daily_close = 100;
+					}else if(daily_close<0){
+						daily_close = 0;
+					}
+					document.getElementById("d__marker__left").classList.remove("current__price");
+					document.getElementById("d__marker__right").classList.remove("closing__price");
+					document.getElementById("d__marker__right").classList.remove("current__price");
+					document.getElementById("d__marker__left").classList.remove("closing__price");
+					document.getElementById("y__marker__left").classList.remove("current__price");
+					document.getElementById("y__marker__right").classList.remove("closing__price");
+					document.getElementById("y__marker__right").classList.remove("current__price");
+					document.getElementById("y__marker__left").classList.remove("closing__price");
+					if(daily_ask>daily_close){
+						document.getElementById('dl__delta').style.right= (100-daily_ask) + "%";
+						document.getElementById('dl__delta').style.width= (daily_ask-daily_close) + "%";
+						document.getElementById('dl__delta').style.borderColor= "var(--green)";
+						document.getElementById('dl__delta').style.backgroundColor= "var(--green)";
+						document.getElementById('yr__delta').style.right= (100-fifty_two_w_ask) + "%";
+						document.getElementById('yr__delta').style.width= (fifty_two_w_ask-daily_close_yr) + "%";
+						document.getElementById('yr__delta').style.borderColor= "var(--green)";
+						document.getElementById('yr__delta').style.backgroundColor= "var(--green)";
+						document.getElementById("y__marker__right").classList.add("current__price");
+						document.getElementById("y__marker__right").innerHTML = ask;
+						document.getElementById("y__marker__left").innerHTML = close;
+						document.getElementById("y__marker__left").classList.add("closing__price");
+						document.getElementById("d__marker__right").classList.add("current__price");
+						document.getElementById("d__marker__right").innerHTML = ask;
+						document.getElementById("d__marker__left").innerHTML = close;
+						document.getElementById("d__marker__left").classList.add("closing__price");
+					}else{
+						document.getElementById('dl__delta').style.right= (100-daily_close) + "%";
+						document.getElementById('dl__delta').style.width= (daily_close-daily_ask) + "%";
+						document.getElementById('dl__delta').style.borderColor= "var(--red)";
+						document.getElementById('dl__delta').style.backgroundColor= "var(--red)";
+						document.getElementById('yr__delta').style.right= (100-daily_close_yr) + "%";
+						document.getElementById('yr__delta').style.width= (daily_close_yr-fifty_two_w_ask) + "%";
+						document.getElementById('yr__delta').style.borderColor= "var(--red)";
+						document.getElementById('yr__delta').style.backgroundColor= "var(--red)";
+						document.getElementById("y__marker__left").classList.add("current__price");
+						document.getElementById("y__marker__right").innerHTML = close;
+						document.getElementById("y__marker__left").innerHTML = ask;
+						document.getElementById("y__marker__right").classList.add("closing__price");
+						document.getElementById("d__marker__left").classList.add("current__price");
+						document.getElementById("d__marker__right").innerHTML = close;
+						document.getElementById("d__marker__left").innerHTML = ask;
+						document.getElementById("d__marker__right").classList.add("closing__price");
+					}
+					// document.getElementById('d__current').style.left = daily_ask + "%";
+					// console.log(daily_close);
+					// document.getElementById('d__close').style.left = (d_offset_close-4) + "%";
 					document.getElementById('dl__value').innerHTML = daily_low;
 					document.getElementById('dh__value').innerHTML = daily_high;
 					document.getElementById('yl__value').innerHTML = fifty_two_w_low;
 					document.getElementById('yh__value').innerHTML = fifty_two_w_high;
-					var fifty_two_w_scale = (fifty_two_w_high - fifty_two_w_low)/100;
-					var fifty_two_w_ask = (ask-fifty_two_w_low)/fifty_two_w_scale;
-					document.getElementById('y__current').style.left = fifty_two_w_ask + "%";
-					document.getElementById('current__price__d').innerHTML = ask;
-					document.getElementById('current__price__y').innerHTML = ask;
-					document.getElementById('d__current').style.left = daily_ask + "%";
-
 				});
 				stockElements[i].addEventListener('mouseleave', function(){
 					document.querySelectorAll('.ticker-scroll')[0].style.animationPlayState = 'running';
