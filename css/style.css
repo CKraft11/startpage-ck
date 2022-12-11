@@ -515,6 +515,7 @@ table {
     padding-left: 2ex;
     padding-right: 2ex;
     overflow-x: hidden;
+    white-space: nowrap;
 }
 
 /* Tabs ####################################### */
