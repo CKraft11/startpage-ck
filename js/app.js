@@ -56,12 +56,12 @@ function stockParse(apiData){
 			if(output[1].indexOf("▼")>0){
 				jQuery("<a/>", {
 					text: output[1],
-					style: "float: right; color: #BF616A;"
+					style: "float: right; color: var(--red);"
 				}).appendTo("."+stock);
 			} else {
 				jQuery("<a/>", {
 					text: output[1],
-					style: "float: right; color: #A3BE8C;"
+					style: "float: right; color: var(--green);"
 				}).appendTo("."+stock);
 			}
 		});
@@ -270,7 +270,7 @@ window.onload = () => {
 				stories.push(apiArticles[i]);
 				us++;
 			}
-			else if(apiArticles[i].section == "business" || apiArticles[i].section == "science" || apiArticles[i].section == "technology" || apiArticles[i].section == "politics") {
+			else if(apiArticles[i].section == "opinion" || apiArticles[i].section == "business" || apiArticles[i].section == "science" || apiArticles[i].section == "technology" || apiArticles[i].section == "politics") {
 				stories.push(apiArticles[i]);
 			}
 		}
@@ -288,7 +288,7 @@ window.onload = () => {
 			$(document).ready(function() {
 				jQuery("<a/>", {
 					class: "news__item story_"+i,
-					href: output[1]
+					href: "https://archive.vn/newest/"+ output[1] + "#0%"
 				}).appendTo(".news");
 				jQuery("<div/>", {
 					class: "news__info info__"+i,
