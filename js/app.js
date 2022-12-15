@@ -75,6 +75,11 @@ function stockParse(apiData){
 					document.querySelectorAll('.news__item').forEach(element => {
 						element.style.display = 'none';
 					});
+
+					// This is the worst code I've ever written, but it works.
+					// I'm sorry.
+					// This code was mainly made for testing and messing with the API but it got bastardized into a stock screener and I went to bed.
+
 					document.getElementsByClassName("stock__container")[0].style.display = 'flex';
 					document.querySelectorAll('.ticker-scroll')[0].style.animationPlayState = 'paused';
 					document.querySelectorAll('.ticker-scroll')[1].style.animationPlayState = 'paused';
@@ -175,6 +180,7 @@ function stockParse(apiData){
 					}else if(daily_close<0){
 						daily_close = 0;
 					}
+
 					document.getElementById("d__marker__left").classList.remove("current__price");
 					document.getElementById("d__marker__right").classList.remove("closing__price");
 					document.getElementById("d__marker__right").classList.remove("current__price");
@@ -218,6 +224,7 @@ function stockParse(apiData){
 						document.getElementById("d__marker__left").innerHTML = ask;
 						document.getElementById("d__marker__right").classList.add("closing__price");
 					}
+
 					// document.getElementById('d__current').style.left = daily_ask + "%";
 					// console.log(daily_close);
 					// document.getElementById('d__close').style.left = (d_offset_close-4) + "%";
@@ -225,6 +232,10 @@ function stockParse(apiData){
 					document.getElementById('dh__value').innerHTML = daily_high;
 					document.getElementById('yl__value').innerHTML = fifty_two_w_low;
 					document.getElementById('yh__value').innerHTML = fifty_two_w_high;
+
+					// * Ctrl + F "document.getElementById" *
+					// * 78 results *
+					// I really should fix this at some point
 				});
 				stockElements[i].addEventListener('mouseleave', function(){
 					document.querySelectorAll('.ticker-scroll')[0].style.animationPlayState = 'running';
@@ -421,6 +432,9 @@ window.onload = () => {
 				a_element.setAttribute('class', 'linksel');
 				a_element.innerHTML = links_var[i][j][0];
 				pingStatus = links_var[i][j][2];
+
+				// Idk why I defined all the b_element stuff twice or why there isn't a CSS class for it but it breaks things if I change anything so thats a later problem.
+
 				if(pingStatus.indexOf('true')>-1){
 					ping(links_var[i][j][1]).then(function(delta) {
 						if (debug_mode==true) {console.log(links_var[i][j][1]+ ' Ping time was ' + String(delta) + ' ms')};
