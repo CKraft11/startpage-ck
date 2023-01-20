@@ -281,7 +281,7 @@ window.onload = () => {
 				stories.push(apiArticles[i]);
 				us++;
 			}
-			else if(apiArticles[i].section == "opinion" || apiArticles[i].section == "business" || apiArticles[i].section == "science" || apiArticles[i].section == "technology" || apiArticles[i].section == "politics") {
+			else if(apiArticles[i].section == "business" || apiArticles[i].section == "science" || apiArticles[i].section == "technology" || apiArticles[i].section == "politics" || apiArticles[i].section == "briefing") {
 				stories.push(apiArticles[i]);
 			}
 		}
