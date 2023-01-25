@@ -54,8 +54,8 @@ var links_var = [
         ['outlook', 'https://outlook.office.com/mail/', 'false'],
         /*['okta', 'https://iastate.okta.com/app/UserHome', 'false'],
         ['canvas', 'https://canvas.iastate.edu/?login_success=1', 'false'],*/
-        ['inside tesla', 'https://inside.tesla.com/en-US/help-center#resources-All%20Categories', 'false'],
-        ['kronos tesla', 'https://kronos.tesla.com/wfcstatic/applications/navigator/html5/dist/container/index.html#/', 'false'],
+        ['tesla myapps', 'https://myapps.tesla.com/apps/default.aspx', 'false'],
+        ['tesla kronos', 'https://kronos.tesla.com/wfcstatic/applications/navigator/html5/dist/container/index.html#/', 'false'],
     ],
     [
         ['amazon', 'https://amazon.com', 'false'],
