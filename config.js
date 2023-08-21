@@ -80,7 +80,7 @@ var links_var = [
     [
         ['github', 'https://github.com/CKraft11', 'false'],
         ['tailscale', 'https://login.tailscale.com/admin/machines', 'false'],
-        ['send', 'https://send.vis.ee', 'false'],
+        ['linkedin', 'https://linkedin.com', 'false'],
         ['dccu', 'https://my.deereemployeescu.com/login', 'false'],
         ['fidelity', 'https://www.fidelity.com', 'false'],
     
