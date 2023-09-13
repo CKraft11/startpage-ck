@@ -32,12 +32,6 @@ function stockParse(apiData){
 		price = price.toFixed(2);
 		delta = delta.toFixed(2);
 		perc = perc.toFixed(2);
-		var timestamp = apiData[i].regularMarketTime.timestamp;
-		var update = new Date(0); // The 0 there is the key, which sets the date to the epoch
-		update.setUTCSeconds(timestamp);
-		update = update.toString();
-		var update = update.split(" ");
-		var updated = "Updated: " + update[0] + " " + update[1] + " " + update[2] + " " + update[3] + " at " + update[4];
 		if (Math.abs(delta) != delta) {
 			var output = ["$" + stock +": " + price + "\xa0",delta + " (▼" + Math.abs(perc) + "%)"];
 		} else {
@@ -67,7 +61,7 @@ function stockParse(apiData){
 		});
 		if (debug_mode==true) {console.log(output)};
 	}
-	document.getElementsByClassName("update")[0].innerHTML = updated;
+	
 	var stockElements = document.querySelectorAll('.ticker__item');
 			console.log(stockElements);
 			for (let i=0; i<stockElements.length; i++){
@@ -114,6 +108,16 @@ function stockParse(apiData){
 					two_hund_d_delta_perc = (two_hund_d_delta_perc*100).toFixed(2);
 					var market_cap = apiData[b].marketCap;
 					market_cap = market_cap.toString();
+
+					var last_updated = apiData[b].regularMarketTime;// get time and convert to local string
+					last_updated = new Date(last_updated * 1000);
+					//console.log(last_updated.toLocaleTimeString("en-US"));
+					last_updated_date = last_updated.toLocaleDateString();
+					var date_options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+					last_updated_date = last_updated.toLocaleDateString('en-US', date_options);
+					
+					last_updated = last_updated.toLocaleTimeString("en-US");
+					
 					if(market_cap.length>12){
 						market_cap = market_cap.substring(0,market_cap.length-12) + "T";
 					}
@@ -140,6 +144,7 @@ function stockParse(apiData){
 					if(name.length>18){
 						name = name.substring(0,18) + "...";
 					}
+					document.getElementsByClassName("update")[0].innerHTML = "Last Updated: " + last_updated_date + " at " + last_updated;
 					document.getElementById('stock__header').innerHTML = name + " ($" + ticker + ")";
 					document.getElementById('ask').innerHTML = "$" + ask;
 					document.getElementById('bid').innerHTML = "$" + bid;

@@ -86,11 +86,11 @@ var links_var = [
     
     ],
     [
-        ['dashboard', 'https://dash.cadenkraft.com', 'true'],
-        ['ghost blog', 'http://ghost.cadenkraft.com/ghost', 'true'],
-        ['3D printer', 'http://fluidd.cadenkraft.com', 'true'],
-        ['radon portainer', 'http://radon.cadenkraft.com:9000', 'true'],
-        ['router', 'https://router.cadenkraft.com', 'true'],
+        ['openmediavault', 'http://10.0.0.222', 'true'],
+        ['ghost blog', 'http://10.0.0.222:2368/ghost', 'true'],
+        ['desktop', 'http://10.0.0.222:8090', 'true'],
+        ['portainer', 'http://10.0.0.222:9000', 'true'],
+        ['router', 'https://10.0.0.1', 'true'],
     
     ],
 ];
