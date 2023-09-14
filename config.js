@@ -86,7 +86,7 @@ var links_var = [
     
     ],
     [
-        ['openmediavault', 'http://10.0.0.222', 'true'],
+        ['openmediavault', 'http://10.0.0.222:8282', 'true'],
         ['ghost blog', 'http://10.0.0.222:2368/ghost', 'true'],
         ['desktop', 'http://10.0.0.222:8090', 'true'],
         ['portainer', 'http://10.0.0.222:9000', 'true'],
