@@ -22,13 +22,13 @@ fetch('https://mboum-finance.p.rapidapi.com/qu/quote?symbol='+stockString, stock
 	.catch(err => console.error(err));
 
 function stockParse(apiData){
+	console.log(apiData.body);
 	for (var i = 0; i<stocks.length; i++) {
-		var stock = apiData[i].symbol;
-		console.log(apiData);
+		var stock = apiData.body[i].symbol;
 		stock = stock.replace('^','');
-		var price = apiData[i].regularMarketPrice;
-		var delta = apiData[i].regularMarketChange;
-		var perc = apiData[i].regularMarketChangePercent;
+		var price = apiData.body[i].regularMarketPrice;
+		var delta = apiData.body[i].regularMarketChange;
+		var perc = apiData.body[i].regularMarketChangePercent;
 		price = price.toFixed(2);
 		delta = delta.toFixed(2);
 		perc = perc.toFixed(2);
@@ -81,35 +81,35 @@ function stockParse(apiData){
 					if(b>=(stockElements.length)/2){
 						b = b-(stockElements.length)/2;
 					}
-					var name = apiData[b].shortName;
+					var name = apiData.body[b].shortName;
 					console.log(name);
-					var ticker = apiData[b].symbol;	
+					var ticker = apiData.body[b].symbol;	
 					var ticker = ticker.replace('^','');	
-					var ask = apiData[b].regularMarketPrice;
+					var ask = apiData.body[b].regularMarketPrice;
 					ask = ask.toFixed(2);
-					var close = apiData[b].regularMarketPreviousClose;
+					var close = apiData.body[b].regularMarketPreviousClose;
 					close = close.toFixed(2);
-					var bid = apiData[b].bid;
+					var bid = apiData.body[b].bid;
 					bid = bid.toFixed(2);
-					var exchange = apiData[b].exchange;
-					var exchange_TZ = apiData[b].exchangeTimezoneShortName;
-					var marketState = apiData[b].marketState;
-					var fifty_d_ave = apiData[b].fiftyDayAverage;
+					var exchange = apiData.body[b].exchange;
+					var exchange_TZ = apiData.body[b].exchangeTimezoneShortName;
+					var marketState = apiData.body[b].marketState;
+					var fifty_d_ave = apiData.body[b].fiftyDayAverage;
 					fifty_d_ave = fifty_d_ave.toFixed(2);
-					var fifty_d_delta = apiData[b].fiftyDayAverageChange;
+					var fifty_d_delta = apiData.body[b].fiftyDayAverageChange;
 					fifty_d_delta = fifty_d_delta.toFixed(2);
-					var fifty_d_delta_perc = apiData[b].fiftyDayAverageChangePercent;
+					var fifty_d_delta_perc = apiData.body[b].fiftyDayAverageChangePercent;
 					fifty_d_delta_perc = (fifty_d_delta_perc*100).toFixed(2);
-					var two_hund_d_ave = apiData[b].twoHundredDayAverage;
+					var two_hund_d_ave = apiData.body[b].twoHundredDayAverage;
 					two_hund_d_ave = two_hund_d_ave.toFixed(2);
-					var two_hund_d_delta = apiData[b].twoHundredDayAverageChange;
+					var two_hund_d_delta = apiData.body[b].twoHundredDayAverageChange;
 					two_hund_d_delta = two_hund_d_delta.toFixed(2);
-					var two_hund_d_delta_perc = apiData[b].twoHundredDayAverageChangePercent;
+					var two_hund_d_delta_perc = apiData.body[b].twoHundredDayAverageChangePercent;
 					two_hund_d_delta_perc = (two_hund_d_delta_perc*100).toFixed(2);
-					var market_cap = apiData[b].marketCap;
+					var market_cap = apiData.body[b].marketCap;
 					market_cap = market_cap.toString();
 
-					var last_updated = apiData[b].regularMarketTime;// get time and convert to local string
+					var last_updated = apiData.body[b].regularMarketTime;// get time and convert to local string
 					last_updated = new Date(last_updated * 1000);
 					//console.log(last_updated.toLocaleTimeString("en-US"));
 					last_updated_date = last_updated.toLocaleDateString();
@@ -129,17 +129,17 @@ function stockParse(apiData){
 						market_cap = market_cap;
 					}
 					console.log(market_cap);
-					var forward_PE = apiData[b].forwardPE;
+					var forward_PE = apiData.body[b].forwardPE;
 					forward_PE = forward_PE.toFixed(2);
-					var trailing_PE = apiData[b].trailingPE;
+					var trailing_PE = apiData.body[b].trailingPE;
 					trailing_PE = trailing_PE.toFixed(2);
-					var daily_high = apiData[b].regularMarketDayHigh;
+					var daily_high = apiData.body[b].regularMarketDayHigh;
 					daily_high = daily_high.toFixed(2);
-					var daily_low = apiData[b].regularMarketDayLow;
+					var daily_low = apiData.body[b].regularMarketDayLow;
 					daily_low = daily_low.toFixed(2);
-					var fifty_two_w_high = apiData[b].fiftyTwoWeekHigh;
+					var fifty_two_w_high = apiData.body[b].fiftyTwoWeekHigh;
 					fifty_two_w_high = fifty_two_w_high.toFixed(2);
-					var fifty_two_w_low = apiData[b].fiftyTwoWeekLow;
+					var fifty_two_w_low = apiData.body[b].fiftyTwoWeekLow;
 					fifty_two_w_low = fifty_two_w_low.toFixed(2);
 					if(name.length>18){
 						name = name.substring(0,18) + "...";
