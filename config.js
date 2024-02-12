@@ -87,10 +87,10 @@ var links_var = [
     
     ],
     [
-        ['openmediavault', 'http://10.0.0.222:8282', 'true'],
-        ['ghost blog', 'http://10.0.0.222:2368/ghost', 'true'],
-        ['desktop', 'http://10.0.0.222:8090', 'true'],
-        ['portainer', 'http://10.0.0.222:9000', 'true'],
+        ['openmediavault', 'http://helium:8282', 'true'],
+        ['ghost blog', 'http://helium:2368/ghost', 'true'],
+        ['desktop', 'http://helium:8090', 'true'],
+        ['portainer', 'http://helium:9000', 'true'],
         ['router', 'https://10.0.0.1', 'true'],
     
     ],
