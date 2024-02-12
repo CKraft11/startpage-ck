@@ -36,6 +36,7 @@ var stocks = [
     'TSLA',
     'GOOGL',
     'MSFT',
+    '^SPX'
     ];
 
 // Startpage Links ################################

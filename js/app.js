@@ -86,11 +86,23 @@ function stockParse(apiData){
 					var ticker = apiData.body[b].symbol;	
 					var ticker = ticker.replace('^','');	
 					var ask = apiData.body[b].regularMarketPrice;
-					ask = ask.toFixed(2);
+					if(ask>=1000){
+						ask = ask.toFixed(1);
+					}else {
+						ask = ask.toFixed(2);
+					}
 					var close = apiData.body[b].regularMarketPreviousClose;
-					close = close.toFixed(2);
+					if(close>=1000){
+						close = close.toFixed(1);
+					}else {
+						close = close.toFixed(2);
+					}
 					var bid = apiData.body[b].bid;
-					bid = bid.toFixed(2);
+					if(bid>=1000){
+						bid = bid.toFixed(1);
+					}else {
+						bid = bid.toFixed(2);
+					}
 					var exchange = apiData.body[b].exchange;
 					var exchange_TZ = apiData.body[b].exchangeTimezoneShortName;
 					var marketState = apiData.body[b].marketState;
@@ -106,8 +118,20 @@ function stockParse(apiData){
 					two_hund_d_delta = two_hund_d_delta.toFixed(2);
 					var two_hund_d_delta_perc = apiData.body[b].twoHundredDayAverageChangePercent;
 					two_hund_d_delta_perc = (two_hund_d_delta_perc*100).toFixed(2);
-					var market_cap = apiData.body[b].marketCap;
-					market_cap = market_cap.toString();
+
+					if(apiData.body[b].quoteType == "EQUITY"){ // Allows both index funds and stocks to work
+						var market_cap = apiData.body[b].marketCap;
+						market_cap = market_cap.toString();
+						var forward_PE = apiData.body[b].forwardPE;
+						forward_PE = forward_PE.toFixed(2);
+						var trailing_PE = apiData.body[b].trailingPE;
+						trailing_PE = trailing_PE.toFixed(2);
+					} else {
+						var market_cap = "NA"
+						var forward_PE = "NA"
+						var trailing_PE = "NA"
+					}
+					
 
 					var last_updated = apiData.body[b].regularMarketTime;// get time and convert to local string
 					last_updated = new Date(last_updated * 1000);
@@ -129,10 +153,6 @@ function stockParse(apiData){
 						market_cap = market_cap;
 					}
 					console.log(market_cap);
-					var forward_PE = apiData.body[b].forwardPE;
-					forward_PE = forward_PE.toFixed(2);
-					var trailing_PE = apiData.body[b].trailingPE;
-					trailing_PE = trailing_PE.toFixed(2);
 					var daily_high = apiData.body[b].regularMarketDayHigh;
 					daily_high = daily_high.toFixed(2);
 					var daily_low = apiData.body[b].regularMarketDayLow;
