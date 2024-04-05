@@ -36,6 +36,8 @@ var stocks = [
     'TSLA',
     'GOOGL',
     'MSFT',
+    'NVO',
+    'LLY',
     '^SPX'
     ];
 
