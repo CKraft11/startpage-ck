@@ -135,7 +135,7 @@ flex-direction: column;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
     animation-name: ticker-scroll;
-    animation-duration: 8s;
+    animation-duration: 14s;
     float: right;
 }
 .ticker-wrap .ticker__item {
