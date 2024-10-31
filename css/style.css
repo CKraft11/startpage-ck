@@ -416,9 +416,7 @@ table {
 
 .news {
     background-color: var(--bg) !important;
-    display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: stretch;
     margin-left: 1ex;
     /* border: 0.4ex solid; */
@@ -429,7 +427,9 @@ table {
     padding:0.5ex;
     background-color: var(--color-1);
     z-index: 4;
-    overflow: hidden;
+    overflow-y: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
 .news > a {
     /* these are the flex items */
@@ -439,7 +439,7 @@ table {
     display:flex;
     overflow: hidden;
     text-overflow: ellipsis;
-    align-items:center;
+    align-items:baseline;
     width:72%;
     padding-left:1ex;
     padding-right:1ex;
@@ -475,12 +475,13 @@ table {
     border-radius: 0.75ex;
     float:right;
     /* margin:1ex; */
-    object-fit: contain;
+    object-fit: cover;
     box-sizing: border-box;
     position: absolute;
     top: 0.5ex;
     bottom: 0.5ex;
     right: 0.5ex;
+    aspect-ratio: 1;
     
 }
 .news__item {
@@ -492,6 +493,7 @@ table {
     /* align-items: center; */
     border-radius: 1.1ex;
     position: relative;
+    height: 25%;
 }
 .news__item > img {
     flex: 1;   

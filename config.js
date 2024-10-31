@@ -8,6 +8,10 @@ var debug_mode = true; // Debug mode (true/false)
 
 var nyt_API_key = "xeNKN3icndLMzdwb4eGwgkjhqc2DRM40";
 
+// TheNewsAPI API Key ########################
+
+var newsAPI_API_key = "4aWC6oJ9q1g6LlC1x9X8Crz9EtzfXYB1HaUfNzpi";
+
 // OpenWeatherMap API Key ########################
 
 var weather_API_key = 'e5b292ae2f9dae5f29e11499c2d82ece';
@@ -89,11 +93,11 @@ var links_var = [
     
     ],
     [
-        ['openmediavault', 'http://helium:8282', 'true'],
-        ['ghost blog', 'http://helium:2368/ghost', 'true'],
-        ['desktop', 'http://helium:8090', 'true'],
-        ['portainer', 'http://helium:9000', 'true'],
-        ['router', 'https://10.0.0.1', 'true'],
+        ['openmediavault', 'http://helium:8282', 'false'],
+        ['ghost blog', 'http://helium:2368/ghost', 'false'],
+        ['desktop', 'http://helium:8090', 'false'],
+        ['portainer', 'http://helium:9000', 'false'],
+        ['router', 'https://10.0.0.1', 'false'],
     
     ],
 ];

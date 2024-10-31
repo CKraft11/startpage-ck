@@ -275,13 +275,18 @@ function stockParse(apiData){
 }
 window.onload = () => {
 // News API #######################################
-	var newsQueryUrl = "https://api.nytimes.com/svc/topstories/v2/home.json?api-key=" + nyt_API_key;
-	fetch(newsQueryUrl)
+	fetch("https://api.spaceflightnewsapi.net/v4/articles/?limit=20&news_site=arstechnica")
+	.then(response => response.json())
+	.then(result => newsParse(result,2))
+	.catch(error => console.log('error', error));
+
+	var NYTnewsQueryUrl = "https://api.nytimes.com/svc/topstories/v2/home.json?api-key=" + nyt_API_key;
+	fetch(NYTnewsQueryUrl)
 	.then(function (newsData) {
 		return newsData.json();
 	})
 	.then(function (newsData) {
-		newsParse(newsData);
+		newsParse(newsData,5);
 	});
 
 	function getMultipleRandom(arr, num) {
@@ -289,67 +294,86 @@ window.onload = () => {
 	
 		return shuffled.slice(0, num);
 	}
-
-	async function newsParse(apiData) {
+	async function newsParse(apiData, count) {
 		console.log(apiData.results);
 		var apiArticles = apiData.results
 		ct = 0;
 		var stories = []
 		var world = 0;
 		var us = 0;
-		for (var i = 0; i < apiArticles.length; i++) {
-			if(apiArticles[i].section == "world" && world == 0) { // Making sure there is only one world story
-				stories.push(apiArticles[i]);
-				world++;
+		if(apiArticles[0].url.indexOf("nytimes")>0){
+			for (var i = 0; i < apiArticles.length; i++) {
+				if(apiArticles[i].section == "world" && world == 0) { // Making sure there is only one world story
+					stories.push(apiArticles[i]);
+					world++;
+				}
+				else if(apiArticles[i].section == "us" && us<=1) { // Making sure there is only one US story
+					stories.push(apiArticles[i]);
+					us++;
+				}
+				else if(apiArticles[i].section == "business" || apiArticles[i].section == "science" || apiArticles[i].section == "technology" || apiArticles[i].section == "politics" || apiArticles[i].section == "briefing") {
+					stories.push(apiArticles[i]);
+				}
 			}
-			else if(apiArticles[i].section == "us" && us==0) { // Making sure there is only one US story
-				stories.push(apiArticles[i]);
-				us++;
-			}
-			else if(apiArticles[i].section == "business" || apiArticles[i].section == "science" || apiArticles[i].section == "technology" || apiArticles[i].section == "politics" || apiArticles[i].section == "briefing") {
-				stories.push(apiArticles[i]);
-			}
+		} else {
+			stories = apiArticles
 		}
-		curated = getMultipleRandom(stories, 4)
+		curated = getMultipleRandom(stories, count)
 		console.log(curated);
 		for (var i = 0; i < curated.length; i++) {
 			var title = curated[i].title;
 			var url = curated[i].url;
-			var image = curated[i].multimedia[2].url;
-			var section = curated[i].section;
-			var date = curated[i].updated_date;
+			if(url.indexOf("nytimes")>0){
+				var image = curated[i].multimedia[2].url;
+				var section = curated[i].section;
+				var date = curated[i].updated_date;
+				var source = "NY Times"
+				var urlPrefix = "https://archive.vn/newest/"
+			} else{
+				var image = curated[i].image_url;
+				if(url.indexOf("science")>0){
+					var section = "science"
+				} else {
+					var section = "space"
+				}
+				var date = curated[i].published_at;
+				var source = curated[i].news_site;
+				var urlPrefix = ""
+			}
+			
 			var date = date.substring(5,7) + "-" + date.substring(8,10) + "-" + date.substring(0,4);
 			console.log(date);
-			var output = [title, url, image, section, date];
+			var output = [title, url, image, section, date, source, urlPrefix];
+			j=document.querySelectorAll('.news__item').length+1;
 			$(document).ready(function() {
 				jQuery("<a/>", {
-					class: "news__item story_"+i,
-					href: "https://archive.vn/newest/"+ output[1] + "#0%"
+					class: "news__item story_"+j,
+					href: output[6] + output[1] + "#0%"
 				}).appendTo(".news");
 				jQuery("<div/>", {
-					class: "news__info info__"+i,
-					text: "NYTimes • "
-				}).appendTo(".story_"+i);
+					class: "news__info info__"+j,
+					text: output[5]+" • "
+				}).appendTo(".story_"+j);
 				
 				jQuery("<div/>", {
 					class: "news__category color",
 					text: output[3]
-				}).appendTo(".info__"+i);
+				}).appendTo(".info__"+j);
 				jQuery("<div/>", {
 					text: "• " + output[4],
 					style: "font-size: inherit;"
-				}).appendTo(".info__"+i);
+				}).appendTo(".info__"+j);
 				document.querySelectorAll(".news__category").forEach(element => {
 					element.setAttribute('data-color', "1");
 				});
 				jQuery("<div/>", {
 					class: "news__title",
 					text: output[0]
-				}).appendTo(".story_"+i);
+				}).appendTo(".story_"+j);
 				jQuery("<img/>", {
 					class: "news__image",
 					src: output[2]
-				}).appendTo(".story_"+i);
+				}).appendTo(".story_"+j);
 			});
 			if (debug_mode==true) {console.log(output)};
 			}
