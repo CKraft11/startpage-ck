@@ -1,4 +1,4 @@
-// JS configuration for Caden Kraft's Startpage
+// JS configuration for CKraft11's Startpage
 
 // Page Configuration ############################
 
@@ -6,25 +6,22 @@ var debug_mode = true; // Debug mode (true/false)
 
 // New York Times API Key ########################
 
-var nyt_API_key = "xeNKN3icndLMzdwb4eGwgkjhqc2DRM40";
-
-// TheNewsAPI API Key ########################
-
-var newsAPI_API_key = "4aWC6oJ9q1g6LlC1x9X8Crz9EtzfXYB1HaUfNzpi";
+var nyt_API_key = "PUT_API_KEY_HERE";
 
 // OpenWeatherMap API Key ########################
 
-var weather_API_key = 'e5b292ae2f9dae5f29e11499c2d82ece';
+var weather_API_key = 'PUT_API_KEY_HERE';
 
 // Mboum Finance RapidAPI Keys ###################
 
 /* 
 Notes:
     - Single API key limited to 500 requests per month and 10 requests per minute.
+    - you can add multiple api keys from multiple accounts if you plan on exceeding this
     - link to API: https://rapidapi.com/sparior/api/mboum-finance/
 */
 
-var rapid_API_keys = ['2b481c0d48msh7b3ae80c17e8e0dp1733f9jsn854791a17134','3651f35b61msh6e13de27c1bf677p102fe9jsn9b81f28c1726'];
+var rapid_API_keys = ['PUT_API_KEY_HERE','OPTIONAL_API_KEY_HERE'];
 
 // Stock Tickers #################################
 
@@ -50,7 +47,7 @@ var stocks = [
 /* 
 Notes:
     Format: ["Link Name", "Link URL", "Status"]
-    Status: Displays Online/Offline Status and Ping (true/false)
+    Status: Displays Online/Offline Status and Ping (true/false) (use this for local services if applicable)
 */
 
 var links_var = [
