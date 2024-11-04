@@ -67,7 +67,7 @@ var links_var = [
         ['aliexpress', 'https://aliexpress.com', 'false'],
         ['ebay', 'https://ebay.com', 'false'],
         ['drop', 'https://drop.com/home', 'false'],
-        ['newegg', 'https://www.newegg.com', 'false'],
+        ['digikey', 'https://www.digikey.com/', 'false'],
     ],
     [
         ['/r/3dprinting', 'https://reddit.com/r/3dprinting', 'false'],
@@ -77,7 +77,7 @@ var links_var = [
         ['/r/custom keyboards', 'https://reddit.com/r/customkeyboards', 'false'],
     ],
     [
-        ['fivethirtyeight', 'https://fivethirtyeight.com/', 'false'],
+        ['silver bulletin', 'https://www.natesilver.net/', 'false'],
         ['associated press', 'https://apnews.com', 'false'],
         ['reuters', 'https://www.reuters.com/', 'false'],
         ['aljazeera', 'https://www.aljazeera.com/', 'false'],
@@ -93,11 +93,11 @@ var links_var = [
     
     ],
     [
-        ['openmediavault', 'http://helium:8282', 'false'],
-        ['ghost blog', 'http://helium:2368/ghost', 'false'],
-        ['desktop', 'http://helium:8090', 'false'],
-        ['portainer', 'http://helium:9000', 'false'],
-        ['router', 'https://10.0.0.1', 'false'],
+        ['openmediavault', 'http://helium:8282', 'true'],
+        ['ghost blog', 'http://helium:2368/ghost', 'true'],
+        ['desktop', 'http://helium:8090', 'true'],
+        ['portainer', 'http://helium:9000', 'true'],
+        ['router', 'https://10.0.0.1', 'true'],
     
     ],
 ];
