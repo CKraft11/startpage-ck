@@ -74,10 +74,10 @@ var links_var = [
         ['/r/custom keyboards', 'https://reddit.com/r/customkeyboards', 'false'],
     ],
     [
-        ['silver bulletin', 'https://www.natesilver.net/', 'false'],
+        ['bluesky', 'https://bsky.app/', 'false'],
         ['associated press', 'https://apnews.com', 'false'],
         ['reuters', 'https://www.reuters.com/', 'false'],
-        ['aljazeera', 'https://www.aljazeera.com/', 'false'],
+        ['silver bulletin', 'https://www.natesilver.net/', 'false'],
         ['ars technica', 'https://arstechnica.com', 'false'],
     
     ],
