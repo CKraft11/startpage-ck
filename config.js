@@ -71,7 +71,7 @@ var links_var = [
         ['/r/mechanicalkeyboards', 'https://reddit.com/r/mechanicalkeyboards', 'false'],
         ['/r/homelab', 'https://www.reddit.com/r/homelab/', 'false'],
         ['/r/selfhosted', 'https://www.reddit.com/r/selfhosted/', 'false'],
-        ['/r/custom keyboards', 'https://reddit.com/r/customkeyboards', 'false'],
+        ['/r/tools', 'https://reddit.com/r/tools', 'false'],
     ],
     [
         ['bluesky', 'https://bsky.app/', 'false'],
